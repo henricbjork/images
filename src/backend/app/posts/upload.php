@@ -7,30 +7,29 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 header("Access-Control-Allow-Methods: POST");
 
-// $filePath = (__DIR__ . '/hej.txt');
+$contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
-// $content = trim(file_get_contents("php://input"));
+if ($contentType === "application/json") {
+  $filePath = (__DIR__ . '/hej.txt');
 
-// $decoded = json_decode($content, true);
+  $content = trim(file_get_contents("php://input"));
 
-// file_put_contents($filePath, $decoded);
+  $decoded = json_decode($content, true);
 
-// $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+  // file_put_contents($filePath, $decoded);
 
-// print_r($contentType);
-// if ($contentType === "application/json") {
-//   //Receive the RAW post data.
-//   $content = trim(file_get_contents("php://input"));
+  $query = "INSERT INTO posts ('user_id', 'description', 'content') VALUES (:user_id, :description, :content)";
+  $statement = $pdo->prepare($query);
 
-//   $decoded = json_decode($content, true);
+  if (!$statement) {
+    die(var_dump($pdo->errorInfo()));
+  }
 
-//   die(var_dump($decoded));
-
-//   //If json_decode failed, the JSON is invalid.
-//   if (!is_array($decoded)) { } else {
-//     // Send error back to user.
-//   }
-// }
+  $statement->bindParam(':user_id', $decoded, PDO::PARAM_STR);
+  $statement->bindParam(':description', $decoded, PDO::PARAM_STR);
+  $statement->bindParam(':content', $decoded, PDO::PARAM_STR);
+  $statement->execute();
+}
 
 
-// http_response_code(200);
+http_response_code(201);
