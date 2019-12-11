@@ -5,6 +5,7 @@ declare(strict_types=1);
 require __DIR__ . '/../autoload.php';
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
+header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 
 $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
@@ -16,7 +17,7 @@ if ($contentType === "application/json") {
 
   $decoded = json_decode($content, true);
 
-  // file_put_contents($filePath, $decoded);
+  file_put_contents($filePath, $decoded);
 
   $query = "INSERT INTO posts ('user_id', 'description', 'content') VALUES (:user_id, :description, :content)";
   $statement = $pdo->prepare($query);
