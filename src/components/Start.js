@@ -1,43 +1,50 @@
 import React, {useState, useEffect} from 'react';
-import Items from './Items';
 
 const Start = () => {
-  const [images, setImages] = useState([]);
+  const [value, setValue] = useState('');
 
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = async () => {
-    const data = await fetch(
-      `http://localhost:1111/src/backend/app/posts/posts.php`
-    );
-
-    const response = await data.json();
-    setImages(response);
+  const handleChange = event => {
+    setValue(event.target.value);
   };
 
-  // handleSubmit = evt => {
-  //   evt.preventDefault();
-  //   const {email, password} = this.state;
-  //   fetch(
-  //     `http://localhost:8888/registration?email=${email}&password=${password}`,
-  //     {
-  //       method: 'GET'
-  //     }
-  //   )
-  //     .then(res => res.json())
-  //     .then(response => {
-  //       if (!response.error) {
-  //         this.props.onAuthenticate(response.session_token);
-  //       } else {
-  //         this.setState({error: JSON.stringify(response.error.message)});
-  //       }
-  //     })
-  //     .catch(error => this.setState({error: 'Something went wrong'}));
-  // };
+  const handleSubmit = async event => {
+    // const data = value;
+    // this works but input value does not same type string
+    const data = {email: 'bob@belcher.com'};
+    console.log(data);
+    event.preventDefault();
 
-  return <div>hej</div>;
+    const url = 'http://localhost:1111/src/backend/app/posts/upload.php';
+    try {
+      const response = await fetch(url, {
+        method: 'POST', // or 'PUT'
+        body: data,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={handleSubmit}>SEND</button>
+      {/* <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={value}
+          onChange={handleChange}
+          placeholder="search"
+          required
+        />
+        <button>SEND</button>
+      </form> */}
+    </div>
+  );
 };
 
 export default Start;

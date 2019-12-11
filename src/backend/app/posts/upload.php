@@ -17,7 +17,7 @@ if ($contentType === "application/json") {
 
   $decoded = json_decode($content, true);
 
-  file_put_contents($filePath, $decoded);
+  // file_put_contents($filePath, $decoded);
 
   $query = "INSERT INTO posts ('user_id', 'description', 'content') VALUES (:user_id, :description, :content)";
   $statement = $pdo->prepare($query);
