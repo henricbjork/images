@@ -1,0 +1,16 @@
+$backgroundColor: white;
+$textColor: black;
+$fontSize: 20px;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: $backgroundColor;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: $fontSize;
+  color: $textColor;
+}
