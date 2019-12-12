@@ -10,7 +10,7 @@ const Posts = () => {
 
   const getData = async () => {
     const data = await fetch(
-      `http://localhost:1111/src/backend/app/posts/posts.php`
+      `http://localhost:1111/src/backend/app/posts/getposts.php`
     );
 
     const response = await data.json();

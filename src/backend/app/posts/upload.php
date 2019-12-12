@@ -30,7 +30,13 @@ if ($contentType === "application/json") {
   $statement->bindParam(':description', $decoded, PDO::PARAM_STR);
   $statement->bindParam(':content', $decoded, PDO::PARAM_STR);
   $statement->execute();
+  http_response_code(201);
+
+  // tell the user
+  echo json_encode(array("message" => "Product was updated."));
+} else {
+  http_response_code(503);
+
+  // tell the user
+  echo json_encode(array("message" => "Unable to login"));
 }
-
-
-http_response_code(201);

@@ -10,24 +10,22 @@ const Upload = () => {
   const handleSubmit = async event => {
     const data = value;
     // this works but input value does not same type string
-    // const data = '1';
+    // const data = '56';
     console.log(data);
     event.preventDefault();
 
-    const url = 'http://localhost:1111/src/backend/app/posts/upload.php';
-    try {
-      const response = await fetch(url, {
-        method: 'POST', // or 'PUT'
+    const response = await fetch(
+      'http://localhost:1111/src/backend/app/posts/upload.php',
+      {
+        method: 'POST',
         body: data,
         headers: {
           'Content-Type': 'application/json'
         }
-      });
-      // const json = await response.json();
-      // console.log('Success:', JSON.stringify(json));
-    } catch (error) {
-      console.error('Error:', error);
-    }
+      }
+    );
+    // const json = await response.json();
+    // console.log('Success:', JSON.stringify(json));
   };
 
   return (

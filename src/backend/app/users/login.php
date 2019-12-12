@@ -9,35 +9,43 @@ header('Access-Control-Allow-Headers: *');
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 
+http_response_code(200);
+
 $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
 
 if ($contentType === "application/json") {
 
-  $content = trim(file_get_contents("php://input"));
+  // $content = trim(file_get_contents("php://input"));
 
-  $decoded = json_decode($content, true);
+  // $decoded = json_decode($content, true);
 
-  $filePath = (__DIR__ . '/hej.txt');
-  file_put_contents($filePath, $decoded);
+  // $filePath = (__DIR__ . '/hej.txt');
+  // file_put_contents($filePath, $decoded);
 
-  $statement = $pdo->query("SELECT * FROM users WHERE email = '$decoded'");
+  // $statement = $pdo->query("SELECT * FROM users WHERE email = '$decoded'");
 
-  $user = $statement->fetch(PDO::FETCH_ASSOC);
+  // $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-  if (!$statement) {
-    die(var_dump($pdo->errorInfo()));
-  }
+  // if (!$statement) {
+  //   die(var_dump($pdo->errorInfo()));
+  // }
 
-  if (password_verify($_POST['password'], $user['password'])) {
-    // If the password was valid we know that the user exists and provided
-    // the correct password. We can now save the user in our session.
-    // Remember to not save the password in the session!
-    // unset($user['password']);
+  // if (password_verify($_POST['password'], $user['password'])) {
+  //   // If the password was valid we know that the user exists and provided
+  //   // the correct password. We can now save the user in our session.
+  //   // Remember to not save the password in the session!
+  //   // unset($user['password']);
 
-    // $_SESSION['user'] = $user;
-  }
+  //   // $_SESSION['user'] = $user;
+  // }
 
-  echo json_encode($user);
+  http_response_code(201);
 
-  http_response_code(200);
+  // tell the user
+  echo json_encode(array("message" => "Login"));
+} else {
+  http_response_code(503);
+
+  // tell the user
+  echo json_encode(array("message" => "Unable to login"));
 }
