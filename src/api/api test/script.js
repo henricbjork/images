@@ -26,23 +26,23 @@ const getPosts = async () => {
 
 // login();
 
-const upload = async () => {
-  const data = 'hej';
-  // console.log(data);
+// const upload = async () => {
+//   const data = 'hej';
+//   // console.log(data);
 
-  const response = await fetch(
-    'http://localhost:1111/src/backend/app/posts/upload.php',
-    {
-      method: 'POST',
-      body: data,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-  );
-  const json = await response.json();
-  console.log('Success:', JSON.stringify(json));
-};
+//   const response = await fetch(
+//     'http://localhost:1111/src/backend/app/posts/upload.php',
+//     {
+//       method: 'POST',
+//       body: data,
+//       headers: {
+//         'Content-Type': 'application/json'
+//       }
+//     }
+//   );
+//   const json = await response.json();
+//   console.log('Success:', JSON.stringify(json));
+// };
 
 // upload();
 
@@ -83,3 +83,18 @@ const login = async () => {
 };
 
 login();
+
+const upload = async () => {
+  var formData = new FormData();
+  formData.append('email', 'bob@belcher.com');
+  formData.append('password', 'bob');
+
+  const data = await fetch('http://localhost:1111/api/users/login.php', {
+    method: 'POST',
+    body: formData
+  });
+  const json = await data.json();
+  console.log('Success:', JSON.stringify(json));
+};
+
+upload();
