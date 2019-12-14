@@ -8,21 +8,21 @@ const getPosts = async () => {
 
 // getPosts();
 
-const login = async () => {
-  const email = 'bob@belcher.com';
-  const data = await fetch(
-    'http://localhost:1111/src/backend/app/users/login.php',
-    {
-      method: 'POST',
-      body: email,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-  );
-  const json = await data.json();
-  console.log('Success:', JSON.stringify(json));
-};
+// const login = async () => {
+//   const email = 'bob@belcher.com';
+//   const data = await fetch(
+//     'http://localhost:1111/src/backend/app/users/login.php',
+//     {
+//       method: 'POST',
+//       body: email,
+//       headers: {
+//         'Content-Type': 'application/json'
+//       }
+//     }
+//   );
+//   const json = await data.json();
+//   console.log('Success:', JSON.stringify(json));
+// };
 
 // login();
 
@@ -67,4 +67,19 @@ const uploadNew = async () => {
   console.log('Success:', JSON.stringify(json));
 };
 
-uploadNew();
+// uploadNew();
+
+const login = async () => {
+  var formData = new FormData();
+  formData.append('email', 'bob@belcher.com');
+  formData.append('password', 'bob');
+
+  const data = await fetch('http://localhost:1111/api/users/login.php', {
+    method: 'POST',
+    body: formData
+  });
+  const json = await data.json();
+  console.log('Success:', JSON.stringify(json));
+};
+
+login();

@@ -3,10 +3,13 @@ import React from 'react';
 const Items = props => {
   return (
     <div>
-      {console.log(props)}
-      {props.data.map(image => (
-        <li key={image.id}>{image.content}</li>
-      ))}
+      {/* {props.data.map(image => (
+        <div key={image.id}>
+          <div>{image.content}</div>
+          <button>edit</button>
+          <button onClick={delete}>delete</button>
+        </div>
+      ))} */}
     </div>
   );
 };

@@ -37,7 +37,6 @@ if (isset($_FILES['image'])) {
     $statement->execute();
 
     echo json_encode(array('message' => 'The file is uploaded'));
-    echo json_encode(array('message' => $_FILES['image']));
   } else {
     echo json_encode(array('message' => 'The file exceeds file limit'));
   }
