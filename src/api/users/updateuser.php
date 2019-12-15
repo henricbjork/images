@@ -8,7 +8,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
 header('Content-Type: application/json');
 // header('Access-Control-Allow-Methods: POST');
-
+// Add all cases when string is empty
 if (isset($_POST['biography'], $_POST['email'], $_POST['password'])) {
   $biography = trim(filter_var($_POST['biography'], FILTER_SANITIZE_STRING));
   $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));

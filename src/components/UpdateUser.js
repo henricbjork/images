@@ -24,30 +24,17 @@ const UpdateUser = () => {
     formData.append('biography', biography);
     console.log(formData);
 
-
     const data = await fetch('http://localhost:1111/api/users/updateuser.php', {
       method: 'POST',
       body: formData
     });
+    // if await is enabled error when string is empty but update database correctly
     // const json = await data.json();
-    // console.log(json); error when string is empty but update databse correctly
+    // console.log(json);
   };
-
-  const test = () => {
-    console.log('hej');
-
-    if (email === null) {
-      console.log('null')
-    }
-    if (email === '') {
-      console.log('empty')
-    }
-  }
 
   return (
     <div>
-      <button onClick={test}>SEND</button>
-
       <form onSubmit={uploadPost}>
         <input
           type="text"
