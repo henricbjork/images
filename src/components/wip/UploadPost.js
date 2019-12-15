@@ -45,20 +45,12 @@ const Upload = () => {
       }
     );
 
-    // // const fileInput = document.querySelector('input');
-    // // console.log(fileInput);
-
     const deleteResponse = await deleteData.json();
     console.log(deleteResponse);
-    // console.log(event);
-    // console.log(value);
-
-    // console.log('hej');
   };
 
   return (
     <div>
-      {/* <button onClick={upload}>SEND</button> */}
       <form onSubmit={uploadPost}>
         <input
           type="file"
