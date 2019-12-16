@@ -1,39 +1,35 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-// import {AuthContext} from '../components-old/context/auth';
 import {AppContext} from '../components/Context';
 
-const Start = () => {
-  // const [isLoggedIn, setLoggedIn] = useState(false);
-  // const [auth, setAuth] = useState();
+const UpdateUser = () => {
   const [auth, setAuth] = useContext(AppContext);
   const [user, setUser] = useContext(AppContext);
+
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  // useEffect(() => {}, [user]);
-
-  const handlePassword = event => {
+  const handleChangePassword = event => {
     setPassword(event.target.value);
   };
-  const handleEmail = event => {
+  const handleChangeEmail = event => {
     setEmail(event.target.value);
   };
 
-  const login = async event => {
+  const uploadPost = async event => {
     event.preventDefault();
     var formData = new FormData();
-    formData.append('email', 'bob@belcher.com');
-    formData.append('password', 'bob');
-    // formData.append('email', email);
-    // formData.append('password', password);
+    formData.append('email', email);
+    formData.append('password', password);
 
-    const data = await fetch('http://localhost:1111/api/users/login.php', {
+    const data = await fetch('http://localhost:1111/api/users/createuser.php', {
       method: 'POST',
       body: formData
     });
+
     const json = await data.json();
-    console.log('Success:', JSON.stringify(json));
+    console.log(json);
+
     if (json.result === 200) {
       setAuth(true);
       setUser(json.user);
@@ -46,27 +42,25 @@ const Start = () => {
 
   return (
     <div>
-      <button onClick={login}>Login</button>
-      {/* <form onSubmit={login}>
+      <form onSubmit={uploadPost}>
         <input
           type="email"
-          onChange={handleEmail}
+          onChange={handleChangeEmail}
           value={email}
           placeholder="email"
           required
         />
         <input
-          type="text"
-          onChange={handlePassword}
+          type="password"
+          onChange={handleChangePassword}
           value={password}
           placeholder="password"
           required
         />
-        <button>Login</button>
-      </form> */}
-      <Link to="/signup">Sign Up</Link>
+        <button>SEND</button>
+      </form>
     </div>
   );
 };
 
-export default Start;
+export default UpdateUser;

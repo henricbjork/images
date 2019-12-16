@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Nav from '../components/Nav';
 
 const UpdateUser = () => {
   const [password, setPassword] = useState('');
@@ -33,6 +34,7 @@ const UpdateUser = () => {
 
   return (
     <div>
+      <Nav />
       <form onSubmit={uploadPost}>
         <input
           type="text"

@@ -30,5 +30,11 @@ if (isset($_POST['email'], $_POST['password'])) {
   $statement->bindParam(':password', $password, PDO::PARAM_STR);
   $statement->execute();
 
-  echo json_encode(array('message' => 'User was created'));
+  $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
+  $statement->bindParam(':email', $email, PDO::PARAM_STR);
+  $statement->execute();
+
+  $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+  echo json_encode(array('message' => 'User was created', 'user' => $user['id'], 'result' => 200));
 }

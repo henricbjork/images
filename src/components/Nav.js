@@ -6,7 +6,8 @@ const Nav = () => {
     <nav>
       <Link to="/">🏠</Link>
       <Link to="/newpost">📸</Link>
-      <Link to="/admin">👤</Link>
+      <Link to="/settings">👤</Link>
+      <Link to="/admin">🚶</Link>
     </nav>
   );
 };
