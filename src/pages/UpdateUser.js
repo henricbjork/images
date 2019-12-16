@@ -17,12 +17,10 @@ const UpdateUser = () => {
 
   const uploadPost = async event => {
     event.preventDefault();
-    console.log(email);
     var formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
     formData.append('biography', biography);
-    console.log(formData);
 
     const data = await fetch('http://localhost:1111/api/users/updateuser.php', {
       method: 'POST',
@@ -41,21 +39,18 @@ const UpdateUser = () => {
           onChange={handleChangeBiography}
           value={biography}
           placeholder="bio"
-          // required
         />
         <input
           type="email"
           onChange={handleChangeEmail}
           value={email}
           placeholder="email"
-          // required
         />
         <input
           type="text"
           onChange={handleChangePassword}
           value={password}
           placeholder="password"
-          // required
         />
         <button>SEND</button>
       </form>

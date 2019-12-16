@@ -4,9 +4,9 @@ import {Link} from 'react-router-dom';
 const Nav = () => {
   return (
     <nav>
-      <Link to="/">Home</Link>
-      <Link to="/upload">Upload</Link>
-      <Link to="/login">Login</Link>
+      <Link to="/">🏠</Link>
+      <Link to="/newpost">📸</Link>
+      <Link to="/admin">👤</Link>
     </nav>
   );
 };

@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import Items from './Items';
+// import Items from '../components-wip/wip/Items';
+import Nav from '../components/Nav';
 
 const Posts = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
     getData();
-    console.log('hej');
   }, []);
 
   const getData = async () => {
@@ -30,16 +30,18 @@ const Posts = () => {
 
     const deleteResponse = await deleteData.json();
     console.log(deleteResponse);
+    getData();
   };
 
   return (
     <div>
+      <Nav />
       {/* <Items data={images} /> */}
       {images.map(image => (
         <div key={image.id}>
           <div>{image.content}</div>
-          <button>edit</button>
-          <button onClick={() => deletePost(image.id)}>delete</button>
+          <button>✏️</button>
+          <button onClick={() => deletePost(image.id)}>🗑</button>
         </div>
       ))}
     </div>

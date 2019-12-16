@@ -28,7 +28,10 @@ if (isset($_POST['email'], $_POST['password'])) {
     unset($user['password']);
 
     // $_SESSION['user'] = $user;
-    echo json_encode(array('message' => 'Logged in'));
+    echo json_encode(array(
+      'user' => $user['id'],
+      'result' => 200
+    ));
     http_response_code(200);
     exit;
   }
