@@ -24,7 +24,8 @@ const UpdateUser = () => {
 
     const data = await fetch('http://localhost:1111/api/users/createuser.php', {
       method: 'POST',
-      body: formData
+      body: formData,
+      credentials: 'include'
     });
 
     const json = await data.json();

@@ -10,33 +10,39 @@ const Start = () => {
   const [user, setUser] = useContext(AppContext);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [errors, setErrors] = useState([]);
 
   // useEffect(() => {}, [user]);
 
   const handlePassword = event => {
     setPassword(event.target.value);
+    setErrors('');
   };
   const handleEmail = event => {
     setEmail(event.target.value);
+    setErrors('');
   };
 
   const login = async event => {
     event.preventDefault();
     var formData = new FormData();
-    formData.append('email', 'bob@belcher.com');
-    formData.append('password', 'bob');
-    // formData.append('email', email);
-    // formData.append('password', password);
+    // formData.append('email', 'bob@belcher.com');
+    // formData.append('password', 'bob');
+    formData.append('email', email);
+    formData.append('password', password);
 
     const data = await fetch('http://localhost:1111/api/users/login.php', {
       method: 'POST',
-      body: formData
+      body: formData,
+      credentials: 'include'
     });
     const json = await data.json();
     console.log('Success:', JSON.stringify(json));
     if (json.result === 200) {
       setAuth(true);
       setUser(json.user);
+    } else {
+      setErrors(json.message);
     }
   };
 
@@ -46,8 +52,8 @@ const Start = () => {
 
   return (
     <div>
-      <button onClick={login}>Login</button>
-      {/* <form onSubmit={login}>
+      {/* <button onClick={login}>Login</button> */}
+      <form onSubmit={login}>
         <input
           type="email"
           onChange={handleEmail}
@@ -63,7 +69,8 @@ const Start = () => {
           required
         />
         <button>Login</button>
-      </form> */}
+      </form>
+      <div>{errors}</div>
       <Link to="/signup">Sign Up</Link>
     </div>
   );

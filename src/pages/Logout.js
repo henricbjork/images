@@ -4,7 +4,14 @@ import {AppContext} from '../components/Context';
 
 function Logout(props) {
   const [auth, setAuth] = useContext(AppContext);
-  const logout = () => {
+  const logout = async () => {
+    const data = await fetch('http://localhost:1111/api/users/logout.php', {
+      credentials: 'include'
+    });
+
+    const response = await data.json();
+    console.log(response);
+
     setAuth(false);
     if (!auth) {
       return <Redirect to="/" />;

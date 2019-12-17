@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: *');
+header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
+header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json');
-// header('Access-Control-Allow-Methods: POST');
 
 if (isset($_POST['email'], $_POST['password'])) {
   $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
@@ -35,6 +34,9 @@ if (isset($_POST['email'], $_POST['password'])) {
   $statement->execute();
 
   $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+  unset($user['password']);
+  $_SESSION['user'] = $user['id'];
 
   echo json_encode(array('message' => 'User was created', 'user' => $user['id'], 'result' => 200));
 }

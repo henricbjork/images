@@ -10,8 +10,9 @@ const Posts = () => {
   }, []);
 
   const getData = async () => {
-    const data = await fetch(`http://localhost:1111/api/posts/getposts.php`);
-
+    const data = await fetch('http://localhost:1111/api/posts/getposts.php', {
+      credentials: 'include'
+    });
     const response = await data.json();
     setImages(response);
   };
@@ -21,10 +22,11 @@ const Posts = () => {
     var formData = new FormData();
     formData.append('id', image);
     const deleteData = await fetch(
-      `http://localhost:1111/api/posts/deletepost.php`,
+      'http://localhost:1111/api/posts/deletepost.php',
       {
         method: 'POST',
-        body: formData
+        body: formData,
+        credentials: 'include'
       }
     );
 
