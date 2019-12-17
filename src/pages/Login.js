@@ -62,7 +62,7 @@ const Start = () => {
           required
         />
         <input
-          type="text"
+          type="password"
           onChange={handlePassword}
           value={password}
           placeholder="password"

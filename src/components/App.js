@@ -16,10 +16,16 @@ function App(props) {
       <Router>
         <div>
           <Switch>
-            <PrivateRoute exact path="/" component={Posts} />
+            {/* <PrivateRoute exact path="/" component={Posts} />
             <PrivateRoute path="/admin" component={Logout} />
             <PrivateRoute path="/newpost" component={UploadPost} />
             <PrivateRoute path="/settings" component={UpdateUser} />
+            <Route path="/signup" component={CreateUser} />
+            <Route path="/login" component={Login} /> */}
+            <Route exact path="/" component={Posts} />
+            <Route path="/admin" component={Logout} />
+            <Route path="/newpost" component={UploadPost} />
+            <Route path="/settings" component={UpdateUser} />
             <Route path="/signup" component={CreateUser} />
             <Route path="/login" component={Login} />
           </Switch>

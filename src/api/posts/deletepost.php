@@ -4,19 +4,20 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: *');
+header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
+header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json');
-// header('Access-Control-Allow-Methods: POST');
+if (isset($_SESSION['user'])) {
+  if (isset($_POST['id'])) {
+    $id = trim(filter_var($_POST['id'], FILTER_SANITIZE_STRING));
 
-if (isset($_POST['id'])) {
+    $query = "DELETE FROM posts WHERE id = :id";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':id', $id, PDO::PARAM_INT);
+    $statement->execute();
 
-  $id = trim(filter_var($_POST['id'], FILTER_SANITIZE_STRING));
-
-  $query = "DELETE FROM posts WHERE id = :id";
-  $statement = $pdo->prepare($query);
-  $statement->bindParam(':id', $id, PDO::PARAM_INT);
-  $statement->execute();
-
-  echo json_encode(array('message' => 'The file is was deleted'));
+    echo json_encode(array('message' => 'The file is was deleted'));
+  }
+} else {
+  echo json_encode(array('message' => 'Not logged in'));
 }

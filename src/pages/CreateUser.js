@@ -8,12 +8,15 @@ const UpdateUser = () => {
 
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [errors, setErrors] = useState([]);
 
   const handleChangePassword = event => {
     setPassword(event.target.value);
+    setErrors('');
   };
   const handleChangeEmail = event => {
     setEmail(event.target.value);
+    setErrors('');
   };
 
   const uploadPost = async event => {
@@ -34,6 +37,8 @@ const UpdateUser = () => {
     if (json.result === 200) {
       setAuth(true);
       setUser(json.user);
+    } else {
+      setErrors(json.message);
     }
   };
 
@@ -60,6 +65,7 @@ const UpdateUser = () => {
         />
         <button>SEND</button>
       </form>
+      <div>{errors}</div>
     </div>
   );
 };

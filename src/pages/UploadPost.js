@@ -1,7 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {Link, Redirect} from 'react-router-dom';
+import {AppContext} from '../components/Context';
 import Nav from '../components/Nav';
 
 const Upload = () => {
+  const [redirect, setRedirect] = useContext(AppContext);
   const [file, setFile] = useState('');
   const [description, setDescription] = useState('');
 
@@ -22,17 +25,26 @@ const Upload = () => {
     formData.append('description', description);
     console.log(formData);
 
-    const deleteData = await fetch(
+    const data = await fetch(
       'http://localhost:1111/api/uploads/uploadpost.php',
       {
         method: 'POST',
-        body: formData
+        body: formData,
+        credentials: 'include'
       }
     );
 
-    const deleteResponse = await deleteData.json();
-    console.log(deleteResponse);
+    const json = await data.json();
+    console.log(json);
+
+    if (json.result === 200) {
+      setRedirect(true);
+    }
   };
+
+  if (redirect) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div>
@@ -43,6 +55,7 @@ const Upload = () => {
           type="text"
           onChange={handleChangeDescription}
           value={description}
+          required
         />
         <button>SEND</button>
       </form>
