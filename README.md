@@ -8,6 +8,8 @@ Built in React, PHP and SQLite
 * [TBD](https://github.com/)
 
 ## Code Review
+TBD
 
+## License
 This project is licensed under the MIT License - see the <a href="https://github.com/deinnielle/plain-news/LICENSE">License 
 file</a> for more details
