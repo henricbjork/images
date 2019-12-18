@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import {AppContext} from '../components/Context';
+import {AppContext} from '../components/AppContext';
 import Nav from '../components/Nav';
 
 const Upload = () => {

@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import {AppContext} from '../components/Context';
+import {AppContext} from '../components/AppContext';
 
 const CreateUser = () => {
   const [auth, setAuth] = useContext(AppContext);

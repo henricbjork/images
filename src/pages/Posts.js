@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {AppContext} from '../components/Context';
+import {AppContext} from '../components/AppContext';
 
 import Nav from '../components/Nav';
 
