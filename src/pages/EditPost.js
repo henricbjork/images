@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 
 const EditPost = ({match}) => {
   const [redirect, setRedirect] = useState(false);
@@ -12,7 +12,7 @@ const EditPost = ({match}) => {
   const updatePost = async event => {
     event.preventDefault();
     console.log(match);
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append('description', description);
     formData.append('id', match.params.id);
     const data = await fetch('http://localhost:1111/api/posts/editpost.php', {

@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-// import {AuthContext} from '../components-old/context/auth';
 import {AppContext} from '../components/AppContext';
 
 const Start = () => {
@@ -20,7 +19,7 @@ const Start = () => {
 
   const login = async event => {
     event.preventDefault();
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append('email', 'bob@belcher.com');
     formData.append('password', 'bob');
     // formData.append('email', email);

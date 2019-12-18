@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Link, Redirect} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import {AppContext} from '../components/AppContext';
 
 const CreateUser = () => {
@@ -19,7 +19,7 @@ const CreateUser = () => {
 
   const uploadPost = async event => {
     event.preventDefault();
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
 

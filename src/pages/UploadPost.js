@@ -1,6 +1,5 @@
 import React, {useState, useContext} from 'react';
-import {Link, Redirect} from 'react-router-dom';
-import {AppContext} from '../components/AppContext';
+import {Redirect} from 'react-router-dom';
 import Nav from '../components/Nav';
 
 const Upload = () => {
@@ -19,8 +18,8 @@ const Upload = () => {
 
   const uploadPost = async event => {
     event.preventDefault();
-    // // // console.log(image);
-    var formData = new FormData();
+
+    const formData = new FormData();
     formData.append('image', file);
     formData.append('description', description);
     console.log(formData);

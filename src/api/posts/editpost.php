@@ -12,7 +12,7 @@ if (isset($_SESSION['user'])) {
   if (isset($_POST['description'], $_POST['id'])) {
     $description = trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING));
     $id = trim(filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT));
-    // $query = "UPDATE users SET biography = :biography, email = :email WHERE id = 3";
+
     $query = "UPDATE posts SET description = :description WHERE id = :id";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':description', $description, PDO::PARAM_STR);

@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import {Link, Redirect} from 'react-router-dom';
 import {AppContext} from '../components/AppContext';
 
 const Logout = () => {

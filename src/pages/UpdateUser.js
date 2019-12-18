@@ -5,7 +5,6 @@ const UpdateUser = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [biography, setBiography] = useState('');
-  //Add context on which user is logged in
 
   const handleChangePassword = event => {
     setPassword(event.target.value);
@@ -19,7 +18,7 @@ const UpdateUser = () => {
 
   const uploadPost = async event => {
     event.preventDefault();
-    var formData = new FormData();
+    const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
     formData.append('biography', biography);
@@ -29,6 +28,7 @@ const UpdateUser = () => {
       body: formData,
       credentials: 'include'
     });
+
     // if await is enabled error when string is empty but update database correctly
     const json = await data.json();
     console.log(json);
