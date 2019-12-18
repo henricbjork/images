@@ -5,7 +5,7 @@ import {AppContext} from './AppContext';
 const AuthenticationRoute = ({component: Component, ...rest}) => {
   const [auth, setAuth] = useContext(AppContext);
 
-  if (sessionStorage.getItem('user')) {
+  if (localStorage.getItem('user')) {
     setAuth(true);
   }
 

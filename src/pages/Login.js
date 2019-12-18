@@ -34,7 +34,7 @@ const Start = () => {
     const json = await data.json();
     console.log('Success:', JSON.stringify(json));
     if (json.result === 200) {
-      sessionStorage.setItem('user', json.user);
+      localStorage.setItem('user', json.user);
       setAuth(true);
     } else {
       setErrors(json.message);

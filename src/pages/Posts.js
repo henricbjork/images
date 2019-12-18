@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
+import {Link} from 'react-router-dom';
 import {AppContext} from '../components/AppContext';
 
 import Nav from '../components/Nav';
@@ -71,7 +72,8 @@ const Posts = () => {
             />
             <button onClick={() => updatePost(image.id)}>Save</button>
           </div>
-          <button onClick={() => toggleInput()}>✏️</button>
+          <Link to={`/post/${image.id}`}>✏️</Link>
+          {/* <button onClick={() => toggleInput()}>✏️</button> */}
           <button onClick={() => deletePost(image.id)}>🗑</button>
         </div>
       ))}

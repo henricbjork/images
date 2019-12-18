@@ -12,7 +12,7 @@ const Logout = () => {
     const response = await data.json();
     console.log(response);
 
-    sessionStorage.clear();
+    localStorage.clear();
     setAuth(false);
   };
 
