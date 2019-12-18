@@ -2,10 +2,8 @@ import React, {useState, useEffect, useContext} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {AppContext} from '../components/Context';
 
-const UpdateUser = () => {
+const CreateUser = () => {
   const [auth, setAuth] = useContext(AppContext);
-  const [user, setUser] = useContext(AppContext);
-
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState([]);
@@ -35,8 +33,8 @@ const UpdateUser = () => {
     console.log(json);
 
     if (json.result === 200) {
+      sessionStorage.setItem('user', json.user);
       setAuth(true);
-      setUser(json.user);
     } else {
       setErrors(json.message);
     }
@@ -70,4 +68,4 @@ const UpdateUser = () => {
   );
 };
 
-export default UpdateUser;
+export default CreateUser;

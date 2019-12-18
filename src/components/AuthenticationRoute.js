@@ -2,8 +2,12 @@ import React, {useContext} from 'react';
 import {Route, Redirect} from 'react-router-dom';
 import {AppContext} from './Context';
 
-function PrivateRoute({component: Component, ...rest}) {
+const AuthenticationRoute = ({component: Component, ...rest}) => {
   const [auth, setAuth] = useContext(AppContext);
+
+  if (sessionStorage.getItem('user')) {
+    setAuth(true);
+  }
 
   return (
     <Route
@@ -13,6 +17,6 @@ function PrivateRoute({component: Component, ...rest}) {
       }
     />
   );
-}
+};
 
-export default PrivateRoute;
+export default AuthenticationRoute;

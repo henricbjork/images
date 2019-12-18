@@ -4,7 +4,7 @@ import {AppContext} from '../components/Context';
 import Nav from '../components/Nav';
 
 const Posts = () => {
-  const [redirect, setRedirect] = useContext(AppContext);
+  // const [redirect, setRedirect] = useContext(AppContext);
   const [images, setImages] = useState([]);
   const [show, setShow] = useState(false);
   const [description, setDescription] = useState('');
@@ -19,7 +19,7 @@ const Posts = () => {
     });
     const response = await data.json();
     setImages(response);
-    setRedirect(false);
+    // setRedirect(false);
   };
 
   const toggleInput = () => {

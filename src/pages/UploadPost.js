@@ -4,7 +4,7 @@ import {AppContext} from '../components/Context';
 import Nav from '../components/Nav';
 
 const Upload = () => {
-  const [redirect, setRedirect] = useContext(AppContext);
+  const [redirect, setRedirect] = useState(false);
   const [file, setFile] = useState('');
   const [description, setDescription] = useState('');
 

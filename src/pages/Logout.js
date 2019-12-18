@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {Link, Redirect} from 'react-router-dom';
 import {AppContext} from '../components/Context';
 
-function Logout(props) {
+const Logout = () => {
   const [auth, setAuth] = useContext(AppContext);
   const logout = async () => {
     const data = await fetch('http://localhost:1111/api/users/logout.php', {
@@ -12,16 +12,15 @@ function Logout(props) {
     const response = await data.json();
     console.log(response);
 
+    sessionStorage.clear();
     setAuth(false);
-    if (!auth) {
-      return <Redirect to="/" />;
-    }
   };
+
   return (
     <div>
       <button onClick={logout}>Logout</button>
     </div>
   );
-}
+};
 
 export default Logout;
