@@ -5,6 +5,7 @@ import Nav from '../components/Nav';
 const UpdateUser = () => {
   const [auth, setAuth] = useContext(AppContext);
   const [file, setFile] = useState('');
+  const [avatar, setAvatar] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [biography, setBiography] = useState('');
@@ -25,10 +26,10 @@ const UpdateUser = () => {
     setBiography(response.biography);
     setEmail(response.email);
     setPassword(response.password);
+    setAvatar(response.avatar);
   };
 
   const handleFile = event => {
-    console.log(event.target.files[0]);
     setFile(event.target.files[0]);
   };
 
@@ -80,12 +81,7 @@ const UpdateUser = () => {
 
     const response = await data.json();
     console.log(response);
-
-    // if (response.result === 200) {
-    //   setRedirect(true);
-    // } else {
-    //   setErrors(response.message);
-    // }
+    getData();
   };
 
   const logout = async () => {
@@ -103,6 +99,7 @@ const UpdateUser = () => {
   return (
     <div>
       <Nav />
+      <img src={'http://localhost:1111/api/posts/uploads/avatars/' + avatar} />
       <form onSubmit={uploadAvatar}>
         <input type="file" onChange={handleFile} required />
         <button>Save</button>
