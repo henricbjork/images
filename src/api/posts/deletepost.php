@@ -12,6 +12,16 @@ if (isset($_SESSION['user'])) {
   if (isset($_POST['id'])) {
     $id = trim(filter_var($_POST['id'], FILTER_SANITIZE_STRING));
 
+    $statement = $pdo->prepare('SELECT * FROM posts WHERE id = :id');
+    $statement->bindParam(':id', $id, PDO::PARAM_STR);
+    $statement->execute();
+
+    $post = $statement->fetch(PDO::FETCH_ASSOC);
+
+    $src = __DIR__ . '/uploads/images/' . $post['content'];
+
+    unlink($src);
+
     $query = "DELETE FROM posts WHERE id = :id";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':id', $id, PDO::PARAM_INT);

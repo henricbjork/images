@@ -24,14 +24,11 @@ const Upload = () => {
     formData.append('description', description);
     console.log(formData);
 
-    const data = await fetch(
-      'http://localhost:1111/api/uploads/uploadpost.php',
-      {
-        method: 'POST',
-        body: formData,
-        credentials: 'include'
-      }
-    );
+    const data = await fetch('http://localhost:1111/api/posts/uploadpost.php', {
+      method: 'POST',
+      body: formData,
+      credentials: 'include'
+    });
 
     const json = await data.json();
     console.log(json);

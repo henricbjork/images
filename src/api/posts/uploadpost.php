@@ -17,15 +17,17 @@ if (isset($_SESSION['user'])) {
       $uid = md5($image['name'] . uniqid());
 
       if ($image['type'] === 'image/jpeg') {
-        $src = __DIR__ . "/images/$uid.jpeg";
+        $filename = "$uid.jpeg";
       } else if ($image['type'] === 'image/png') {
-        $src = __DIR__ . "/images/$uid.png";
+        $filename = "$uid.png";
       } else if ($image['type'] === 'image/gif') {
-        $src = __DIR__ . "/images/$uid.gif";
+        $filename = "$uid.gif";
       } else {
         echo json_encode(array('message' => 'The file is not supported'));
         exit;
       }
+
+      $src = __DIR__ . '/uploads/images/' . $filename;
 
       move_uploaded_file($image['tmp_name'], $src);
 
@@ -34,7 +36,7 @@ if (isset($_SESSION['user'])) {
       $query = "INSERT INTO posts ('description', 'content') VALUES (:description, :content)";
       $statement = $pdo->prepare($query);
       $statement->bindParam(':description', $description, PDO::PARAM_STR);
-      $statement->bindParam(':content', $src, PDO::PARAM_STR);
+      $statement->bindParam(':content', $filename, PDO::PARAM_STR);
       $statement->execute();
 
       echo json_encode(array('message' => 'The post is uploaded', 'result' => 200));

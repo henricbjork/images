@@ -15,18 +15,16 @@ const App = () => {
   return (
     <AppProvider>
       <Router>
-        <div>
-          <Switch>
-            <AuthRoute exact path="/" component={Posts} />
-            <AuthRoute path="/admin" component={Logout} />
-            <AuthRoute path="/newpost" component={UploadPost} />
-            <AuthRoute path="/settings" component={UpdateUser} />
-            <AuthRoute path="/post/:id" component={EditPost} />
-            <Route path="/signup" component={CreateUser} />
-            <Route path="/login" component={Login} />
-            <Route path="*" component={NotFound} />
-          </Switch>
-        </div>
+        <Switch>
+          <AuthRoute exact path="/" component={Posts} />
+          <AuthRoute path="/admin" component={Logout} />
+          <AuthRoute path="/newpost" component={UploadPost} />
+          <AuthRoute path="/settings" component={UpdateUser} />
+          <AuthRoute path="/post/:id" component={EditPost} />
+          <Route path="/signup" component={CreateUser} />
+          <Route path="/login" component={Login} />
+          <Route path="*" component={NotFound} />
+        </Switch>
       </Router>
     </AppProvider>
   );
