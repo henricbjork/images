@@ -99,6 +99,7 @@ const UpdateUser = () => {
   return (
     <div>
       <Nav />
+      {/* Add if avatar is empty */}
       <img src={'http://localhost:1111/api/posts/uploads/avatars/' + avatar} />
       <form onSubmit={uploadAvatar}>
         <input type="file" onChange={handleFile} required />

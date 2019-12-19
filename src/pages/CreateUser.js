@@ -33,7 +33,7 @@ const CreateUser = () => {
     console.log(response);
 
     if (response.result === 200) {
-      sessionStorage.setItem('user', response.user);
+      localStorage.setItem('user', response.user);
       setAuth(true);
     } else {
       setErrors(response.message);
