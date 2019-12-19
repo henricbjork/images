@@ -9,6 +9,7 @@ import UploadPost from '../pages/UploadPost';
 import UpdateUser from '../pages/UpdateUser';
 import CreateUser from '../pages/CreateUser';
 import EditPost from '../pages/EditPost';
+import NotFound from '../pages/NotFound';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <AuthRoute path="/post/:id" component={EditPost} />
             <Route path="/signup" component={CreateUser} />
             <Route path="/login" component={Login} />
+            <Route path="*" component={NotFound} />
           </Switch>
         </div>
       </Router>
