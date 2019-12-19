@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import {AppContext} from '../components/AppContext';
 import Nav from '../components/Nav';
 
 const UpdateUser = () => {
+  const [auth, setAuth] = useContext(AppContext);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [biography, setBiography] = useState('');
@@ -24,17 +26,17 @@ const UpdateUser = () => {
     setPassword(response.password);
   };
 
-  const handleChangePassword = event => {
+  const handlePassword = event => {
     setPassword(event.target.value);
   };
-  const handleChangeEmail = event => {
+  const handleEmail = event => {
     setEmail(event.target.value);
   };
-  const handleChangeBiography = event => {
+  const handleBiography = event => {
     setBiography(event.target.value);
   };
 
-  const uploadPost = async event => {
+  const editUser = async event => {
     event.preventDefault();
     const formData = new FormData();
     formData.append('email', email);
@@ -52,30 +54,46 @@ const UpdateUser = () => {
     console.log(response);
   };
 
+  const logout = async () => {
+    const data = await fetch('http://localhost:1111/api/users/logout.php', {
+      credentials: 'include'
+    });
+
+    const response = await data.json();
+    console.log(response);
+
+    localStorage.clear();
+    setAuth(false);
+  };
+
   return (
     <div>
       <Nav />
-      <form onSubmit={uploadPost}>
+      <form>
+        <input type="file"></input>
+      </form>
+      <form onSubmit={editUser}>
         <input
           type="text"
-          onChange={handleChangeBiography}
+          onChange={handleBiography}
           value={biography}
           placeholder="bio"
         />
         <input
           type="email"
-          onChange={handleChangeEmail}
+          onChange={handleEmail}
           value={email}
           placeholder="email"
         />
         <input
           type="password"
-          onChange={handleChangePassword}
+          onChange={handlePassword}
           value={password}
           placeholder="password"
         />
         <button>Save</button>
       </form>
+      <button onClick={logout}>Logout</button>
     </div>
   );
 };

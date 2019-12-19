@@ -8,12 +8,12 @@ const Upload = () => {
   const [description, setDescription] = useState('');
   const [errors, setErrors] = useState([]);
 
-  const handleChangeFile = event => {
+  const handleFile = event => {
     console.log(event.target.files[0]);
     setFile(event.target.files[0]);
   };
 
-  const handleChangeDescription = event => {
+  const handleDescription = event => {
     setDescription(event.target.value);
   };
 
@@ -49,10 +49,10 @@ const Upload = () => {
     <div>
       <Nav />
       <form onSubmit={uploadPost}>
-        <input type="file" onChange={handleChangeFile} required />
+        <input type="file" onChange={handleFile} required />
         <input
           type="text"
-          onChange={handleChangeDescription}
+          onChange={handleDescription}
           value={description}
           placeholder="Description"
         />

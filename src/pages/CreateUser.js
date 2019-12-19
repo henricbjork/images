@@ -8,11 +8,11 @@ const CreateUser = () => {
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState([]);
 
-  const handleChangePassword = event => {
+  const handlePassword = event => {
     setPassword(event.target.value);
     setErrors('');
   };
-  const handleChangeEmail = event => {
+  const handleEmail = event => {
     setEmail(event.target.value);
     setErrors('');
   };
@@ -49,14 +49,14 @@ const CreateUser = () => {
       <form onSubmit={uploadPost}>
         <input
           type="email"
-          onChange={handleChangeEmail}
+          onChange={handleEmail}
           value={email}
           placeholder="email"
           required
         />
         <input
           type="password"
-          onChange={handleChangePassword}
+          onChange={handlePassword}
           value={password}
           placeholder="password"
           required

@@ -7,7 +7,6 @@ const Nav = () => {
       <Link to="/">🏠</Link>
       <Link to="/share">📸</Link>
       <Link to="/settings">👤</Link>
-      <Link to="/admin">🚶</Link>
     </nav>
   );
 };

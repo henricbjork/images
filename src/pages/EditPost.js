@@ -25,7 +25,7 @@ const EditPost = ({match}) => {
     setDescription(response.description);
   };
 
-  const handleChange = event => {
+  const handlePost = event => {
     setDescription(event.target.value);
   };
 
@@ -55,12 +55,7 @@ const EditPost = ({match}) => {
   return (
     <div>
       <form onSubmit={updatePost}>
-        <input
-          type="text"
-          onChange={handleChange}
-          value={description}
-          required
-        />
+        <input type="text" onChange={handlePost} value={description} required />
         <button>Save</button>
       </form>
     </div>

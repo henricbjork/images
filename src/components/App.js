@@ -4,9 +4,8 @@ import {AppProvider} from './AppContext';
 import AuthRoute from './AuthRoute';
 import Posts from '../pages/Posts';
 import Login from '../pages/Login';
-import Logout from '../pages/Logout';
 import UploadPost from '../pages/UploadPost';
-import EditUser from '../pages/EditUser';
+import Settings from '../pages/Settings';
 import CreateUser from '../pages/CreateUser';
 import EditPost from '../pages/EditPost';
 import NotFound from '../pages/NotFound';
@@ -17,9 +16,8 @@ const App = () => {
       <Router>
         <Switch>
           <AuthRoute exact path="/" component={Posts} />
-          <AuthRoute path="/admin" component={Logout} />
           <AuthRoute path="/share" component={UploadPost} />
-          <AuthRoute path="/settings" component={EditUser} />
+          <AuthRoute path="/settings" component={Settings} />
           <AuthRoute path="/post/:id" component={EditPost} />
           <Route path="/signup" component={CreateUser} />
           <Route path="/login" component={Login} />
