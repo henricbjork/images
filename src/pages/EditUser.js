@@ -56,7 +56,7 @@ const UpdateUser = () => {
           value={password}
           placeholder="password"
         />
-        <button>SEND</button>
+        <button>Save</button>
       </form>
     </div>
   );

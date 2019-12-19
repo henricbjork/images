@@ -5,7 +5,7 @@ const Nav = () => {
   return (
     <nav>
       <Link to="/">🏠</Link>
-      <Link to="/newpost">📸</Link>
+      <Link to="/share">📸</Link>
       <Link to="/settings">👤</Link>
       <Link to="/admin">🚶</Link>
     </nav>

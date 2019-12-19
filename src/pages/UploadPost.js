@@ -55,7 +55,7 @@ const Upload = () => {
           onChange={handleChangeDescription}
           value={description}
         />
-        <button>SEND</button>
+        <button>Share</button>
         <div>{errors}</div>
       </form>
     </div>

@@ -18,7 +18,7 @@ const App = () => {
         <Switch>
           <AuthRoute exact path="/" component={Posts} />
           <AuthRoute path="/admin" component={Logout} />
-          <AuthRoute path="/newpost" component={UploadPost} />
+          <AuthRoute path="/share" component={UploadPost} />
           <AuthRoute path="/settings" component={EditUser} />
           <AuthRoute path="/post/:id" component={EditPost} />
           <Route path="/signup" component={CreateUser} />

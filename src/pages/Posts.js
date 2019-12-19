@@ -44,7 +44,7 @@ const Posts = () => {
           />
           <div>{image.description}</div>
           <Link to={`/post/${image.id}`}>✏️</Link>
-          <button onClick={() => deletePost(image.id)}>🗑</button>
+          <a onClick={() => deletePost(image.id)}>🗑</a>
         </div>
       ))}
     </div>
