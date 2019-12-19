@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {Redirect} from 'react-router-dom';
+import {Redirect, Link} from 'react-router-dom';
 import {AppContext} from '../components/AppContext';
 
 const CreateUser = () => {
@@ -61,9 +61,10 @@ const CreateUser = () => {
           placeholder="password"
           required
         />
-        <button>SEND</button>
+        <button>Login</button>
       </form>
       <div>{errors}</div>
+      <Link to="/login">Already have an account?</Link>
     </div>
   );
 };

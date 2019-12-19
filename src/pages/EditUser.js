@@ -11,19 +11,17 @@ const UpdateUser = () => {
   }, []);
 
   const getData = async () => {
-    const formData = new FormData();
-    formData.append('id', match.params.id);
     const data = await fetch(
       'http://localhost:1111/api/users/usersettings.php',
       {
-        method: 'POST',
-        body: formData,
         credentials: 'include'
       }
     );
     const response = await data.json();
     console.log(response);
-    // setDescription(response.description);
+    setBiography(response.biography);
+    setEmail(response.email);
+    setPassword(response.password);
   };
 
   const handleChangePassword = event => {
