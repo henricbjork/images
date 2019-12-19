@@ -1,6 +1,7 @@
 $backgroundColor: white;
 $textColor: black;
-$fontSize: 30px;
+$fontSize: 20px;
+$fontSizeDesktop: 40px;
 
 * {
   box-sizing: border-box;
@@ -38,4 +39,10 @@ button {
 
 img {
   width: 100vw;
+}
+
+@media screen and (min-width: 600px) {
+  body {
+    font-size: $fontSizeDesktop;
+  }
 }
