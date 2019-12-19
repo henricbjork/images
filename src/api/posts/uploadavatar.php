@@ -10,10 +10,16 @@ header('Content-Type: application/json');
 
 if (isset($_SESSION['user'])) {
   if (isset($_FILES['image'])) {
-
     $image = $_FILES['image'];
-
     if ($image['size'] <= 2097152) {
+      $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
+
+      $statement = $pdo->prepare('SELECT avatar FROM users WHERE id = :id');
+      $statement->bindParam(':id', $id, PDO::PARAM_STR);
+      $statement->execute();
+
+      $user = $statement->fetch(PDO::FETCH_ASSOC);
+
       $uid = md5($image['name'] . uniqid());
 
       if ($image['type'] === 'image/jpeg') {
@@ -29,14 +35,28 @@ if (isset($_SESSION['user'])) {
 
       $src = __DIR__ . '/uploads/avatars/' . $filename;
 
-      move_uploaded_file($image['tmp_name'], $src);
+      if (empty($user['avatar'])) {
+        move_uploaded_file($image['tmp_name'], $src);
 
-      $query = "INSERT INTO users ('avatar') VALUES (:avatar)";
-      $statement = $pdo->prepare($query);
-      $statement->bindParam(':avatar', $filename, PDO::PARAM_STR);
-      $statement->execute();
+        $query = "UPDATE users SET avatar = :avatar WHERE id = :id";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':avatar', $filename, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
+        $statement->execute();
 
-      echo json_encode(array('message' => 'The avatar is uploaded', 'result' => 200));
+        echo json_encode(array('message' => 'The avatar is uploaded', 'result' => 200));
+      } else {
+        $srcUnlink = __DIR__ . '/uploads/avatars/' . $user['avatar'];
+        unlink($srcUnlink);
+        move_uploaded_file($image['tmp_name'], $src);
+
+        $query = "UPDATE users SET avatar = :avatar WHERE id = :id";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':avatar', $filename, PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
+        $statement->execute();
+        echo json_encode(array('message' => 'The avatar is uploaded', 'result' => 200));
+      }
     } else {
       echo json_encode(array('message' => 'The file exceeds limit size'));
     }

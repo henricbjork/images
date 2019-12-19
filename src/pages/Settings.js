@@ -4,6 +4,7 @@ import Nav from '../components/Nav';
 
 const UpdateUser = () => {
   const [auth, setAuth] = useContext(AppContext);
+  const [file, setFile] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [biography, setBiography] = useState('');
@@ -26,12 +27,19 @@ const UpdateUser = () => {
     setPassword(response.password);
   };
 
+  const handleFile = event => {
+    console.log(event.target.files[0]);
+    setFile(event.target.files[0]);
+  };
+
   const handlePassword = event => {
     setPassword(event.target.value);
   };
+
   const handleEmail = event => {
     setEmail(event.target.value);
   };
+
   const handleBiography = event => {
     setBiography(event.target.value);
   };
@@ -54,6 +62,32 @@ const UpdateUser = () => {
     console.log(response);
   };
 
+  const uploadAvatar = async event => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('image', file);
+    console.log(formData);
+
+    const data = await fetch(
+      'http://localhost:1111/api/posts/uploadavatar.php',
+      {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      }
+    );
+
+    const response = await data.json();
+    console.log(response);
+
+    // if (response.result === 200) {
+    //   setRedirect(true);
+    // } else {
+    //   setErrors(response.message);
+    // }
+  };
+
   const logout = async () => {
     const data = await fetch('http://localhost:1111/api/users/logout.php', {
       credentials: 'include'
@@ -69,8 +103,9 @@ const UpdateUser = () => {
   return (
     <div>
       <Nav />
-      <form>
-        <input type="file"></input>
+      <form onSubmit={uploadAvatar}>
+        <input type="file" onChange={handleFile} required />
+        <button>Save</button>
       </form>
       <form onSubmit={editUser}>
         <input
