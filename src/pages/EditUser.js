@@ -23,7 +23,7 @@ const UpdateUser = () => {
     formData.append('password', password);
     formData.append('biography', biography);
 
-    const data = await fetch('http://localhost:1111/api/users/updateuser.php', {
+    const data = await fetch('http://localhost:1111/api/users/edituser.php', {
       method: 'POST',
       body: formData,
       credentials: 'include'

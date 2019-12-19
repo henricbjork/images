@@ -6,7 +6,7 @@ import Posts from '../pages/Posts';
 import Login from '../pages/Login';
 import Logout from '../pages/Logout';
 import UploadPost from '../pages/UploadPost';
-import UpdateUser from '../pages/UpdateUser';
+import EditUser from '../pages/EditUser';
 import CreateUser from '../pages/CreateUser';
 import EditPost from '../pages/EditPost';
 import NotFound from '../pages/NotFound';
@@ -19,7 +19,7 @@ const App = () => {
           <AuthRoute exact path="/" component={Posts} />
           <AuthRoute path="/admin" component={Logout} />
           <AuthRoute path="/newpost" component={UploadPost} />
-          <AuthRoute path="/settings" component={UpdateUser} />
+          <AuthRoute path="/settings" component={EditUser} />
           <AuthRoute path="/post/:id" component={EditPost} />
           <Route path="/signup" component={CreateUser} />
           <Route path="/login" component={Login} />

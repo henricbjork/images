@@ -33,16 +33,25 @@ if (isset($_SESSION['user'])) {
 
       $description = trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING));
 
-      $query = "INSERT INTO posts ('description', 'content') VALUES (:description, :content)";
-      $statement = $pdo->prepare($query);
-      $statement->bindParam(':description', $description, PDO::PARAM_STR);
-      $statement->bindParam(':content', $filename, PDO::PARAM_STR);
-      $statement->execute();
+      if (empty($description)) {
+        $query = "INSERT INTO posts ('content') VALUES (:content)";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':content', $filename, PDO::PARAM_STR);
+        $statement->execute();
+      } else {
+        $query = "INSERT INTO posts ('description', 'content') VALUES (:description, :content)";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':description', $description, PDO::PARAM_STR);
+        $statement->bindParam(':content', $filename, PDO::PARAM_STR);
+        $statement->execute();
+      }
 
       echo json_encode(array('message' => 'The post is uploaded', 'result' => 200));
     } else {
       echo json_encode(array('message' => 'The file exceeds limit size'));
     }
+  } else {
+    echo json_encode(array('message' => 'No file'));
   }
 } else {
   echo json_encode(array('message' => 'Not logged in'));

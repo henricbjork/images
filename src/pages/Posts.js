@@ -37,7 +37,11 @@ const Posts = () => {
       <Nav />
       {images.map(image => (
         <div key={image.id}>
-          <div>{image.content}</div>
+          <img
+            src={
+              'http://localhost:1111/api/posts/uploads/images/' + image.content
+            }
+          />
           <div>{image.description}</div>
           <Link to={`/post/${image.id}`}>✏️</Link>
           <button onClick={() => deletePost(image.id)}>🗑</button>

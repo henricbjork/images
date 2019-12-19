@@ -6,6 +6,7 @@ const Upload = () => {
   const [redirect, setRedirect] = useState(false);
   const [file, setFile] = useState('');
   const [description, setDescription] = useState('');
+  const [errors, setErrors] = useState([]);
 
   const handleChangeFile = event => {
     console.log(event.target.files[0]);
@@ -35,6 +36,8 @@ const Upload = () => {
 
     if (json.result === 200) {
       setRedirect(true);
+    } else {
+      setErrors(json.message);
     }
   };
 
@@ -51,9 +54,9 @@ const Upload = () => {
           type="text"
           onChange={handleChangeDescription}
           value={description}
-          required
         />
         <button>SEND</button>
+        <div>{errors}</div>
       </form>
     </div>
   );
