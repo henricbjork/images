@@ -11,7 +11,7 @@ const EditPost = ({match}) => {
 
   const getData = async () => {
     const formData = new FormData();
-    formData.append('id', 3);
+    formData.append('id', match.params.id);
     const data = await fetch(
       'http://localhost:1111/api/posts/postdescription.php',
       {
