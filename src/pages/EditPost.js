@@ -5,6 +5,26 @@ const EditPost = ({match}) => {
   const [redirect, setRedirect] = useState(false);
   const [description, setDescription] = useState('');
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const formData = new FormData();
+    formData.append('id', match.params.id);
+    const data = await fetch(
+      'http://localhost:1111/api/posts/postdescription.php',
+      {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      }
+    );
+    const response = await data.json();
+    console.log(response);
+    setDescription(response.description);
+  };
+
   const handleChange = event => {
     setDescription(event.target.value);
   };
@@ -20,10 +40,10 @@ const EditPost = ({match}) => {
       body: formData,
       credentials: 'include'
     });
-    const json = await data.json();
-    console.log(json);
+    const response = await data.json();
+    console.log(response);
 
-    if (json.result === 200) {
+    if (response.result === 200) {
       setRedirect(true);
     }
   };

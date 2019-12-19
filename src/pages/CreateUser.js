@@ -29,14 +29,14 @@ const CreateUser = () => {
       credentials: 'include'
     });
 
-    const json = await data.json();
-    console.log(json);
+    const response = await data.json();
+    console.log(response);
 
-    if (json.result === 200) {
-      sessionStorage.setItem('user', json.user);
+    if (response.result === 200) {
+      sessionStorage.setItem('user', response.user);
       setAuth(true);
     } else {
-      setErrors(json.message);
+      setErrors(response.message);
     }
   };
 

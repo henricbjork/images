@@ -31,13 +31,13 @@ const Upload = () => {
       credentials: 'include'
     });
 
-    const json = await data.json();
-    console.log(json);
+    const response = await data.json();
+    console.log(response);
 
-    if (json.result === 200) {
+    if (response.result === 200) {
       setRedirect(true);
     } else {
-      setErrors(json.message);
+      setErrors(response.message);
     }
   };
 
@@ -54,6 +54,7 @@ const Upload = () => {
           type="text"
           onChange={handleChangeDescription}
           value={description}
+          placeholder="Description"
         />
         <button>Share</button>
         <div>{errors}</div>

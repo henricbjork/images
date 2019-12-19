@@ -6,6 +6,26 @@ const UpdateUser = () => {
   const [email, setEmail] = useState('');
   const [biography, setBiography] = useState('');
 
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const formData = new FormData();
+    formData.append('id', match.params.id);
+    const data = await fetch(
+      'http://localhost:1111/api/users/usersettings.php',
+      {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      }
+    );
+    const response = await data.json();
+    console.log(response);
+    // setDescription(response.description);
+  };
+
   const handleChangePassword = event => {
     setPassword(event.target.value);
   };
@@ -30,8 +50,8 @@ const UpdateUser = () => {
     });
 
     // if await is enabled error when string is empty but update database correctly
-    const json = await data.json();
-    console.log(json);
+    const response = await data.json();
+    console.log(response);
   };
 
   return (

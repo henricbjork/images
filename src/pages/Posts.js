@@ -10,7 +10,7 @@ const Posts = () => {
   }, []);
 
   const getData = async () => {
-    const data = await fetch('http://localhost:1111/api/posts/getposts.php', {
+    const data = await fetch('http://localhost:1111/api/posts/posts.php', {
       credentials: 'include'
     });
     const response = await data.json();
@@ -26,8 +26,8 @@ const Posts = () => {
       credentials: 'include'
     });
 
-    const json = await data.json();
-    console.log(json);
+    const response = await data.json();
+    console.log(response);
     getData();
   };
 
@@ -40,8 +40,8 @@ const Posts = () => {
       credentials: 'include'
     });
 
-    const json = await data.json();
-    console.log(json);
+    const response = await data.json();
+    console.log(response);
     getData();
   };
 
@@ -54,8 +54,8 @@ const Posts = () => {
       credentials: 'include'
     });
 
-    const json = await data.json();
-    console.log(json);
+    const response = await data.json();
+    console.log(response);
     getData();
   };
 
@@ -70,8 +70,8 @@ const Posts = () => {
             }
           />
           <div>{image.description}</div>
-          <span>{image.likes}</span>
           <a onClick={() => like(image.id)}>❤️</a>
+          <span>{image.likes}</span>
           <a onClick={() => unlike(image.id)}>💔</a>
           <Link to={`/post/${image.id}`}>✏️</Link>
           <a onClick={() => deletePost(image.id)}>🗑</a>

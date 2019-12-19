@@ -20,23 +20,23 @@ const Start = () => {
   const login = async event => {
     event.preventDefault();
     const formData = new FormData();
-    formData.append('email', 'bob@belcher.com');
-    formData.append('password', 'bob');
-    // formData.append('email', email);
-    // formData.append('password', password);
+    // formData.append('email', 'bob@belcher.com');
+    // formData.append('password', 'bob');
+    formData.append('email', email);
+    formData.append('password', password);
 
     const data = await fetch('http://localhost:1111/api/users/login.php', {
       method: 'POST',
       body: formData,
       credentials: 'include'
     });
-    const json = await data.json();
-    console.log('Success:', JSON.stringify(json));
-    if (json.result === 200) {
-      localStorage.setItem('user', json.user);
+    const response = await data.json();
+    console.log(response);
+    if (response.result === 200) {
+      localStorage.setItem('user', response.user);
       setAuth(true);
     } else {
-      setErrors(json.message);
+      setErrors(response.message);
     }
   };
 
@@ -46,8 +46,8 @@ const Start = () => {
 
   return (
     <div>
-      <button onClick={login}>Login</button>
-      {/* <form onSubmit={login}>
+      {/* <button onClick={login}>Login</button> */}
+      <form onSubmit={login}>
         <input
           type="email"
           onChange={handleEmail}
@@ -63,7 +63,7 @@ const Start = () => {
           required
         />
         <button>Login</button>
-      </form> */}
+      </form>
       <div>{errors}</div>
       <Link to="/signup">Sign Up</Link>
     </div>
