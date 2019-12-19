@@ -18,10 +18,37 @@ const Posts = () => {
   };
 
   const deletePost = async image => {
-    console.log(image);
     const formData = new FormData();
     formData.append('id', image);
     const data = await fetch('http://localhost:1111/api/posts/deletepost.php', {
+      method: 'POST',
+      body: formData,
+      credentials: 'include'
+    });
+
+    const json = await data.json();
+    console.log(json);
+    getData();
+  };
+
+  const like = async image => {
+    const formData = new FormData();
+    formData.append('id', image);
+    const data = await fetch('http://localhost:1111/api/posts/like.php', {
+      method: 'POST',
+      body: formData,
+      credentials: 'include'
+    });
+
+    const json = await data.json();
+    console.log(json);
+    getData();
+  };
+
+  const unlike = async image => {
+    const formData = new FormData();
+    formData.append('id', image);
+    const data = await fetch('http://localhost:1111/api/posts/unlike.php', {
       method: 'POST',
       body: formData,
       credentials: 'include'
@@ -43,6 +70,9 @@ const Posts = () => {
             }
           />
           <div>{image.description}</div>
+          <span>{image.likes}</span>
+          <a onClick={() => like(image.id)}>❤️</a>
+          <a onClick={() => unlike(image.id)}>💔</a>
           <Link to={`/post/${image.id}`}>✏️</Link>
           <a onClick={() => deletePost(image.id)}>🗑</a>
         </div>
