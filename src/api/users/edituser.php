@@ -9,7 +9,6 @@ header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json');
 
 if (isset($_SESSION['user'])) {
-  // Add all cases when string is empty
   $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_NUMBER_INT));
 
   if (isset($_POST['biography'], $_POST['email'], $_POST['password'])) {
@@ -24,24 +23,9 @@ if (isset($_SESSION['user'])) {
       $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
       $statement->bindParam(':email', $email, PDO::PARAM_STR);
       $statement->bindParam(':password', $password, PDO::PARAM_STR);
-      $statement->bindParam(':id', $id, PDO::PARAM_INT);
+      $statement->bindParam(':id', $id, PDO::PARAM_STR);
       $statement->execute();
-      echo json_encode(array('message' => 'Updated all'));
-    } elseif (!empty($biography) && !empty($email) && empty($password)) {
-      $query = "UPDATE users SET biography = :biography, email = :email WHERE id = :id";
-      $statement = $pdo->prepare($query);
-      $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
-      $statement->bindParam(':email', $email, PDO::PARAM_STR);
-      $statement->bindParam(':id', $id, PDO::PARAM_INT);
-      $statement->execute();
-      echo json_encode(array('message' => 'Updated bio and email'));
-    } elseif (!empty($biography) && empty($email) && empty($password)) {
-      $query = "UPDATE users SET biography = :biography WHERE id = :id";
-      $statement = $pdo->prepare($query);
-      $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
-      $statement->bindParam(':id', $id, PDO::PARAM_INT);
-      $statement->execute();
-      echo json_encode(array('message' => 'Updated bio'));
+      echo json_encode(array('message' => 'Updated settings'));
     }
   }
 } else {

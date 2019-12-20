@@ -9,10 +9,10 @@ header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json');
 
 if (isset($_SESSION['user'])) {
-  $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_NUMBER_INT));
+  $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
 
   $statement = $pdo->prepare('SELECT * FROM users WHERE id = :id');
-  $statement->bindParam(':id', $id, PDO::PARAM_INT);
+  $statement->bindParam(':id', $id, PDO::PARAM_STR);
   $statement->execute();
 
   $user = $statement->fetch(PDO::FETCH_ASSOC);

@@ -24,7 +24,7 @@ if (isset($_SESSION['user'])) {
 
     $query = "DELETE FROM posts WHERE id = :id";
     $statement = $pdo->prepare($query);
-    $statement->bindParam(':id', $id, PDO::PARAM_INT);
+    $statement->bindParam(':id', $id, PDO::PARAM_STR);
     $statement->execute();
 
     echo json_encode(array('message' => 'The file is was deleted'));

@@ -58,8 +58,8 @@ const UpdateUser = () => {
       credentials: 'include'
     });
 
-    // if await is enabled error when string is empty but update database correctly
     const response = await data.json();
+    setPassword('');
     console.log(response);
   };
 

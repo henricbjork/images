@@ -21,8 +21,8 @@ if (isset($_SESSION['user'])) {
     $likes = $post['likes'] - 1;
     $query = "UPDATE posts SET likes = :likes WHERE id = :id";
     $statement = $pdo->prepare($query);
-    $statement->bindParam(':likes', $likes, PDO::PARAM_INT);
-    $statement->bindParam(':id', $id, PDO::PARAM_INT);
+    $statement->bindParam(':likes', $likes, PDO::PARAM_STR);
+    $statement->bindParam(':id', $id, PDO::PARAM_STR);
     $statement->execute();
 
     echo json_encode(array('message' => 'Liked', 'likes' => $likes));
