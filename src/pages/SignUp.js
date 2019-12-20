@@ -2,7 +2,7 @@ import React, {useState, useContext} from 'react';
 import {Redirect, Link} from 'react-router-dom';
 import {AppContext} from '../components/AppContext';
 
-const CreateUser = () => {
+const SignUp = () => {
   const [auth, setAuth] = useContext(AppContext);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -61,12 +61,12 @@ const CreateUser = () => {
           placeholder="password"
           required
         />
-        <button>Login</button>
+        <button>Sign Up</button>
       </form>
       <div>{errors}</div>
-      <Link to="/login">Already have an account?</Link>
+      <Link to="/login">Have an account? Login</Link>
     </div>
   );
 };
 
-export default CreateUser;
+export default SignUp;

@@ -62,10 +62,10 @@ const Start = () => {
           placeholder="password"
           required
         />
-        <button>Login</button>
+        <button>Log In</button>
       </form>
       <div>{errors}</div>
-      <Link to="/signup">Sign Up</Link>
+      <Link to="/signup">Don't have an account? Sign Up</Link>
     </div>
   );
 };

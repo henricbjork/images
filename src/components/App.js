@@ -7,7 +7,7 @@ import Posts from '../pages/Posts';
 import Login from '../pages/Login';
 import UploadPost from '../pages/UploadPost';
 import Settings from '../pages/Settings';
-import CreateUser from '../pages/CreateUser';
+import SignUp from '../pages/SignUp';
 import EditPost from '../pages/EditPost';
 import NotFound from '../pages/NotFound';
 
@@ -20,7 +20,7 @@ const App = () => {
           <AuthRoute path="/share" component={UploadPost} />
           <AuthRoute path="/settings" component={Settings} />
           <AuthRoute path="/post/:id" component={EditPost} />
-          <HideRoute path="/signup" component={CreateUser} />
+          <HideRoute path="/signup" component={SignUp} />
           <HideRoute path="/login" component={Login} />
           <Route path="*" component={NotFound} />
         </Switch>

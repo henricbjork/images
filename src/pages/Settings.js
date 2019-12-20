@@ -127,7 +127,7 @@ const UpdateUser = () => {
         />
         <button>Save</button>
       </form>
-      <button onClick={logout}>Logout</button>
+      <button onClick={logout}>Log Out</button>
     </div>
   );
 };

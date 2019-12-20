@@ -12,7 +12,7 @@ const HideRoute = ({component: Component, ...rest}) => {
   return (
     <Route
       {...rest}
-      render={props => (auth ? <Redirect to="/" /> : <Redirect to="/login" />)}
+      render={props => (auth ? <Redirect to="/" /> : <Component {...props} />)}
     />
   );
 };
