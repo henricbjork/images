@@ -29,25 +29,33 @@ a {
   cursor: pointer;
 }
 
-a:hover {
+a:hover,
+button:hover {
   text-decoration: underline;
 }
 
 a,
 p,
-span {
+span,
+button {
   padding: 0 0 0 5px;
 }
 
 button {
+  font-size: 100%;
+  font-family: inherit;
+  color: #000;
+  background: none;
+  border: 0;
+  outline: none;
   cursor: pointer;
 }
 
 img {
-  width: 100vw;
+  width: 100%;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 1000px) {
   body {
     font-size: $fontSizeDesktop;
   }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Nav from '../components/Nav';
 
@@ -65,16 +65,15 @@ const Posts = () => {
       {images.map(image => (
         <div key={image.id}>
           <img
-            src={
-              'http://localhost:1111/api/posts/uploads/images/' + image.content
-            }
+            src={`http://localhost:1111/api/posts/uploads/images/${image.content}`}
+            alt={`Post ${image.id}`}
           />
           <p>{image.description}</p>
-          <a onClick={() => like(image.id)}>Like</a>
+          <button onClick={() => like(image.id)}>Like</button>
           <span>{image.likes}</span>
-          <a onClick={() => unlike(image.id)}>Dislike</a>
+          <button onClick={() => unlike(image.id)}>Dislike</button>
           <Link to={`/post/${image.id}`}>Edit</Link>
-          <a onClick={() => deletePost(image.id)}>Delete</a>
+          <button onClick={() => deletePost(image.id)}>Delete</button>
         </div>
       ))}
     </div>

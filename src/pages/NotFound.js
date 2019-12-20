@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-  useLocation
-} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 const NotFound = () => {
   return (
