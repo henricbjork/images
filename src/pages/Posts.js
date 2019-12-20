@@ -69,12 +69,12 @@ const Posts = () => {
               'http://localhost:1111/api/posts/uploads/images/' + image.content
             }
           />
-          <div>{image.description}</div>
-          <a onClick={() => like(image.id)}>❤️</a>
+          <p>{image.description}</p>
+          <a onClick={() => like(image.id)}>Like</a>
           <span>{image.likes}</span>
-          <a onClick={() => unlike(image.id)}>💔</a>
-          <Link to={`/post/${image.id}`}>✏️</Link>
-          <a onClick={() => deletePost(image.id)}>🗑</a>
+          <a onClick={() => unlike(image.id)}>Dislike</a>
+          <Link to={`/post/${image.id}`}>Edit</Link>
+          <a onClick={() => deletePost(image.id)}>Delete</a>
         </div>
       ))}
     </div>

@@ -30,7 +30,13 @@ a {
 }
 
 a:hover {
-  // font-size: 35px;
+  text-decoration: underline;
+}
+
+a,
+p,
+span {
+  padding: 0 0 0 5px;
 }
 
 button {
