@@ -25,8 +25,9 @@ const UpdateUser = () => {
     console.log(response);
     setBiography(response.biography);
     setEmail(response.email);
-    setPassword(response.password);
-    setAvatar(response.avatar);
+    setAvatar(
+      `http://localhost:1111/api/posts/uploads/avatars/${response.avatar}`
+    );
   };
 
   const handleFile = event => {
@@ -100,7 +101,7 @@ const UpdateUser = () => {
     <div>
       <Nav />
       {/* Add if avatar is empty */}
-      <img src={'http://localhost:1111/api/posts/uploads/avatars/' + avatar} />
+      <img src={avatar} alt="Avatar" />
       <form onSubmit={uploadAvatar}>
         <input type="file" onChange={handleFile} required />
         <button>Save</button>
