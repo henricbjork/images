@@ -11,7 +11,7 @@ header('Content-Type: application/json');
 if (isset($_POST['email'], $_POST['password'])) {
   $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
 
-  $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
+  $statement = $pdo->prepare('SELECT id, email, password FROM users WHERE email = :email');
   $statement->bindParam(':email', $email, PDO::PARAM_STR);
   $statement->execute();
 

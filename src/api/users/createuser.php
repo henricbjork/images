@@ -12,11 +12,11 @@ if (isset($_POST['email'], $_POST['password'])) {
   $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-  $getEmail = $pdo->prepare('SELECT * FROM users WHERE email = :email');
-  $getEmail->bindParam(':email', $email, PDO::PARAM_STR);
-  $getEmail->execute();
+  $statement = $pdo->prepare('SELECT email FROM users WHERE email = :email');
+  $statement->bindParam(':email', $email, PDO::PARAM_STR);
+  $statement->execute();
 
-  $user = $getEmail->fetch(PDO::FETCH_ASSOC);
+  $user = $statement->fetch(PDO::FETCH_ASSOC);
 
   if ($user) {
     echo json_encode(array('message' => 'User already exist'));
@@ -29,7 +29,7 @@ if (isset($_POST['email'], $_POST['password'])) {
   $statement->bindParam(':password', $password, PDO::PARAM_STR);
   $statement->execute();
 
-  $statement = $pdo->prepare('SELECT * FROM users WHERE email = :email');
+  $statement = $pdo->prepare('SELECT id FROM users WHERE email = :email');
   $statement->bindParam(':email', $email, PDO::PARAM_STR);
   $statement->execute();
 

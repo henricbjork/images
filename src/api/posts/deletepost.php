@@ -12,7 +12,7 @@ if (isset($_SESSION['user'])) {
   if (isset($_POST['id'])) {
     $id = trim(filter_var($_POST['id'], FILTER_SANITIZE_STRING));
 
-    $statement = $pdo->prepare('SELECT * FROM posts WHERE id = :id');
+    $statement = $pdo->prepare('SELECT id FROM posts WHERE id = :id');
     $statement->bindParam(':id', $id, PDO::PARAM_STR);
     $statement->execute();
 

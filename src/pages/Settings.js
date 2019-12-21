@@ -6,9 +6,9 @@ const UpdateUser = () => {
   const [auth, setAuth] = useContext(AppContext);
   const [file, setFile] = useState('');
   const [avatar, setAvatar] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
   const [biography, setBiography] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     getData();
@@ -53,11 +53,14 @@ const UpdateUser = () => {
     formData.append('password', password);
     formData.append('biography', biography);
 
-    const data = await fetch('http://localhost:1111/api/users/edituser.php', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include'
-    });
+    const data = await fetch(
+      'http://localhost:1111/api/users/editusersettings.php',
+      {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      }
+    );
 
     const response = await data.json();
     setPassword('');
