@@ -6,10 +6,21 @@ const Home = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    getData();
+    getPosts();
   }, []);
 
-  const getData = async () => {
+  const getPosts = async () => {
+    const data = await fetch('http://localhost:1111/api/posts/posts.php', {
+      credentials: 'include'
+    });
+    const response = await data.json();
+    console.log(response);
+    if (response.length > 0) {
+      setImages(response);
+    }
+  };
+
+  const getLikes = async () => {
     const data = await fetch('http://localhost:1111/api/posts/posts.php', {
       credentials: 'include'
     });
@@ -31,7 +42,7 @@ const Home = () => {
 
     const response = await data.json();
     console.log(response);
-    getData();
+    getPosts();
   };
 
   const like = async image => {

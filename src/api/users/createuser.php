@@ -38,5 +38,7 @@ if (isset($_POST['email'], $_POST['password'])) {
   unset($user['password']);
   $_SESSION['user'] = $user['id'];
 
+  //Add follow yourself to view posts you created
+
   echo json_encode(array('message' => 'User was created', 'user' => $user['id'], 'result' => 200));
 }
