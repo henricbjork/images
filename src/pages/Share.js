@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Redirect} from 'react-router-dom';
 import Nav from '../components/Nav';
 
-const Upload = () => {
+const Share = () => {
   const [redirect, setRedirect] = useState(false);
   const [file, setFile] = useState('');
   const [description, setDescription] = useState('');
@@ -62,4 +62,4 @@ const Upload = () => {
   );
 };
 
-export default Upload;
+export default Share;

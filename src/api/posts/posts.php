@@ -10,7 +10,7 @@ header('Content-Type: application/json');
 
 if (isset($_SESSION['user'])) {
   $statement = $pdo->query('SELECT * FROM posts ORDER BY id DESC');
-
+  //change query
   $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
   echo json_encode($posts);
 

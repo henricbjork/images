@@ -3,12 +3,12 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {AppProvider} from './AppContext';
 import AuthRoute from './AuthRoute';
 import HideRoute from './HideRoute';
-import Posts from '../pages/Posts';
 import Login from '../pages/Login';
-import UploadPost from '../pages/UploadPost';
-import Settings from '../pages/Settings';
 import SignUp from '../pages/SignUp';
+import Home from '../pages/Home';
 import EditPost from '../pages/EditPost';
+import Share from '../pages/Share';
+import Settings from '../pages/Settings';
 import NotFound from '../pages/NotFound';
 
 const App = () => {
@@ -16,12 +16,12 @@ const App = () => {
     <AppProvider>
       <Router>
         <Switch>
-          <AuthRoute exact path="/" component={Posts} />
-          <AuthRoute path="/share" component={UploadPost} />
-          <AuthRoute path="/settings" component={Settings} />
+          <AuthRoute exact path="/" component={Home} />
           <AuthRoute path="/post/:id" component={EditPost} />
-          <HideRoute path="/signup" component={SignUp} />
+          <AuthRoute path="/share" component={Share} />
+          <AuthRoute path="/settings" component={Settings} />
           <HideRoute path="/login" component={Login} />
+          <HideRoute path="/signup" component={SignUp} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

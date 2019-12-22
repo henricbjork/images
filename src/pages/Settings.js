@@ -4,11 +4,11 @@ import Nav from '../components/Nav';
 
 const UpdateUser = () => {
   const [auth, setAuth] = useContext(AppContext);
-  const [file, setFile] = useState('');
-  const [avatar, setAvatar] = useState('');
-  const [biography, setBiography] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [file, setFile] = useState(null);
+  const [avatar, setAvatar] = useState(null);
+  const [biography, setBiography] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
 
   useEffect(() => {
     getData();

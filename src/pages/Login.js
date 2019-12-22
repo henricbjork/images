@@ -4,8 +4,8 @@ import {AppContext} from '../components/AppContext';
 
 const Start = () => {
   const [auth, setAuth] = useContext(AppContext);
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState(null);
   const [errors, setErrors] = useState([]);
 
   const handlePassword = event => {
