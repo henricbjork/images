@@ -56,7 +56,7 @@ const Home = () => {
 
     const response = await data.json();
     console.log(response);
-    // getData();
+    getPosts();
   };
 
   return (

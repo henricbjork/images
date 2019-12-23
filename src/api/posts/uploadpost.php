@@ -12,6 +12,7 @@ if (isset($_SESSION['user'])) {
   if (isset($_FILES['image'])) {
 
     $image = $_FILES['image'];
+    $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
 
     if ($image['size'] <= 2097152) {
       $uid = md5($image['name'] . uniqid());
@@ -34,13 +35,15 @@ if (isset($_SESSION['user'])) {
       $description = trim(filter_var($_POST['description'], FILTER_SANITIZE_STRING));
 
       if (empty($description)) {
-        $query = "INSERT INTO posts ('content') VALUES (:content)";
+        $query = "INSERT INTO posts ('user_id','content') VALUES (:id, :content)";
         $statement = $pdo->prepare($query);
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
         $statement->bindParam(':content', $filename, PDO::PARAM_STR);
         $statement->execute();
       } else {
-        $query = "INSERT INTO posts ('description', 'content') VALUES (:description, :content)";
+        $query = "INSERT INTO posts ('user_id', 'description', 'content') VALUES (:id, :description, :content)";
         $statement = $pdo->prepare($query);
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
         $statement->bindParam(':description', $description, PDO::PARAM_STR);
         $statement->bindParam(':content', $filename, PDO::PARAM_STR);
         $statement->execute();
