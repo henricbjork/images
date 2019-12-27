@@ -12,6 +12,7 @@ const Start = () => {
     setPassword(event.target.value);
     setErrors('');
   };
+
   const handleEmail = event => {
     setEmail(event.target.value);
     setErrors('');
