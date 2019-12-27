@@ -15,20 +15,7 @@ const Home = () => {
     });
     const response = await data.json();
     console.log(response);
-    if (response.length > 0) {
-      setPosts(response);
-    }
-  };
-
-  const getLikes = async () => {
-    const data = await fetch('http://localhost:1111/api/posts/posts.php', {
-      credentials: 'include'
-    });
-    const response = await data.json();
-    console.log(response);
-    if (response.length > 0) {
-      setPosts(response);
-    }
+    setPosts(response);
   };
 
   const deletePost = async post => {

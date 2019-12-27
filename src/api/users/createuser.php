@@ -29,16 +29,21 @@ if (isset($_POST['email'], $_POST['password'])) {
   $statement->bindParam(':password', $password, PDO::PARAM_STR);
   $statement->execute();
 
-  $statement = $pdo->prepare('SELECT id FROM users WHERE email = :email');
+
+
+  $query = "SELECT id FROM users WHERE email = :email";
+  $statement = $pdo->prepare($query);
   $statement->bindParam(':email', $email, PDO::PARAM_STR);
   $statement->execute();
 
   $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-  unset($user['password']);
-  $_SESSION['user'] = $user['id'];
+  $query = "INSERT INTO followings (follower_user_id, followed_user_id) VALUES (:id, :id)";
+  $statement = $pdo->prepare($query);
+  $statement->bindParam(':id', $user['id'], PDO::PARAM_STR);
+  $statement->execute();
 
-  //Add follow yourself to view posts you created
+  $_SESSION['user'] = $user['id'];
 
   echo json_encode(array('message' => 'User was created', 'user' => $user['id'], 'result' => 200));
 }
