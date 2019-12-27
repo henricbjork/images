@@ -4,8 +4,8 @@ import {AppContext} from '../components/AppContext';
 
 const Start = () => {
   const [auth, setAuth] = useContext(AppContext);
-  const [password, setPassword] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [errors, setErrors] = useState([]);
 
   const handlePassword = event => {
@@ -20,8 +20,6 @@ const Start = () => {
   const login = async event => {
     event.preventDefault();
     const formData = new FormData();
-    // formData.append('email', 'bob@belcher.com');
-    // formData.append('password', 'bob');
     formData.append('email', email);
     formData.append('password', password);
 
@@ -46,7 +44,6 @@ const Start = () => {
 
   return (
     <div>
-      {/* <button onClick={login}>Login</button> */}
       <form onSubmit={login}>
         <input
           type="email"
