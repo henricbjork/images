@@ -1,4 +1,3 @@
-import {Link} from 'react-router-dom';
 import React, {useState, useEffect} from 'react';
 import Nav from '../components/Nav';
 
@@ -18,10 +17,10 @@ const Users = () => {
     setUsers(response);
   };
 
-  const like = async post => {
+  const follow = async user => {
     const formData = new FormData();
-    formData.append('id', post);
-    const data = await fetch('http://localhost:1111/api/users/like.php', {
+    formData.append('id', user);
+    const data = await fetch('http://localhost:1111/api/users/follow.php', {
       method: 'POST',
       body: formData,
       credentials: 'include'
@@ -39,8 +38,7 @@ const Users = () => {
         users.map(user => (
           <div key={user.id}>
             <span>{user.email}</span>
-            <button onClick={() => like(user.id)}>Follow</button>
-            <Link to={`/user/${user.id}`}>Profile</Link>
+            <button onClick={() => follow(user.id)}>Follow</button>
           </div>
         ))
       ) : (
