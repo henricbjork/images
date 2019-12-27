@@ -4,11 +4,11 @@ import Nav from '../components/Nav';
 
 const UpdateUser = () => {
   const [auth, setAuth] = useContext(AppContext);
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState('');
   const [avatar, setAvatar] = useState(null);
-  const [biography, setBiography] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
+  const [biography, setBiography] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     getData();
@@ -25,9 +25,11 @@ const UpdateUser = () => {
     console.log(response);
     setBiography(response.biography);
     setEmail(response.email);
-    setAvatar(
-      `http://localhost:1111/api/posts/uploads/avatars/${response.avatar}`
-    );
+    if (response.avatar) {
+      setAvatar(
+        `http://localhost:1111/api/posts/uploads/avatars/${response.avatar}`
+      );
+    }
   };
 
   const handleFile = event => {
@@ -103,8 +105,7 @@ const UpdateUser = () => {
   return (
     <div>
       <Nav />
-      {/* Add if avatar is empty */}
-      <img src={avatar} alt="Avatar" />
+      {avatar ? <img src={avatar} alt="Avatar" /> : <p>No profile image</p>}
       <form onSubmit={uploadAvatar}>
         <input type="file" onChange={handleFile} required />
         <button>Save</button>
@@ -121,6 +122,7 @@ const UpdateUser = () => {
           onChange={handleEmail}
           value={email}
           placeholder="email"
+          required
         />
         <input
           type="password"

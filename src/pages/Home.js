@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import Nav from '../components/Nav';
 
 const Home = () => {
-  const [images, setImages] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     getPosts();
@@ -16,7 +16,7 @@ const Home = () => {
     const response = await data.json();
     console.log(response);
     if (response.length > 0) {
-      setImages(response);
+      setPosts(response);
     }
   };
 
@@ -27,13 +27,13 @@ const Home = () => {
     const response = await data.json();
     console.log(response);
     if (response.length > 0) {
-      setImages(response);
+      setPosts(response);
     }
   };
 
-  const deletePost = async image => {
+  const deletePost = async post => {
     const formData = new FormData();
-    formData.append('id', image);
+    formData.append('id', post);
     const data = await fetch('http://localhost:1111/api/posts/deletepost.php', {
       method: 'POST',
       body: formData,
@@ -45,10 +45,10 @@ const Home = () => {
     getPosts();
   };
 
-  const like = async image => {
+  const like = async post => {
     const formData = new FormData();
-    formData.append('id', image);
-    const data = await fetch('http://localhost:1111/api/posts/likes.php', {
+    formData.append('id', post);
+    const data = await fetch('http://localhost:1111/api/posts/like.php', {
       method: 'POST',
       body: formData,
       credentials: 'include'
@@ -62,18 +62,18 @@ const Home = () => {
   return (
     <div>
       <Nav />
-      {images.length > 0 ? (
-        images.map(image => (
-          <div key={image.id}>
+      {posts.length > 0 ? (
+        posts.map(post => (
+          <div key={post.id}>
             <img
-              src={`http://localhost:1111/api/posts/uploads/images/${image.content}`}
-              alt={`Post ${image.id}`}
+              src={`http://localhost:1111/api/posts/uploads/images/${post.content}`}
+              alt={`Post ${post.id}`}
             />
-            <p>{image.description}</p>
-            <span>{image.likes}</span>
-            <button onClick={() => like(image.id)}>Like</button>
-            <Link to={`/post/${image.id}`}>Edit</Link>
-            <button onClick={() => deletePost(image.id)}>Delete</button>
+            <p>{post.description}</p>
+            <span>{post.likes ? post.likes : 0}</span>
+            <button onClick={() => like(post.id)}>Like</button>
+            <Link to={`/post/${post.id}`}>Edit</Link>
+            <button onClick={() => deletePost(post.id)}>Delete</button>
           </div>
         ))
       ) : (

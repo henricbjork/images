@@ -11,7 +11,8 @@ header('Content-Type: application/json');
 if (isset($_SESSION['user'])) {
   $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
 
-  $statement = $pdo->prepare('SELECT email, biography, avatar FROM users WHERE id = :id');
+  $query = "SELECT email, biography, avatar FROM users WHERE id = :id";
+  $statement = $pdo->prepare($query);
   $statement->bindParam(':id', $id, PDO::PARAM_STR);
   $statement->execute();
 

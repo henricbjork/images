@@ -14,7 +14,8 @@ if (isset($_SESSION['user'])) {
     if ($image['size'] <= 2097152) {
       $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
 
-      $statement = $pdo->prepare('SELECT avatar FROM users WHERE id = :id');
+      $query = "SELECT avatar FROM users WHERE id = :id";
+      $statement = $pdo->prepare($query);
       $statement->bindParam(':id', $id, PDO::PARAM_STR);
       $statement->execute();
 

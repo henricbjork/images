@@ -3,7 +3,7 @@ import {Redirect} from 'react-router-dom';
 
 const EditPost = ({match}) => {
   const [redirect, setRedirect] = useState(false);
-  const [description, setDescription] = useState(null);
+  const [description, setDescription] = useState('');
 
   useEffect(() => {
     getData();

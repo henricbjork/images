@@ -10,8 +10,7 @@ header('Content-Type: application/json');
 
 if (isset($_SESSION['user'])) {
   $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
-  // $statement = $pdo->query('SELECT * FROM posts ORDER BY id DESC');
-  $query = 'SELECT * FROM followings INNER JOIN users ON followings.followed_user_id = users.id INNER JOIN posts ON followings.followed_user_id = posts.user_id WHERE followings.follower_user_id = :id ORDER BY id DESC';
+  $query = 'SELECT * FROM followings INNER JOIN users ON followings.followed_user_id = users.id INNER JOIN posts ON followings.followed_user_id = posts.user_id WHERE followings.follower_user_id = :id ORDER BY posts.id DESC';
   $statement = $pdo->prepare($query);
   $statement->bindParam(':id', $id, PDO::PARAM_STR);
   $statement->execute();
