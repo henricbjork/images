@@ -35,7 +35,7 @@ if (isset($_SESSION['user'])) {
       $statement->execute();
       echo json_encode(array('message' => 'Updated settings'));
     } elseif (empty($biography) && !empty($email) && empty($password)) {
-      $query = "UPDATE users SET email = :email WHERE id = :id";
+      $query = "UPDATE users SET biography = '', email = :email WHERE id = :id";
       $statement = $pdo->prepare($query);
       $statement->bindParam(':email', $email, PDO::PARAM_STR);
       $statement->bindParam(':id', $id, PDO::PARAM_STR);
@@ -43,7 +43,7 @@ if (isset($_SESSION['user'])) {
       echo json_encode(array('message' => 'Updated settings'));
     } elseif (empty($biography) && !empty($email) && !empty($password)) {
       $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-      $query = "UPDATE users SET email = :email, password = :password WHERE id = :id";
+      $query = "UPDATE users SET biography = '', email = :email, password = :password WHERE id = :id";
       $statement = $pdo->prepare($query);
       $statement->bindParam(':email', $email, PDO::PARAM_STR);
       $statement->bindParam(':password', $password, PDO::PARAM_STR);
