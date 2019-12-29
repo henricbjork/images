@@ -9,6 +9,7 @@ import Home from '../pages/Home';
 import Users from '../pages/Users';
 import EditPost from '../pages/EditPost';
 import Share from '../pages/Share';
+import Profile from '../pages/Profile';
 import Settings from '../pages/Settings';
 import NotFound from '../pages/NotFound';
 
@@ -21,6 +22,7 @@ const App = () => {
           <AuthRoute path="/post/:id" component={EditPost} />
           <AuthRoute path="/share" component={Share} />
           <AuthRoute path="/settings" component={Settings} />
+          <AuthRoute path="/profile" component={Profile} />
           <AuthRoute path="/users" component={Users} />
           <HideRoute path="/login" component={Login} />
           <HideRoute path="/signup" component={SignUp} />
