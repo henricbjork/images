@@ -17,7 +17,7 @@ const SignUp = () => {
     setErrors('');
   };
 
-  const uploadPost = async event => {
+  const login = async event => {
     event.preventDefault();
     const formData = new FormData();
     formData.append('email', email);
@@ -38,6 +38,7 @@ const SignUp = () => {
     } else {
       setErrors(response.message);
     }
+    setPassword('');
   };
 
   if (auth) {
@@ -46,7 +47,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <form onSubmit={uploadPost}>
+      <form onSubmit={login}>
         <input
           type="email"
           onChange={handleEmail}

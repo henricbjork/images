@@ -16,40 +16,56 @@ if (isset($_SESSION['user'])) {
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $password = $_POST['password'];
 
-    if (!empty($biography) && !empty($email) && !empty($password)) {
-      $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-      $query = "UPDATE users SET biography = :biography, email = :email, password = :password WHERE id = :id";
-      $statement = $pdo->prepare($query);
-      $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
-      $statement->bindParam(':email', $email, PDO::PARAM_STR);
-      $statement->bindParam(':password', $password, PDO::PARAM_STR);
-      $statement->bindParam(':id', $id, PDO::PARAM_STR);
-      $statement->execute();
-      echo json_encode(array('message' => 'Updated settings'));
-    } elseif (!empty($biography) && !empty($email) && empty($password)) {
-      $query = "UPDATE users SET biography = :biography, email = :email WHERE id = :id";
-      $statement = $pdo->prepare($query);
-      $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
-      $statement->bindParam(':email', $email, PDO::PARAM_STR);
-      $statement->bindParam(':id', $id, PDO::PARAM_STR);
-      $statement->execute();
-      echo json_encode(array('message' => 'Updated settings'));
-    } elseif (empty($biography) && !empty($email) && empty($password)) {
-      $query = "UPDATE users SET biography = '', email = :email WHERE id = :id";
+    if (!empty($email)) {
+      $query = "SELECT email FROM users WHERE email = :email AND NOT id = :id";
+      // $query = "SELECT email FROM users WHERE email = :email";
       $statement = $pdo->prepare($query);
       $statement->bindParam(':email', $email, PDO::PARAM_STR);
       $statement->bindParam(':id', $id, PDO::PARAM_STR);
       $statement->execute();
-      echo json_encode(array('message' => 'Updated settings'));
-    } elseif (empty($biography) && !empty($email) && !empty($password)) {
-      $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-      $query = "UPDATE users SET biography = '', email = :email, password = :password WHERE id = :id";
-      $statement = $pdo->prepare($query);
-      $statement->bindParam(':email', $email, PDO::PARAM_STR);
-      $statement->bindParam(':password', $password, PDO::PARAM_STR);
-      $statement->bindParam(':id', $id, PDO::PARAM_STR);
-      $statement->execute();
-      echo json_encode(array('message' => 'Updated settings'));
+
+      $emailDatabase = $statement->fetch(PDO::FETCH_ASSOC);
+
+      if ($emailDatabase) {
+        echo json_encode(array('message' => 'Email already exist', 'result' => 400));
+        exit;
+      } else {
+        if (!empty($biography) && !empty($password)) {
+          $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+          $query = "UPDATE users SET biography = :biography, email = :email, password = :password WHERE id = :id";
+          $statement = $pdo->prepare($query);
+          $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+          $statement->bindParam(':email', $email, PDO::PARAM_STR);
+          $statement->bindParam(':password', $password, PDO::PARAM_STR);
+          $statement->bindParam(':id', $id, PDO::PARAM_STR);
+          $statement->execute();
+          echo json_encode(array('message' => 'Updated settings'));
+        } elseif (!empty($biography) && empty($password)) {
+          $query = "UPDATE users SET biography = :biography, email = :email WHERE id = :id";
+          $statement = $pdo->prepare($query);
+          $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+          $statement->bindParam(':email', $email, PDO::PARAM_STR);
+          $statement->bindParam(':id', $id, PDO::PARAM_STR);
+          $statement->execute();
+          echo json_encode(array('message' => 'Updated settings'));
+        } elseif (empty($biography) && empty($password)) {
+          $query = "UPDATE users SET biography = '', email = :email WHERE id = :id";
+          $statement = $pdo->prepare($query);
+          $statement->bindParam(':email', $email, PDO::PARAM_STR);
+          $statement->bindParam(':id', $id, PDO::PARAM_STR);
+          $statement->execute();
+          echo json_encode(array('message' => 'Updated settings'));
+        } elseif (empty($biography) && !empty($password)) {
+          $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+          $query = "UPDATE users SET biography = '', email = :email, password = :password WHERE id = :id";
+          $statement = $pdo->prepare($query);
+          $statement->bindParam(':email', $email, PDO::PARAM_STR);
+          $statement->bindParam(':password', $password, PDO::PARAM_STR);
+          $statement->bindParam(':id', $id, PDO::PARAM_STR);
+          $statement->execute();
+          echo json_encode(array('message' => 'Updated settings'));
+        }
+      }
     }
   }
 } else {

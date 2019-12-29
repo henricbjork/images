@@ -37,6 +37,7 @@ const Start = () => {
     } else {
       setErrors(response.message);
     }
+    setPassword('');
   };
 
   if (auth) {

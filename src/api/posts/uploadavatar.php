@@ -30,7 +30,7 @@ if (isset($_SESSION['user'])) {
       } else if ($image['type'] === 'image/gif') {
         $filename = "$uid.gif";
       } else {
-        echo json_encode(array('message' => 'The file is not supported'));
+        echo json_encode(array('message' => 'The file is not supported', 'result' => 400));
         exit;
       }
 
@@ -59,11 +59,11 @@ if (isset($_SESSION['user'])) {
         echo json_encode(array('message' => 'The avatar is uploaded', 'result' => 200));
       }
     } else {
-      echo json_encode(array('message' => 'The file exceeds limit size'));
+      echo json_encode(array('message' => 'The file exceeds limit size', 'result' => 400));
     }
   } else {
-    echo json_encode(array('message' => 'No file'));
+    echo json_encode(array('message' => 'No file', 'result' => 400));
   }
 } else {
-  echo json_encode(array('message' => 'Not logged in'));
+  echo json_encode(array('message' => 'Not logged in', 'result' => 400));
 }

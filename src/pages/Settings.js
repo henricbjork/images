@@ -9,6 +9,7 @@ const UpdateUser = () => {
   const [biography, setBiography] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState('');
 
   useEffect(() => {
     getData();
@@ -33,18 +34,22 @@ const UpdateUser = () => {
   };
 
   const handleFile = event => {
+    setErrors('');
     setFile(event.target.files[0]);
   };
 
   const handlePassword = event => {
+    setErrors('');
     setPassword(event.target.value);
   };
 
   const handleEmail = event => {
+    setErrors('');
     setEmail(event.target.value);
   };
 
   const handleBiography = event => {
+    setErrors('');
     setBiography(event.target.value);
   };
 
@@ -65,6 +70,11 @@ const UpdateUser = () => {
     );
 
     const response = await data.json();
+
+    if (response.result === 400) {
+      setErrors(response.message);
+    }
+
     setPassword('');
     console.log(response);
   };
@@ -86,6 +96,11 @@ const UpdateUser = () => {
     );
 
     const response = await data.json();
+
+    if (response.result === 400) {
+      setErrors(response.message);
+    }
+
     console.log(response);
     getData();
   };
@@ -132,6 +147,7 @@ const UpdateUser = () => {
         />
         <button>Save</button>
       </form>
+      <div>{errors}</div>
       <button onClick={logout}>Log Out</button>
     </div>
   );
