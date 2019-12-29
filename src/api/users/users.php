@@ -11,7 +11,7 @@ header('Content-Type: application/json');
 if (isset($_SESSION['user'])) {
   $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
 
-  $query = "SELECT * FROM users WHERE NOT id = :id";
+  $query = "SELECT id, email FROM users WHERE NOT id = :id";
   $statement = $pdo->prepare($query);
   $statement->bindParam(':id', $id, PDO::PARAM_STR);
   $statement->execute();
