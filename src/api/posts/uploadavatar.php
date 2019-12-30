@@ -56,6 +56,7 @@ if (isset($_SESSION['user'])) {
         $statement->bindParam(':avatar', $filename, PDO::PARAM_STR);
         $statement->bindParam(':id', $id, PDO::PARAM_STR);
         $statement->execute();
+
         echo json_encode(array('message' => 'The avatar is uploaded', 'result' => 200));
       }
     } else {
