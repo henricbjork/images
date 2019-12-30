@@ -44,7 +44,11 @@ const Profile = () => {
   return (
     <div>
       <Nav />
-      {avatar ? <img src={avatar} alt="Avatar" /> : <p>No profile image</p>}
+      {avatar ? (
+        <img src={avatar} className="avatar" alt="Avatar" />
+      ) : (
+        <p>No profile image</p>
+      )}
       <p>{biography}</p>
       <Link to="/settings">Edit Profile</Link>
       <button onClick={logout}>Log Out</button>
