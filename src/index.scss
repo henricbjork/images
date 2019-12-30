@@ -1,5 +1,5 @@
 $backgroundColor: white;
-$textColor: black;
+$fontColor: black;
 $fontSize: 20px;
 
 * {
@@ -13,7 +13,7 @@ body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: $fontSize;
   text-transform: uppercase;
-  color: $textColor;
+  color: $fontColor;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -24,7 +24,7 @@ body {
 }
 
 a {
-  color: #000;
+  color: $fontColor;
   text-decoration: none;
   cursor: pointer;
 }
@@ -37,7 +37,8 @@ button:hover {
 a,
 p,
 span,
-button {
+button,
+label {
   padding: 0 0 0 5px;
 }
 
@@ -45,22 +46,61 @@ button {
   font-size: 100%;
   font-family: inherit;
   text-transform: uppercase;
-  color: #000;
+  color: $fontColor;
   background: none;
   border: 0;
   outline: none;
   cursor: pointer;
 }
 
+form {
+  button {
+    font-size: 100%;
+    font-family: inherit;
+    text-transform: uppercase;
+    color: $fontColor;
+    background: none;
+    border: 1px solid $fontColor;
+    outline: none;
+    cursor: pointer;
+    padding: 5px;
+  }
+  button:hover {
+    color: $backgroundColor;
+    background: $fontColor;
+    text-decoration: none;
+  }
+}
+
 input {
   font-size: 100%;
   font-family: inherit;
   text-transform: uppercase;
-  color: #000;
+  color: $fontColor;
   background: none;
-  border: 1px solid #000;
+  border: 1px solid $fontColor;
   outline: none;
   padding: 5px;
+}
+
+::placeholder {
+  color: $fontColor;
+}
+
+label {
+  border: 1px solid $fontColor;
+  padding: 5px;
+}
+
+label:hover {
+  cursor: pointer;
+}
+
+.fileinput {
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
 img {

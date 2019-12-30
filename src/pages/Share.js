@@ -5,14 +5,18 @@ import Nav from '../components/Nav';
 const Share = () => {
   const [redirect, setRedirect] = useState(false);
   const [file, setFile] = useState('');
+  const [filename, setFilename] = useState('Choose a file');
   const [description, setDescription] = useState('');
   const [errors, setErrors] = useState([]);
 
   const handleFile = event => {
+    setErrors('');
+    setFilename('File selected');
     setFile(event.target.files[0]);
   };
 
   const handleDescription = event => {
+    setErrors('');
     setDescription(event.target.value);
   };
 
@@ -48,7 +52,15 @@ const Share = () => {
     <div>
       <Nav />
       <form onSubmit={uploadPost}>
-        <input type="file" onChange={handleFile} required />
+        <label>
+          {filename}
+          <input
+            type="file"
+            className="fileinput"
+            onChange={handleFile}
+            required
+          />
+        </label>
         <input
           type="text"
           onChange={handleDescription}

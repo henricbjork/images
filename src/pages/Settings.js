@@ -1,8 +1,9 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import Nav from '../components/Nav';
 
 const UpdateUser = () => {
   const [file, setFile] = useState('');
+  const [filename, setFilename] = useState('Choose a file');
   const [biography, setBiography] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +28,7 @@ const UpdateUser = () => {
 
   const handleFile = event => {
     setErrors('');
+    setFilename('File selected');
     setFile(event.target.files[0]);
   };
 
@@ -101,7 +103,15 @@ const UpdateUser = () => {
     <div>
       <Nav />
       <form onSubmit={uploadAvatar}>
-        <input type="file" onChange={handleFile} required />
+        <label>
+          {filename}
+          <input
+            type="file"
+            className="fileinput"
+            onChange={handleFile}
+            required
+          />
+        </label>
         <button>Save</button>
       </form>
       <form onSubmit={editUser}>
