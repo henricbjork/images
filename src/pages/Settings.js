@@ -1,9 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {AppContext} from '../components/AppContext';
 import Nav from '../components/Nav';
 
 const UpdateUser = () => {
-  const [auth, setAuth] = useContext(AppContext);
   const [file, setFile] = useState('');
   const [biography, setBiography] = useState('');
   const [email, setEmail] = useState('');
@@ -99,18 +97,6 @@ const UpdateUser = () => {
     getData();
   };
 
-  const logout = async () => {
-    const data = await fetch('http://localhost:1111/api/users/logout.php', {
-      credentials: 'include'
-    });
-
-    const response = await data.json();
-    console.log(response);
-
-    localStorage.clear();
-    setAuth(false);
-  };
-
   return (
     <div>
       <Nav />
@@ -141,7 +127,6 @@ const UpdateUser = () => {
         <button>Save</button>
       </form>
       <div>{errors}</div>
-      <button onClick={logout}>Log Out</button>
     </div>
   );
 };
