@@ -12,6 +12,7 @@ import Share from '../pages/Share';
 import Profile from '../pages/Profile';
 import Settings from '../pages/Settings';
 import NotFound from '../pages/NotFound';
+import HomeTest from '../pages/HomeTest';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           <AuthRoute path="/users" component={Users} />
           <HideRoute path="/login" component={Login} />
           <HideRoute path="/signup" component={SignUp} />
+          <Route path="/home" component={HomeTest} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Nav from '../components/Nav';
 
-const Home = () => {
+const HomeTest = () => {
   const [posts, setPosts] = useState([]);
+  const [comment, setComment] = useState('');
 
   useEffect(() => {
     getPosts();
@@ -16,6 +17,15 @@ const Home = () => {
     const response = await data.json();
     console.log(response);
     setPosts(response);
+  };
+
+  const handleComment = event => {
+    setComment(event.target.value);
+  };
+
+  const uploadComment = event => {
+    event.preventDefault();
+    console.log('hej');
   };
 
   const deletePost = async post => {
@@ -61,6 +71,14 @@ const Home = () => {
             <button onClick={() => like(post.id)}>Like</button>
             <Link to={`/post/${post.id}`}>Edit</Link>
             <button onClick={() => deletePost(post.id)}>Delete</button>
+            <form onSubmit={uploadComment}>
+              <input
+                type="text"
+                onChange={handleComment}
+                value={comment}
+                placeholder="Comment"
+              />
+            </form>
           </div>
         ))
       ) : (
@@ -70,4 +88,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeTest;
