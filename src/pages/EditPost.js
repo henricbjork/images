@@ -32,6 +32,7 @@ const EditPost = ({match}) => {
   const updatePost = async event => {
     event.preventDefault();
     console.log(match);
+
     const formData = new FormData();
     formData.append('description', description);
     formData.append('id', match.params.id);

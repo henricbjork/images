@@ -28,25 +28,6 @@ const Post = props => {
     onUpdate();
   };
 
-  const deletePost = async post => {
-    const formData = new FormData();
-    formData.append('id', post);
-    const data = await fetch('http://localhost:1111/api/posts/deletepost.php', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include'
-    });
-
-    const response = await data.json();
-    console.log(response);
-    onUpdate();
-  };
-
-  const addComment = event => {
-    event.preventDefault();
-    console.log('hej');
-  };
-
   const updatePost = async event => {
     event.preventDefault();
 
@@ -65,11 +46,44 @@ const Post = props => {
     onUpdate();
   };
 
+  const deletePost = async post => {
+    const formData = new FormData();
+    formData.append('id', post);
+    const data = await fetch('http://localhost:1111/api/posts/deletepost.php', {
+      method: 'POST',
+      body: formData,
+      credentials: 'include'
+    });
+
+    const response = await data.json();
+    console.log(response);
+    onUpdate();
+  };
+
+  const addComment = async event => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('id', props.post.id);
+    formData.append('comment', comment);
+
+    const data = await fetch('http://localhost:1111/api/posts/comment.php', {
+      method: 'POST',
+      body: formData,
+      credentials: 'include'
+    });
+
+    const response = await data.json();
+    console.log(response);
+    onUpdate();
+  };
+
   return (
     <div>
       <img
         src={`http://localhost:1111/api/posts/uploads/images/${props.post.content}`}
         alt={`Post ${props.post.id}`}
+        loading="lazy"
       />
       <p>{props.post.description}</p>
       <span>{props.post.likes ? props.post.likes : 0}</span>

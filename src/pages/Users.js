@@ -19,6 +19,7 @@ const Users = () => {
 
   const follow = async user => {
     const formData = new FormData();
+
     formData.append('id', user);
     const data = await fetch('http://localhost:1111/api/users/follow.php', {
       method: 'POST',

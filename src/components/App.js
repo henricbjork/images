@@ -12,15 +12,13 @@ import Share from '../pages/Share';
 import Profile from '../pages/Profile';
 import Settings from '../pages/Settings';
 import NotFound from '../pages/NotFound';
-import HomeTest from '../pages/HomeTest';
 
 const App = () => {
   return (
     <AppProvider>
       <Router>
         <Switch>
-          <AuthRoute exact path="/" component={HomeTest} />
-          {/* <AuthRoute path="/home" component={Home} /> */}
+          <AuthRoute exact path="/" component={Home} />
           <AuthRoute path="/post/:id" component={EditPost} />
           <AuthRoute path="/share" component={Share} />
           <AuthRoute path="/settings" component={Settings} />

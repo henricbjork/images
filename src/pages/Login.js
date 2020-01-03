@@ -20,6 +20,7 @@ const Start = () => {
 
   const login = async event => {
     event.preventDefault();
+
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);

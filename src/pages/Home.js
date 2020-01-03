@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
 import Nav from '../components/Nav';
+import Post from '../components/Post';
 
-const Home = () => {
+const HomeTest = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -18,31 +18,7 @@ const Home = () => {
     setPosts(response);
   };
 
-  const deletePost = async post => {
-    const formData = new FormData();
-    formData.append('id', post);
-    const data = await fetch('http://localhost:1111/api/posts/deletepost.php', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include'
-    });
-
-    const response = await data.json();
-    console.log(response);
-    getPosts();
-  };
-
-  const like = async post => {
-    const formData = new FormData();
-    formData.append('id', post);
-    const data = await fetch('http://localhost:1111/api/posts/like.php', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include'
-    });
-
-    const response = await data.json();
-    console.log(response);
+  const handleUpdate = () => {
     getPosts();
   };
 
@@ -51,17 +27,7 @@ const Home = () => {
       <Nav />
       {posts.length > 0 ? (
         posts.map(post => (
-          <div key={post.id}>
-            <img
-              src={`http://localhost:1111/api/posts/uploads/images/${post.content}`}
-              alt={`Post ${post.id}`}
-            />
-            <p>{post.description}</p>
-            <span>{post.likes ? post.likes : 0}</span>
-            <button onClick={() => like(post.id)}>Like</button>
-            <Link to={`/post/${post.id}`}>Edit</Link>
-            <button onClick={() => deletePost(post.id)}>Delete</button>
-          </div>
+          <Post key={post.id} onUpdate={() => handleUpdate()} post={post} />
         ))
       ) : (
         <p>To enjoy Instagram follow people or share photos.</p>
@@ -70,4 +36,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeTest;
