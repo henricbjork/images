@@ -19,7 +19,8 @@ const App = () => {
     <AppProvider>
       <Router>
         <Switch>
-          <AuthRoute exact path="/" component={Home} />
+          <AuthRoute exact path="/" component={HomeTest} />
+          {/* <AuthRoute path="/home" component={Home} /> */}
           <AuthRoute path="/post/:id" component={EditPost} />
           <AuthRoute path="/share" component={Share} />
           <AuthRoute path="/settings" component={Settings} />
@@ -27,7 +28,6 @@ const App = () => {
           <AuthRoute path="/users" component={Users} />
           <HideRoute path="/login" component={Login} />
           <HideRoute path="/signup" component={SignUp} />
-          <Route path="/home" component={HomeTest} />
           <Route path="*" component={NotFound} />
         </Switch>
       </Router>

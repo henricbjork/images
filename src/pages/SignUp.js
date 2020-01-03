@@ -52,14 +52,14 @@ const SignUp = () => {
           type="email"
           onChange={handleEmail}
           value={email}
-          placeholder="email"
+          placeholder="Email"
           required
         />
         <input
           type="password"
           onChange={handlePassword}
           value={password}
-          placeholder="password"
+          placeholder="Password"
           required
         />
         <button>Sign Up</button>
