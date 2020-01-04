@@ -25,13 +25,15 @@ const HomeTest = () => {
   return (
     <div>
       <Nav />
-      {posts.length > 0 ? (
-        posts.map(post => (
-          <Post key={post.id} onUpdate={() => handleUpdate()} post={post} />
-        ))
-      ) : (
-        <p>To enjoy Instagram follow people or share photos.</p>
-      )}
+      <div className="content">
+        {posts.length > 0 ? (
+          posts.map(post => (
+            <Post key={post.id} onUpdate={() => handleUpdate()} post={post} />
+          ))
+        ) : (
+          <p>To enjoy Instagram follow people or share photos.</p>
+        )}
+      </div>
     </div>
   );
 };

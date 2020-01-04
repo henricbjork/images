@@ -18,7 +18,6 @@ if (isset($_SESSION['user'])) {
 
     if (!empty($email)) {
       $query = "SELECT email FROM users WHERE email = :email AND NOT id = :id";
-      // $query = "SELECT email FROM users WHERE email = :email";
       $statement = $pdo->prepare($query);
       $statement->bindParam(':email', $email, PDO::PARAM_STR);
       $statement->bindParam(':id', $id, PDO::PARAM_STR);

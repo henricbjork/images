@@ -6,6 +6,7 @@ import HideRoute from './HideRoute';
 import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import Home from '../pages/Home';
+import Comments from '../pages/Comments';
 import Users from '../pages/Users';
 import EditPost from '../pages/EditPost';
 import Share from '../pages/Share';
@@ -19,6 +20,7 @@ const App = () => {
       <Router>
         <Switch>
           <AuthRoute exact path="/" component={Home} />
+          <AuthRoute path="/post/:id" component={Comments} />
           <AuthRoute path="/post/:id" component={EditPost} />
           <AuthRoute path="/share" component={Share} />
           <AuthRoute path="/settings" component={Settings} />

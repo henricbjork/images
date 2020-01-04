@@ -107,3 +107,13 @@ img {
 .avatar {
   max-width: 300px;
 }
+
+nav {
+  width: 100%;
+  position: fixed;
+  background: $backgroundColor;
+}
+
+.content {
+  padding: 25px 0 0 0;
+}

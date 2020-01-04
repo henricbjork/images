@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 const Post = props => {
   const [edit, setEdit] = useState('');
@@ -83,16 +84,22 @@ const Post = props => {
       <img
         src={`http://localhost:1111/api/posts/uploads/images/${props.post.content}`}
         alt={`Post ${props.post.id}`}
-        loading="lazy"
       />
       <p>{props.post.description}</p>
-      <span>{props.post.likes ? props.post.likes : 0}</span>
+      <span>
+        {props.post.likes
+          ? props.post.likes == 1
+            ? `${props.post.likes} Like`
+            : `${props.post.likes} Likes`
+          : `0 Likes`}
+      </span>
+      <Link to={`/post/${props.post.id}`}>Comments</Link>
       <button onClick={() => like(props.post.id)}>Like</button>
+      <button onClick={() => like(props.post.id)}>Edit</button>
       <form onSubmit={updatePost}>
         <input
           type="text"
           onChange={handleEdit}
-          /* Workable not optimal */
           value={edit ? edit : props.post.description}
           placeholder="Edit post"
         />

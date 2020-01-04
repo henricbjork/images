@@ -66,9 +66,7 @@ const UpdateUser = () => {
 
     const response = await data.json();
 
-    if (response.result === 400) {
-      setErrors(response.message);
-    }
+    response.result === 400 && setErrors(response.message);
 
     setPassword('');
     console.log(response);
@@ -92,9 +90,7 @@ const UpdateUser = () => {
 
     const response = await data.json();
 
-    if (response.result === 400) {
-      setErrors(response.message);
-    }
+    response.result === 400 && setErrors(response.message);
 
     console.log(response);
     getData();
@@ -103,41 +99,43 @@ const UpdateUser = () => {
   return (
     <div>
       <Nav />
-      <form onSubmit={uploadAvatar}>
-        <label>
-          {filename}
+      <div className="content">
+        <form onSubmit={uploadAvatar}>
+          <label>
+            {filename}
+            <input
+              type="file"
+              className="fileinput"
+              onChange={handleFile}
+              required
+            />
+          </label>
+          <button>Save</button>
+        </form>
+        <form onSubmit={editUser}>
           <input
-            type="file"
-            className="fileinput"
-            onChange={handleFile}
+            type="text"
+            onChange={handleBiography}
+            value={biography}
+            placeholder="bio"
+          />
+          <input
+            type="email"
+            onChange={handleEmail}
+            value={email}
+            placeholder="email"
             required
           />
-        </label>
-        <button>Save</button>
-      </form>
-      <form onSubmit={editUser}>
-        <input
-          type="text"
-          onChange={handleBiography}
-          value={biography}
-          placeholder="bio"
-        />
-        <input
-          type="email"
-          onChange={handleEmail}
-          value={email}
-          placeholder="email"
-          required
-        />
-        <input
-          type="password"
-          onChange={handlePassword}
-          value={password}
-          placeholder="password"
-        />
-        <button>Save</button>
-      </form>
-      <div>{errors}</div>
+          <input
+            type="password"
+            onChange={handlePassword}
+            value={password}
+            placeholder="password"
+          />
+          <button>Save</button>
+        </form>
+        <div>{errors}</div>
+      </div>
     </div>
   );
 };

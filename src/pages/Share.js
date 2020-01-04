@@ -37,11 +37,7 @@ const Share = () => {
     const response = await data.json();
     console.log(response);
 
-    if (response.result === 200) {
-      setRedirect(true);
-    } else {
-      setErrors(response.message);
-    }
+    response.result === 200 ? setRedirect(true) : setErrors(response.message);
   };
 
   if (redirect) {
@@ -51,25 +47,27 @@ const Share = () => {
   return (
     <div>
       <Nav />
-      <form onSubmit={uploadPost}>
-        <label>
-          {filename}
+      <div className="content">
+        <form onSubmit={uploadPost}>
+          <label>
+            {filename}
+            <input
+              type="file"
+              className="fileinput"
+              onChange={handleFile}
+              required
+            />
+          </label>
           <input
-            type="file"
-            className="fileinput"
-            onChange={handleFile}
-            required
+            type="text"
+            onChange={handleDescription}
+            value={description}
+            placeholder="Description"
           />
-        </label>
-        <input
-          type="text"
-          onChange={handleDescription}
-          value={description}
-          placeholder="Description"
-        />
-        <button>Share</button>
-        <div>{errors}</div>
-      </form>
+          <button>Share</button>
+          <div>{errors}</div>
+        </form>
+      </div>
     </div>
   );
 };

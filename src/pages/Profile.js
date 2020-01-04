@@ -22,11 +22,10 @@ const Profile = () => {
     const response = await data.json();
     console.log(response);
     setBiography(response.biography);
-    if (response.avatar) {
+    response.avatar &&
       setAvatar(
         `http://localhost:1111/api/posts/uploads/avatars/${response.avatar}`
       );
-    }
   };
 
   const logout = async () => {
@@ -44,14 +43,16 @@ const Profile = () => {
   return (
     <div>
       <Nav />
-      {avatar ? (
-        <img src={avatar} className="avatar" alt="Avatar" />
-      ) : (
-        <p>No profile image</p>
-      )}
-      <p>{biography}</p>
-      <Link to="/settings">Edit Profile</Link>
-      <button onClick={logout}>Log Out</button>
+      <div className="content">
+        {avatar ? (
+          <img src={avatar} className="avatar" alt="Avatar" />
+        ) : (
+          <p>No profile image</p>
+        )}
+        <p>{biography}</p>
+        <Link to="/settings">Edit Profile</Link>
+        <button onClick={logout}>Log Out</button>
+      </div>
     </div>
   );
 };

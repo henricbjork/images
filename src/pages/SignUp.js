@@ -39,6 +39,7 @@ const SignUp = () => {
     } else {
       setErrors(response.message);
     }
+
     setPassword('');
   };
 

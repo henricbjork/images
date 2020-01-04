@@ -35,17 +35,19 @@ const Users = () => {
   return (
     <div>
       <Nav />
-      {users.length > 0 ? (
-        users.map(user => (
-          <div key={user.id}>
-            <button
-              onClick={() => follow(user.id)}
-            >{`Follow ${user.email}`}</button>
-          </div>
-        ))
-      ) : (
-        <div>No users</div>
-      )}
+      <div className="content">
+        {users.length > 0 ? (
+          users.map(user => (
+            <div key={user.id}>
+              <button
+                onClick={() => follow(user.id)}
+              >{`Follow ${user.email}`}</button>
+            </div>
+          ))
+        ) : (
+          <div>No users</div>
+        )}
+      </div>
     </div>
   );
 };
