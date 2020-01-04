@@ -12,7 +12,7 @@ if (isset($_SESSION['user'])) {
   if (isset($_POST['id'])) {
     $id = trim(filter_var($_POST['id'], FILTER_SANITIZE_STRING));
 
-    $query = "SELECT comments.comment, users.email FROM comments INNER JOIN users ON comments.user_id = users.id WHERE comments.post_id = :id";
+    $query = "SELECT comments.id, comments.comment, users.email FROM comments INNER JOIN users ON comments.user_id = users.id WHERE comments.post_id = :id";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':id', $id, PDO::PARAM_STR);
     $statement->execute();

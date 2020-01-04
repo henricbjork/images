@@ -24,7 +24,7 @@ const Comments = ({match}) => {
       <div className="content">
         {comments ? (
           comments.map(comment => (
-            <p>{`${comment.email} ${comment.comment}`}</p>
+            <p key={comment.id}>{`${comment.email} ${comment.comment}`}</p>
           ))
         ) : (
           <p>No comments</p>
