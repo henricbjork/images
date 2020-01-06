@@ -14,7 +14,7 @@ if (isset($_SESSION['user'])) {
     $image = $_FILES['image'];
     $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
 
-    if ($image['size'] <= 2097152) {
+    if ($image['size'] <= 2097152 && $image['size'] > 1) {
       $uid = md5($image['name'] . uniqid());
 
       if ($image['type'] === 'image/jpeg') {
