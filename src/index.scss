@@ -8,6 +8,10 @@ $fontSize: 20px;
   margin: 0;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   background: $backgroundColor;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -102,6 +106,8 @@ label:hover {
 
 img {
   width: 100%;
+  display: block;
+  padding: 0 5px 0 5px;
 }
 
 .avatar {
@@ -115,5 +121,5 @@ nav {
 }
 
 .content {
-  padding: 25px 0 0 0;
+  padding: 24px 0 0 0;
 }

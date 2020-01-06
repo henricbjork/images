@@ -20,9 +20,9 @@ if (isset($_SESSION['user'])) {
     $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
     $statement->bindParam(':id', $id, PDO::PARAM_STR);
     $statement->execute();
-
     $description = $statement->fetch(PDO::FETCH_ASSOC);
-
+    // echo json_encode(array('message' => $description));
+    // exit;
     if ($description) {
       echo json_encode(array('message' => 'The post was updated', 'result' => 200));
     } else {
