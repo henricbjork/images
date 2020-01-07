@@ -25,6 +25,7 @@ const HomeTest = () => {
 
   return (
     <div>
+      {console.log('hej')}
       <Nav />
       <div className="content">
         {posts.length > 0 ? (
