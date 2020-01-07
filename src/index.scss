@@ -45,6 +45,51 @@ img {
   display: block;
 }
 
+label {
+  border: 1px solid $fontColor;
+  padding: 5px;
+  width: 100%;
+  display: block;
+  cursor: pointer;
+}
+
+.fileinput {
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+input {
+  font-size: 100%;
+  font-family: inherit;
+  color: $fontColor;
+  background: none;
+  border: 1px solid $fontColor;
+  outline: none;
+  padding: 5px;
+  width: 100%;
+  margin: -1px 0 0 0;
+}
+
+button {
+  font-size: 100%;
+  font-family: inherit;
+  color: $fontColor;
+  background: none;
+  border: 1px solid $fontColor;
+  padding: 5px;
+  width: 50%;
+  width: 100%;
+  margin: -1px 0 0 0;
+}
+
+button:hover {
+  color: $backgroundColor;
+  background: $fontColor;
+  text-decoration: none;
+}
+
 .wrapper {
   padding: 10px 10px 0px 10px;
 }
@@ -62,23 +107,6 @@ nav {
 
 .content {
   padding: 23px 0 0 0;
-
-  button {
-    font-size: 100%;
-    font-family: inherit;
-    border: 1px solid $fontColor;
-    padding: 5px;
-    width: 100%;
-    margin: -1px 0 0 0;
-    font-size: 100%;
-    cursor: pointer;
-  }
-
-  button:hover {
-    color: $backgroundColor;
-    background: $fontColor;
-    text-decoration: none;
-  }
 
   .content-text {
     padding: 5px 0 5px 0;
@@ -136,51 +164,6 @@ nav {
   .edit-form {
     padding: 0 0 10px 0;
   }
-}
-
-label {
-  border: 1px solid $fontColor;
-  padding: 5px;
-  width: 100%;
-  display: block;
-  cursor: pointer;
-}
-
-.fileinput {
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-
-input {
-  font-size: 100%;
-  font-family: inherit;
-  color: $fontColor;
-  background: none;
-  border: 1px solid $fontColor;
-  outline: none;
-  padding: 5px;
-  width: 100%;
-  margin: -1px 0 0 0;
-}
-
-button {
-  font-size: 100%;
-  font-family: inherit;
-  color: $fontColor;
-  background: none;
-  border: 1px solid $fontColor;
-  padding: 5px;
-  width: 50%;
-  width: 100%;
-  margin: -1px 0 0 0;
-}
-
-button:hover {
-  color: $backgroundColor;
-  background: $fontColor;
-  text-decoration: none;
 }
 
 @media (min-width: 626px) {
