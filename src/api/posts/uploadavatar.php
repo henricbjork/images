@@ -18,7 +18,6 @@ if (isset($_SESSION['user'])) {
       $statement = $pdo->prepare($query);
       $statement->bindParam(':id', $id, PDO::PARAM_STR);
       $statement->execute();
-
       $user = $statement->fetch(PDO::FETCH_ASSOC);
 
       $uid = md5($image['name'] . uniqid());

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import Nav from '../components/Nav';
 import Post from '../components/Post';
 
@@ -31,7 +32,10 @@ const HomeTest = () => {
             <Post key={post.id} onUpdate={() => handleUpdate()} post={post} />
           ))
         ) : (
-          <p>To enjoy Instagram follow people or share photos.</p>
+          <p>
+            To enjoy Instagram<Link to="/users">follow</Link> people or
+            <Link to="/share">share</Link> photos.
+          </p>
         )}
       </div>
     </div>

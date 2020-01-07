@@ -18,7 +18,6 @@ if (isset($_SESSION['user'])) {
     $statement->bindParam(':id', $id, PDO::PARAM_STR);
     $statement->bindParam(':uid', $userId, PDO::PARAM_STR);
     $statement->execute();
-
     $followed = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($followed) {

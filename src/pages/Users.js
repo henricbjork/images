@@ -38,11 +38,17 @@ const Users = () => {
       <div className="content">
         {users.length > 0 ? (
           users.map(user => (
-            <p key={user.id}>
-              <button
-                onClick={() => follow(user.id)}
-              >{`Follow ${user.email}`}</button>
-            </p>
+            <div key={user.id}>
+              {user.followed === 0 ? (
+                <button
+                  onClick={() => follow(user.id)}
+                >{`Follow ${user.email}`}</button>
+              ) : (
+                <button
+                  onClick={() => follow(user.id)}
+                >{`Following ${user.email}`}</button>
+              )}
+            </div>
           ))
         ) : (
           <p>No users</p>

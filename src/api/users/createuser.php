@@ -15,7 +15,6 @@ if (isset($_POST['email'], $_POST['password'])) {
   $statement = $pdo->prepare('SELECT email FROM users WHERE email = :email');
   $statement->bindParam(':email', $email, PDO::PARAM_STR);
   $statement->execute();
-
   $user = $statement->fetch(PDO::FETCH_ASSOC);
 
   if ($user) {
@@ -29,13 +28,10 @@ if (isset($_POST['email'], $_POST['password'])) {
   $statement->bindParam(':password', $password, PDO::PARAM_STR);
   $statement->execute();
 
-
-
   $query = "SELECT id FROM users WHERE email = :email";
   $statement = $pdo->prepare($query);
   $statement->bindParam(':email', $email, PDO::PARAM_STR);
   $statement->execute();
-
   $user = $statement->fetch(PDO::FETCH_ASSOC);
 
   $query = "INSERT INTO followings (follower_user_id, followed_user_id) VALUES (:id, :id)";

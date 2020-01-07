@@ -22,7 +22,6 @@ if (isset($_SESSION['user'])) {
       $statement->bindParam(':email', $email, PDO::PARAM_STR);
       $statement->bindParam(':id', $id, PDO::PARAM_STR);
       $statement->execute();
-
       $emailDatabase = $statement->fetch(PDO::FETCH_ASSOC);
 
       if ($emailDatabase) {

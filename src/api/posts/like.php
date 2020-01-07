@@ -18,14 +18,12 @@ if (isset($_SESSION['user'])) {
     $statement->bindParam(':uid', $userId, PDO::PARAM_STR);
     $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
     $statement->execute();
-
     $liked = $statement->fetch(PDO::FETCH_ASSOC);
 
     $query = "SELECT id, likes FROM posts WHERE id = :pid";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
     $statement->execute();
-
     $likes = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($liked) {

@@ -18,7 +18,6 @@ if (isset($_SESSION['user'])) {
     $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
     $statement->bindParam(':id', $id, PDO::PARAM_STR);
     $statement->execute();
-
     $post = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($post) {
