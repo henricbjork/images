@@ -58,13 +58,16 @@ button {
 form {
   padding: 0 0 0 5px;
 
+  label,
   input {
     display: block;
+    width: 50%;
   }
 
   button {
     border: 1px solid $fontColor;
     padding: 5px;
+    width: 50%;
   }
 
   button:hover {

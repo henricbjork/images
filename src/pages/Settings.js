@@ -117,20 +117,20 @@ const UpdateUser = () => {
             type="text"
             onChange={handleBiography}
             value={biography}
-            placeholder="bio"
+            placeholder="Biography"
           />
           <input
             type="email"
             onChange={handleEmail}
             value={email}
-            placeholder="email"
+            placeholder="Email"
             required
           />
           <input
             type="password"
             onChange={handlePassword}
             value={password}
-            placeholder="password"
+            placeholder="Password"
           />
           <button>Save</button>
         </form>

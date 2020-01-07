@@ -16,7 +16,45 @@ if (isset($_SESSION['user'])) {
   $statement->bindParam(':id', $id, PDO::PARAM_STR);
   $statement->execute();
   $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-  echo json_encode($posts);
+
+  $response = [];
+
+  foreach ($posts as $post) {
+    $postId = $post['id'];
+
+    $query = 'SELECT COUNT(post_id) as likes FROM likes WHERE post_id = :pid';
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
+    $statement->execute();
+    $countLikes = $statement->fetch(PDO::FETCH_ASSOC);
+
+    $query = 'SELECT user_id, post_id FROM likes WHERE user_id = :id and post_id = :pid';
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':id', $id, PDO::PARAM_STR);
+    $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
+    $statement->execute();
+    $liked = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($liked) {
+      $response[] = [
+        'id' => $post['id'],
+        'content' => $post['content'],
+        'description' => $post['description'],
+        'likes' => $countLikes['likes'],
+        'liked' => 1,
+      ];
+    } else {
+      $response[] = [
+        'id' => $post['id'],
+        'content' => $post['content'],
+        'description' => $post['description'],
+        'likes' => $countLikes['likes'],
+        'liked' => 0,
+      ];
+    }
+  }
+
+  echo json_encode($response);
 
   http_response_code(200);
 } else {
