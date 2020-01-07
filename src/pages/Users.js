@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Nav from '../components/Nav';
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState(null);
 
   useEffect(() => {
     getUsers();
@@ -31,6 +31,10 @@ const Users = () => {
     console.log(response);
     getUsers();
   };
+
+  if (users === null) {
+    return null;
+  }
 
   return (
     <div>

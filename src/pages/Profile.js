@@ -40,6 +40,10 @@ const Profile = () => {
     setAuth(false);
   };
 
+  if (avatar === null) {
+    return null;
+  }
+
   return (
     <div>
       <Nav />

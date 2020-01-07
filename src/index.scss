@@ -79,9 +79,9 @@ button {
   background: none;
   border: 1px solid $fontColor;
   padding: 5px;
-  width: 50%;
   width: 100%;
   margin: -1px 0 0 0;
+  cursor: pointer;
 }
 
 button:hover {
@@ -91,6 +91,7 @@ button:hover {
 }
 
 .wrapper {
+  width: 100vw;
   padding: 10px 10px 0px 10px;
 }
 
@@ -165,6 +166,14 @@ nav {
     padding: 0 0 10px 0;
   }
 }
+
+// .general-form {
+//   width: 596px;
+//   background: white;
+//   padding: 1px 0 10px 0;
+//   position: fixed;
+//   bottom: 0px;
+// }
 
 @media (min-width: 626px) {
   .wrapper {

@@ -4,7 +4,7 @@ import Nav from '../components/Nav';
 import Post from '../components/Post';
 
 const HomeTest = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(null);
 
   useEffect(() => {
     getPosts();
@@ -23,6 +23,10 @@ const HomeTest = () => {
     getPosts();
   };
 
+  if (posts === null) {
+    return null;
+  }
+
   return (
     <div>
       {console.log('hej')}
@@ -34,11 +38,21 @@ const HomeTest = () => {
           ))
         ) : (
           <p>
-            To enjoy Instagram<Link to="/users">follow</Link> people or
+            To enjoy Instagram <Link to="/users">follow</Link> people or{' '}
             <Link to="/share">share</Link> photos.
           </p>
         )}
       </div>
+      {/* <div className="general-form">
+        <form>
+          <label>
+            Select file
+            <input type="file" className="fileinput" required />
+          </label>
+          <input type="text" placeholder="Description" />
+          <button>Share</button>
+        </form>
+      </div> */}
     </div>
   );
 };
