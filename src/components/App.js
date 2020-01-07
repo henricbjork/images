@@ -15,21 +15,23 @@ import NotFound from '../pages/NotFound';
 
 const App = () => {
   return (
-    <AppProvider>
-      <Router>
-        <Switch>
-          <AuthRoute exact path="/" component={Home} />
-          <AuthRoute path="/post/:id" component={Comments} />
-          <AuthRoute path="/share" component={Share} />
-          <AuthRoute path="/settings" component={Settings} />
-          <AuthRoute path="/profile" component={Profile} />
-          <AuthRoute path="/users" component={Users} />
-          <HideRoute path="/login" component={Login} />
-          <HideRoute path="/signup" component={SignUp} />
-          <Route path="*" component={NotFound} />
-        </Switch>
-      </Router>
-    </AppProvider>
+    <div className="wrapper">
+      <AppProvider>
+        <Router>
+          <Switch>
+            <AuthRoute exact path="/" component={Home} />
+            <AuthRoute path="/post/:id" component={Comments} />
+            <AuthRoute path="/share" component={Share} />
+            <AuthRoute path="/settings" component={Settings} />
+            <AuthRoute path="/profile" component={Profile} />
+            <AuthRoute path="/users" component={Users} />
+            <HideRoute path="/login" component={Login} />
+            <HideRoute path="/signup" component={SignUp} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </Router>
+      </AppProvider>
+    </div>
   );
 };
 

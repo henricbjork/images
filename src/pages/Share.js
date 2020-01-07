@@ -48,25 +48,27 @@ const Share = () => {
     <div>
       <Nav />
       <div className="content">
-        <form onSubmit={uploadPost}>
-          <label>
-            {filename}
+        <div className="general-form">
+          <form onSubmit={uploadPost}>
+            <label>
+              {filename}
+              <input
+                type="file"
+                className="fileinput"
+                onChange={handleFile}
+                required
+              />
+            </label>
             <input
-              type="file"
-              className="fileinput"
-              onChange={handleFile}
-              required
+              type="text"
+              onChange={handleDescription}
+              value={description}
+              placeholder="Description"
             />
-          </label>
-          <input
-            type="text"
-            onChange={handleDescription}
-            value={description}
-            placeholder="Description"
-          />
-          <button>Share</button>
-          <div>{errors}</div>
-        </form>
+            <button>Share</button>
+            <div>{errors}</div>
+          </form>
+        </div>
       </div>
     </div>
   );

@@ -38,7 +38,7 @@ const Users = () => {
       <div className="content">
         {users.length > 0 ? (
           users.map(user => (
-            <div key={user.id}>
+            <div className="users-text" key={user.id}>
               {user.followed === 0 ? (
                 <button
                   onClick={() => follow(user.id)}

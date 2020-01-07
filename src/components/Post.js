@@ -68,19 +68,21 @@ const Post = props => {
         src={`http://localhost:1111/api/posts/uploads/images/${props.post.content}`}
         alt={`Post ${props.post.id}`}
       />
-      <p>{props.post.description}</p>
-      <span>{props.post.likes ? props.post.likes : 0}</span>
-      {props.post.liked === 0 ? (
-        <button onClick={() => like(props.post.id)}>Like</button>
-      ) : (
-        <button onClick={() => like(props.post.id)}>Liked</button>
-      )}
-      <Link to={`/post/${props.post.id}`}>Comment</Link>
-      <button onClick={() => (show ? setShow(false) : setShow(true))}>
-        Edit
-      </button>
+      <div className="content-text">
+        <p>{props.post.description}</p>
+        <span>{props.post.likes ? props.post.likes : 0}</span>
+        {props.post.liked === 0 ? (
+          <button onClick={() => like(props.post.id)}>Like</button>
+        ) : (
+          <button onClick={() => like(props.post.id)}>Liked</button>
+        )}
+        <Link to={`/post/${props.post.id}`}>Comment</Link>
+        <button onClick={() => (show ? setShow(false) : setShow(true))}>
+          Edit
+        </button>
+      </div>
       {show && (
-        <div>
+        <div className="edit-form">
           <form onSubmit={updatePost}>
             <input
               type="text"

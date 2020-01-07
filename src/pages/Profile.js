@@ -44,14 +44,14 @@ const Profile = () => {
     <div>
       <Nav />
       <div className="content">
-        {avatar ? (
-          <img src={avatar} className="avatar" alt="Avatar" />
-        ) : (
-          <p>No profile image</p>
-        )}
-        <p>{biography}</p>
-        <Link to="/settings">Edit Profile</Link>
-        <button onClick={logout}>Log Out</button>
+        {avatar ? <img src={avatar} alt="Avatar" /> : <p>No profile image</p>}
+        <div className="profile-text">
+          <p>{biography}</p>
+          <Link to="/settings">
+            <button>Edit Profile</button>
+          </Link>
+          <button onClick={logout}>Log Out</button>
+        </div>
       </div>
     </div>
   );

@@ -32,42 +32,46 @@ a {
   cursor: pointer;
 }
 
-a:hover,
-button:hover {
+a:hover {
   text-decoration: underline;
 }
 
-a,
-p,
-span,
-button,
-label {
-  padding: 0 0 0 5px;
-}
-
-button {
-  font-size: 100%;
-  font-family: inherit;
+::placeholder {
   color: $fontColor;
-  background: none;
-  border: 0;
-  outline: none;
-  cursor: pointer;
 }
 
-form {
-  padding: 0 0 0 5px;
+img {
+  width: 100%;
+  display: block;
+}
 
-  label,
-  input {
-    display: block;
-    width: 50%;
+.wrapper {
+  padding: 10px 10px 0px 10px;
+}
+
+nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  background: $backgroundColor;
+  padding: 5px 0 5px 0;
+  a {
+    padding: 0 5px 0 0;
   }
+}
+
+.content {
+  padding: 23px 0 0 0;
 
   button {
+    font-size: 100%;
+    font-family: inherit;
     border: 1px solid $fontColor;
     padding: 5px;
-    width: 50%;
+    width: 100%;
+    margin: -1px 0 0 0;
+    font-size: 100%;
+    cursor: pointer;
   }
 
   button:hover {
@@ -75,28 +79,70 @@ form {
     background: $fontColor;
     text-decoration: none;
   }
-}
 
-input {
-  font-size: 100%;
-  font-family: inherit;
-  color: $fontColor;
-  background: none;
-  border: 1px solid $fontColor;
-  outline: none;
-  padding: 5px;
-}
+  .content-text {
+    padding: 5px 0 5px 0;
 
-::placeholder {
-  color: $fontColor;
+    p,
+    a,
+    span,
+    button {
+      padding: 0 5px 0 0;
+    }
+
+    button {
+      font-size: 100%;
+      font-family: inherit;
+      color: $fontColor;
+      background: none;
+      border: 0;
+      outline: none;
+      width: auto;
+    }
+
+    button:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .users-text {
+    button {
+      padding: 0 5px 0 0;
+    }
+
+    button {
+      font-size: 100%;
+      font-family: inherit;
+      color: $fontColor;
+      background: none;
+      border: 0;
+      outline: none;
+      width: auto;
+    }
+
+    button:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .profile-text p {
+    padding: 5px 0 5px 0;
+  }
+
+  .general-form {
+    padding: 1px 0 0 0;
+  }
+
+  .edit-form {
+    padding: 0 0 10px 0;
+  }
 }
 
 label {
   border: 1px solid $fontColor;
   padding: 5px;
-}
-
-label:hover {
+  width: 100%;
+  display: block;
   cursor: pointer;
 }
 
@@ -107,22 +153,39 @@ label:hover {
   z-index: -1;
 }
 
-img {
+input {
+  font-size: 100%;
+  font-family: inherit;
+  color: $fontColor;
+  background: none;
+  border: 1px solid $fontColor;
+  outline: none;
+  padding: 5px;
   width: 100%;
-  display: block;
-  padding: 0 5px 0 5px;
+  margin: -1px 0 0 0;
 }
 
-.avatar {
-  max-width: 300px;
-}
-
-nav {
+button {
+  font-size: 100%;
+  font-family: inherit;
+  color: $fontColor;
+  background: none;
+  border: 1px solid $fontColor;
+  padding: 5px;
+  width: 50%;
   width: 100%;
-  position: fixed;
-  background: $backgroundColor;
+  margin: -1px 0 0 0;
 }
 
-.content {
-  padding: 24px 0 0 0;
+button:hover {
+  color: $backgroundColor;
+  background: $fontColor;
+  text-decoration: none;
+}
+
+@media (min-width: 626px) {
+  .wrapper {
+    margin: auto;
+    max-width: 616px;
+  }
 }

@@ -100,41 +100,43 @@ const UpdateUser = () => {
     <div>
       <Nav />
       <div className="content">
-        <form onSubmit={uploadAvatar}>
-          <label>
-            {filename}
+        <div className="general-form">
+          <form onSubmit={uploadAvatar}>
+            <label>
+              {filename}
+              <input
+                type="file"
+                className="fileinput"
+                onChange={handleFile}
+                required
+              />
+            </label>
+            <button>Save</button>
+          </form>
+          <form onSubmit={editUser}>
             <input
-              type="file"
-              className="fileinput"
-              onChange={handleFile}
+              type="text"
+              onChange={handleBiography}
+              value={biography}
+              placeholder="Biography"
+            />
+            <input
+              type="email"
+              onChange={handleEmail}
+              value={email}
+              placeholder="Email"
               required
             />
-          </label>
-          <button>Save</button>
-        </form>
-        <form onSubmit={editUser}>
-          <input
-            type="text"
-            onChange={handleBiography}
-            value={biography}
-            placeholder="Biography"
-          />
-          <input
-            type="email"
-            onChange={handleEmail}
-            value={email}
-            placeholder="Email"
-            required
-          />
-          <input
-            type="password"
-            onChange={handlePassword}
-            value={password}
-            placeholder="Password"
-          />
-          <button>Save</button>
-        </form>
-        <div>{errors}</div>
+            <input
+              type="password"
+              onChange={handlePassword}
+              value={password}
+              placeholder="Password"
+            />
+            <button>Save</button>
+          </form>
+          <div>{errors}</div>
+        </div>
       </div>
     </div>
   );
