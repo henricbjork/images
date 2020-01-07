@@ -70,7 +70,11 @@ const Post = props => {
       />
       <p>{props.post.description}</p>
       <span>{props.post.likes ? props.post.likes : 0}</span>
-      <button onClick={() => like(props.post.id)}>Like</button>
+      {props.post.liked === 0 ? (
+        <button onClick={() => like(props.post.id)}>Like</button>
+      ) : (
+        <button onClick={() => like(props.post.id)}>Unlike</button>
+      )}
       <Link to={`/post/${props.post.id}`}>Comment</Link>
       <button onClick={() => (show ? setShow(false) : setShow(true))}>
         Edit
