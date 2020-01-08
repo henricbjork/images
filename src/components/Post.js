@@ -18,6 +18,7 @@ const Post = props => {
   const like = async post => {
     const formData = new FormData();
     formData.append('id', post);
+
     const response = await fetch('http://localhost:1111/api/posts/like.php', {
       method: 'POST',
       body: formData,
@@ -48,6 +49,7 @@ const Post = props => {
   const deletePost = async post => {
     const formData = new FormData();
     formData.append('id', post);
+
     const response = await fetch(
       'http://localhost:1111/api/posts/deletepost.php',
       {
@@ -80,9 +82,11 @@ const Post = props => {
           <button onClick={() => like(props.post.id)}>Liked</button>
         )}
         <Link to={`/post/${props.post.id}`}>Comment</Link>
-        <button onClick={() => (show ? setShow(false) : setShow(true))}>
-          Edit
-        </button>
+        {props.post.edit === 1 && (
+          <button onClick={() => (show ? setShow(false) : setShow(true))}>
+            Edit
+          </button>
+        )}
       </div>
       {show && (
         <div className="edit-form">

@@ -39,7 +39,7 @@ const Profile = () => {
   };
 
   if (avatar === null) {
-    return null;
+    return <Nav />;
   }
 
   return (

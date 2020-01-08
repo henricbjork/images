@@ -94,7 +94,7 @@ const UpdateUser = () => {
   };
 
   if (biography === null && email === null) {
-    return null;
+    return <Nav />;
   }
 
   return (

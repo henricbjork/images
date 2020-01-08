@@ -18,8 +18,8 @@ const Users = () => {
 
   const follow = async user => {
     const formData = new FormData();
-
     formData.append('id', user);
+
     const response = await fetch('http://localhost:1111/api/users/follow.php', {
       method: 'POST',
       body: formData,
@@ -29,7 +29,7 @@ const Users = () => {
   };
 
   if (users === null) {
-    return null;
+    return <Nav />;
   }
 
   return (

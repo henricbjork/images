@@ -48,7 +48,7 @@ const Comments = ({match}) => {
   };
 
   if (comments === null) {
-    return null;
+    return <Nav />;
   }
 
   return (

@@ -15,6 +15,8 @@ const Home = () => {
       credentials: 'include'
     });
     const data = await response.json();
+    console.log(data);
+
     setPosts(data);
   };
 
@@ -23,7 +25,7 @@ const Home = () => {
   };
 
   if (posts === null) {
-    return null;
+    return <Nav />;
   }
 
   return (

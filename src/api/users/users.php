@@ -22,7 +22,7 @@ if (isset($_SESSION['user'])) {
   foreach ($users as $user) {
     $userId = $user['id'];
 
-    $query = "SELECT follower_user_id, followed_user_id FROM followings WHERE follower_user_id = :id and followed_user_id = :uid";
+    $query = "SELECT follower_user_id, followed_user_id FROM followings WHERE follower_user_id = :id AND followed_user_id = :uid";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':id', $id, PDO::PARAM_STR);
     $statement->bindParam(':uid', $userId, PDO::PARAM_STR);
