@@ -47,6 +47,9 @@ const Start = () => {
 
   return (
     <div>
+      <p className="login-text">
+        Log in to see photos and videos from your friends.
+      </p>
       <form onSubmit={login}>
         <input
           type="email"
@@ -64,8 +67,10 @@ const Start = () => {
         />
         <button>Log In</button>
       </form>
-      <div>{errors}</div>
-      <Link to="/signup">Don't have an account? Sign Up</Link>
+      <p className="error-text">{errors}</p>
+      <Link className="login-text" to="/signup">
+        Don't have an account? Sign Up
+      </Link>
     </div>
   );
 };
