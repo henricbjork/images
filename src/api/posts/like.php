@@ -37,7 +37,9 @@ if (isset($_SESSION['user'])) {
 
       echo json_encode(array('message' => 'Liked'));
     }
+    http_response_code(200);
   }
 } else {
   echo json_encode(array('message' => 'Not logged in'));
+  http_response_code(401);
 }

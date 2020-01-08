@@ -28,11 +28,14 @@ if (isset($_SESSION['user'])) {
       $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
       $statement->bindParam(':id', $id, PDO::PARAM_STR);
       $statement->execute();
-      echo json_encode(array('message' => 'The post was updated', 'result' => 200));
+      echo json_encode(array('message' => 'The post was updated'));
+      http_response_code(200);
     } else {
-      echo json_encode(array('message' => 'No access to edit post', 'result' => 400));
+      echo json_encode(array('message' => 'No access to edit post'));
+      http_response_code(401);
     }
   }
 } else {
   echo json_encode(array('message' => 'Not logged in'));
+  http_response_code(401);
 }

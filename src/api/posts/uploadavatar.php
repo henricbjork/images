@@ -57,13 +57,17 @@ if (isset($_SESSION['user'])) {
         $statement->execute();
 
         echo json_encode(array('message' => 'The avatar is uploaded', 'result' => 200));
+        http_response_code(201);
       }
     } else {
       echo json_encode(array('message' => 'The file exceeds limit size', 'result' => 400));
+      http_response_code(400);
     }
   } else {
     echo json_encode(array('message' => 'No file', 'result' => 400));
+    http_response_code(400);
   }
 } else {
   echo json_encode(array('message' => 'Not logged in', 'result' => 400));
+  http_response_code(401);
 }

@@ -23,7 +23,9 @@ if (isset($_SESSION['user'])) {
     } else {
       echo json_encode(array('message' => 'No comments'));
     }
+    http_response_code(200);
   }
 } else {
   echo json_encode(array('message' => 'Not logged in'));
+  http_response_code(401);
 }

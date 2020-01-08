@@ -26,6 +26,7 @@ if (isset($_SESSION['user'])) {
 
       if ($emailDatabase) {
         echo json_encode(array('message' => 'Email already exist', 'result' => 400));
+        http_response_code(409);
         exit;
       } else {
         if (!empty($biography) && !empty($password)) {
@@ -63,9 +64,11 @@ if (isset($_SESSION['user'])) {
           $statement->execute();
           echo json_encode(array('message' => 'Updated settings'));
         }
+        http_response_code(200);
       }
     }
   }
 } else {
   echo json_encode(array('message' => 'Not logged in'));
+  http_response_code(401);
 }

@@ -22,7 +22,9 @@ if (isset($_SESSION['user'])) {
     $statement->execute();
 
     echo json_encode(array('message' => 'Comment added'));
+    http_response_code(201);
   }
 } else {
   echo json_encode(array('message' => 'Not logged in'));
+  http_response_code(401);
 }

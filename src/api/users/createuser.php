@@ -42,4 +42,5 @@ if (isset($_POST['email'], $_POST['password'])) {
   $_SESSION['user'] = $user['id'];
 
   echo json_encode(array('message' => 'User was created', 'user' => $user['id'], 'result' => 200));
+  http_response_code(201);
 }

@@ -50,12 +50,16 @@ if (isset($_SESSION['user'])) {
       }
 
       echo json_encode(array('message' => 'The post is uploaded', 'result' => 200));
+      http_response_code(201);
     } else {
       echo json_encode(array('message' => 'The file exceeds limit size'));
+      http_response_code(400);
     }
   } else {
     echo json_encode(array('message' => 'No file'));
+    http_response_code(400);
   }
 } else {
   echo json_encode(array('message' => 'Not logged in'));
+  http_response_code(401);
 }
