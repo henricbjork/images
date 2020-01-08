@@ -7,43 +7,42 @@ const UpdateUser = () => {
   const [biography, setBiography] = useState(null);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState('');
+  const [errors, setErrors] = useState(null);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
-    const data = await fetch(
+    const response = await fetch(
       'http://localhost:1111/api/users/usersettings.php',
       {
         credentials: 'include'
       }
     );
-    const response = await data.json();
-    console.log(response);
-    setBiography(response.biography);
-    setEmail(response.email);
+    const data = await response.json();
+    setBiography(data.biography);
+    setEmail(data.email);
   };
 
   const handleAvatar = event => {
-    setErrors('');
+    setErrors(null);
     setLabel('Avatar chosen');
     setAvatar(event.target.files[0]);
   };
 
   const handlePassword = event => {
-    setErrors('');
+    setErrors(null);
     setPassword(event.target.value);
   };
 
   const handleEmail = event => {
-    setErrors('');
+    setErrors(null);
     setEmail(event.target.value);
   };
 
   const handleBiography = event => {
-    setErrors('');
+    setErrors(null);
     setBiography(event.target.value);
   };
 
@@ -55,7 +54,7 @@ const UpdateUser = () => {
     formData.append('password', password);
     formData.append('biography', biography);
 
-    const data = await fetch(
+    const response = await fetch(
       'http://localhost:1111/api/users/editusersettings.php',
       {
         method: 'POST',
@@ -64,12 +63,10 @@ const UpdateUser = () => {
       }
     );
 
-    const response = await data.json();
+    const data = await response.json();
 
-    response.result === 400 && setErrors(response.message);
-
+    !response.ok && setErrors(data.message);
     setPassword('');
-    console.log(response);
   };
 
   const uploadAvatar = async event => {
@@ -77,9 +74,8 @@ const UpdateUser = () => {
 
     const formData = new FormData();
     formData.append('image', avatar);
-    console.log(formData);
 
-    const data = await fetch(
+    const response = await fetch(
       'http://localhost:1111/api/posts/uploadavatar.php',
       {
         method: 'POST',
@@ -88,11 +84,13 @@ const UpdateUser = () => {
       }
     );
 
-    const response = await data.json();
-
-    response.result === 400 && setErrors(response.message);
-
-    console.log(response);
+    const data = await response.json();
+    if (response.ok) {
+      setLabel('Saved');
+    } else {
+      setLabel('Choose avatar');
+      setErrors(data.message);
+    }
     getData();
   };
 
@@ -139,7 +137,7 @@ const UpdateUser = () => {
             />
             <button>Save</button>
           </form>
-          <div>{errors}</div>
+          {errors && <p className="error-text">{errors}</p>}
         </div>
       </div>
     </div>

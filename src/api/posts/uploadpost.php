@@ -48,8 +48,7 @@ if (isset($_SESSION['user'])) {
         $statement->bindParam(':content', $filename, PDO::PARAM_STR);
         $statement->execute();
       }
-
-      echo json_encode(array('message' => 'The post is uploaded', 'result' => 200));
+      echo json_encode(array('message' => 'The post is uploaded'));
       http_response_code(201);
     } else {
       echo json_encode(array('message' => 'The file exceeds limit size'));

@@ -19,8 +19,8 @@ const Profile = () => {
         credentials: 'include'
       }
     );
+
     const response = await data.json();
-    console.log(response);
     setBiography(response.biography);
     response.avatar &&
       setAvatar(
@@ -32,9 +32,6 @@ const Profile = () => {
     const data = await fetch('http://localhost:1111/api/users/logout.php', {
       credentials: 'include'
     });
-
-    const response = await data.json();
-    console.log(response);
 
     localStorage.clear();
     setAuth(false);
@@ -48,7 +45,7 @@ const Profile = () => {
     <div>
       <Nav />
       <div className="content">
-        {avatar ? <img src={avatar} alt="Avatar" /> : <p>No profile image</p>}
+        {avatar ? <img src={avatar} alt="Avatar" /> : <p>No avatar</p>}
         <div className="profile-text">
           <p>{biography}</p>
           <Link to="/settings">

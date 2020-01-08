@@ -9,26 +9,22 @@ const Users = () => {
   }, []);
 
   const getUsers = async () => {
-    const data = await fetch('http://localhost:1111/api/users/users.php', {
+    const response = await fetch('http://localhost:1111/api/users/users.php', {
       credentials: 'include'
     });
-    const response = await data.json();
-    console.log(response);
-    setUsers(response);
+    const data = await response.json();
+    setUsers(data);
   };
 
   const follow = async user => {
     const formData = new FormData();
 
     formData.append('id', user);
-    const data = await fetch('http://localhost:1111/api/users/follow.php', {
+    const response = await fetch('http://localhost:1111/api/users/follow.php', {
       method: 'POST',
       body: formData,
       credentials: 'include'
     });
-
-    const response = await data.json();
-    console.log(response);
     getUsers();
   };
 

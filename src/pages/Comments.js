@@ -12,14 +12,16 @@ const Comments = ({match}) => {
   const getComments = async () => {
     const formData = new FormData();
     formData.append('id', match.params.id);
-    const data = await fetch('http://localhost:1111/api/posts/comments.php', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include'
-    });
-    const response = await data.json();
-    response.length ? setComments(response) : setComments(false);
-    console.log(response);
+    const response = await fetch(
+      'http://localhost:1111/api/posts/comments.php',
+      {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      }
+    );
+    const data = await response.json();
+    data.length ? setComments(data) : setComments(false);
   };
 
   const handleComment = event => {
@@ -33,14 +35,14 @@ const Comments = ({match}) => {
     formData.append('id', match.params.id);
     formData.append('comment', newComment);
 
-    const data = await fetch('http://localhost:1111/api/posts/comment.php', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include'
-    });
-
-    const response = await data.json();
-    console.log(response);
+    const response = await fetch(
+      'http://localhost:1111/api/posts/comment.php',
+      {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      }
+    );
     setNewComment('');
     getComments();
   };
@@ -53,13 +55,15 @@ const Comments = ({match}) => {
     <div>
       <Nav />
       <div className="content">
-        {comments ? (
-          comments.map(comment => (
-            <p key={comment.id}>{`${comment.email} ${comment.comment}`}</p>
-          ))
-        ) : (
-          <p>No comments</p>
-        )}
+        <div className="comments">
+          {comments ? (
+            comments.map(comment => (
+              <p key={comment.id}>{`${comment.email} ${comment.comment}`}</p>
+            ))
+          ) : (
+            <p>No comments</p>
+          )}
+        </div>
         <form onSubmit={addComment}>
           <input
             type="text"

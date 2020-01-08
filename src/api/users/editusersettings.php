@@ -25,7 +25,7 @@ if (isset($_SESSION['user'])) {
       $emailDatabase = $statement->fetch(PDO::FETCH_ASSOC);
 
       if ($emailDatabase) {
-        echo json_encode(array('message' => 'Email already exist', 'result' => 400));
+        echo json_encode(array('message' => 'Email already used by another user'));
         http_response_code(409);
         exit;
       } else {

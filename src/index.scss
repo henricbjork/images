@@ -78,6 +78,7 @@ button {
   color: $fontColor;
   background: none;
   border: 1px solid $fontColor;
+  outline: none;
   padding: 5px;
   width: 100%;
   margin: -1px 0 0 0;
@@ -125,7 +126,6 @@ nav {
       color: $fontColor;
       background: none;
       border: 0;
-      outline: none;
       width: auto;
     }
 
@@ -145,7 +145,6 @@ nav {
       color: $fontColor;
       background: none;
       border: 0;
-      outline: none;
       width: auto;
     }
 
@@ -165,23 +164,24 @@ nav {
   .edit-form {
     padding: 0 0 10px 0;
   }
+
+  .comments {
+    padding: 0 0 10px 0;
+  }
 }
 
 .login-text {
   padding: 0 0 10px 0;
 }
 
-.error-text {
-  padding: 10px 0 10px 0;
+.login-link {
+  padding: 10px 0 0 0;
+  display: block;
 }
 
-// .general-form {
-//   width: 596px;
-//   background: white;
-//   padding: 1px 0 10px 0;
-//   position: fixed;
-//   bottom: 0px;
-// }
+.error-text {
+  padding: 10px 0 0 0;
+}
 
 @media (min-width: 626px) {
   .wrapper {

@@ -6,16 +6,16 @@ const Start = () => {
   const [auth, setAuth] = useContext(AppContext);
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(null);
 
   const handlePassword = event => {
     setPassword(event.target.value);
-    setErrors('');
+    setErrors(null);
   };
 
   const handleEmail = event => {
     setEmail(event.target.value);
-    setErrors('');
+    setErrors(null);
   };
 
   const login = async event => {
@@ -25,18 +25,19 @@ const Start = () => {
     formData.append('email', email);
     formData.append('password', password);
 
-    const data = await fetch('http://localhost:1111/api/users/login.php', {
+    const response = await fetch('http://localhost:1111/api/users/login.php', {
       method: 'POST',
       body: formData,
       credentials: 'include'
     });
-    const response = await data.json();
-    console.log(response);
-    if (response.result === 200) {
-      localStorage.setItem('user', response.user);
+
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem('user', data.user);
       setAuth(true);
     } else {
-      setErrors(response.message);
+      setErrors(data.message);
     }
     setPassword('');
   };
@@ -67,8 +68,8 @@ const Start = () => {
         />
         <button>Log In</button>
       </form>
-      <p className="error-text">{errors}</p>
-      <Link className="login-text" to="/signup">
+      {errors && <p className="error-text">{errors}</p>}
+      <Link className="login-link" to="/signup">
         Don't have an account? Sign Up
       </Link>
     </div>

@@ -11,12 +11,11 @@ const Home = () => {
   }, []);
 
   const getPosts = async () => {
-    const data = await fetch('http://localhost:1111/api/posts/posts.php', {
+    const response = await fetch('http://localhost:1111/api/posts/posts.php', {
       credentials: 'include'
     });
-    const response = await data.json();
-    console.log(response);
-    setPosts(response);
+    const data = await response.json();
+    setPosts(data);
   };
 
   const handleUpdate = () => {
@@ -42,16 +41,6 @@ const Home = () => {
           </p>
         )}
       </div>
-      {/* <div className="general-form">
-        <form>
-          <label>
-            Select file
-            <input type="file" className="fileinput" required />
-          </label>
-          <input type="text" placeholder="Description" />
-          <button>Share</button>
-        </form>
-      </div> */}
     </div>
   );
 };

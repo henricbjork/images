@@ -18,14 +18,11 @@ const Post = props => {
   const like = async post => {
     const formData = new FormData();
     formData.append('id', post);
-    const data = await fetch('http://localhost:1111/api/posts/like.php', {
+    const response = await fetch('http://localhost:1111/api/posts/like.php', {
       method: 'POST',
       body: formData,
       credentials: 'include'
     });
-
-    const response = await data.json();
-    console.log(response);
     onUpdate();
   };
 
@@ -36,14 +33,14 @@ const Post = props => {
     formData.append('description', value);
     formData.append('id', props.post.id);
 
-    const data = await fetch('http://localhost:1111/api/posts/editpost.php', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include'
-    });
-
-    const response = await data.json();
-    console.log(response);
+    const response = await fetch(
+      'http://localhost:1111/api/posts/editpost.php',
+      {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      }
+    );
     setShow(false);
     onUpdate();
   };
@@ -51,14 +48,14 @@ const Post = props => {
   const deletePost = async post => {
     const formData = new FormData();
     formData.append('id', post);
-    const data = await fetch('http://localhost:1111/api/posts/deletepost.php', {
-      method: 'POST',
-      body: formData,
-      credentials: 'include'
-    });
-
-    const response = await data.json();
-    console.log(response);
+    const response = await fetch(
+      'http://localhost:1111/api/posts/deletepost.php',
+      {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      }
+    );
     onUpdate();
   };
 

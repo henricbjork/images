@@ -29,7 +29,8 @@ if (isset($_SESSION['user'])) {
       } else if ($image['type'] === 'image/gif') {
         $filename = "$uid.gif";
       } else {
-        echo json_encode(array('message' => 'The file is not supported', 'result' => 400));
+        echo json_encode(array('message' => 'The file is not supported'));
+        http_response_code(400);
         exit;
       }
 
@@ -44,7 +45,7 @@ if (isset($_SESSION['user'])) {
         $statement->bindParam(':id', $id, PDO::PARAM_STR);
         $statement->execute();
 
-        echo json_encode(array('message' => 'The avatar is uploaded', 'result' => 200));
+        echo json_encode(array('message' => 'The avatar is uploaded'));
       } else {
         $srcUnlink = __DIR__ . '/uploads/avatars/' . $user['avatar'];
         unlink($srcUnlink);
@@ -56,18 +57,18 @@ if (isset($_SESSION['user'])) {
         $statement->bindParam(':id', $id, PDO::PARAM_STR);
         $statement->execute();
 
-        echo json_encode(array('message' => 'The avatar is uploaded', 'result' => 200));
-        http_response_code(201);
+        echo json_encode(array('message' => 'The avatar is uploaded'));
       }
+      http_response_code(201);
     } else {
-      echo json_encode(array('message' => 'The file exceeds limit size', 'result' => 400));
+      echo json_encode(array('message' => 'The file exceeds limit size'));
       http_response_code(400);
     }
   } else {
-    echo json_encode(array('message' => 'No file', 'result' => 400));
+    echo json_encode(array('message' => 'No file'));
     http_response_code(400);
   }
 } else {
-  echo json_encode(array('message' => 'Not logged in', 'result' => 400));
+  echo json_encode(array('message' => 'Not logged in'));
   http_response_code(401);
 }
