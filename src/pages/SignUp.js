@@ -34,7 +34,6 @@ const SignUp = () => {
     );
 
     const data = await response.json();
-
     if (response.ok) {
       localStorage.setItem('user', data.user);
       setAuth(true);

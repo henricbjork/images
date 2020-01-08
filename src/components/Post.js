@@ -67,7 +67,13 @@ const Post = props => {
       />
       <div className="content-text">
         <p>{props.post.description}</p>
-        <span>{props.post.likes ? props.post.likes : 0}</span>
+        <span>
+          {props.post.likes
+            ? props.post.likes === '1'
+              ? `${props.post.likes} Like`
+              : `${props.post.likes} Likes`
+            : `0 Likes`}
+        </span>
         {props.post.liked === 0 ? (
           <button onClick={() => like(props.post.id)}>Like</button>
         ) : (

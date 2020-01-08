@@ -19,6 +19,7 @@ if (isset($_POST['email'], $_POST['password'])) {
 
   if ($user) {
     echo json_encode(array('message' => 'User already exist'));
+    http_response_code(401);
     exit;
   }
 

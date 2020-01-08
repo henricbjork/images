@@ -5,13 +5,13 @@ import Nav from '../components/Nav';
 const Share = () => {
   const [redirect, setRedirect] = useState(false);
   const [file, setFile] = useState('');
-  const [filename, setFilename] = useState('Choose a file');
+  const [label, setLabel] = useState('Choose a file');
   const [description, setDescription] = useState('');
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(null);
 
   const handleFile = event => {
     setErrors('');
-    setFilename('File selected');
+    setLabel('File selected');
     setFile(event.target.files[0]);
   };
 
@@ -35,7 +35,14 @@ const Share = () => {
         credentials: 'include'
       }
     );
-    response.ok ? setRedirect(true) : setErrors(response.message);
+
+    const data = await response.json();
+    if (response.ok) {
+      setRedirect(true);
+    } else {
+      setLabel('Choose a file');
+      setErrors(data.message);
+    }
   };
 
   if (redirect) {
@@ -49,7 +56,7 @@ const Share = () => {
         <div className="general-form">
           <form onSubmit={uploadPost}>
             <label>
-              {filename}
+              {label}
               <input
                 type="file"
                 className="fileinput"
@@ -64,7 +71,7 @@ const Share = () => {
               placeholder="Description"
             />
             <button>Share</button>
-            <div>{errors}</div>
+            {errors && <p className="error-text">{errors}</p>}
           </form>
         </div>
       </div>

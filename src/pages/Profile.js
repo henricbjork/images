@@ -13,23 +13,24 @@ const Profile = () => {
   }, []);
 
   const getData = async () => {
-    const data = await fetch(
+    const response = await fetch(
       'http://localhost:1111/api/users/usersettings.php',
       {
         credentials: 'include'
       }
     );
 
-    const response = await data.json();
-    setBiography(response.biography);
-    response.avatar &&
-      setAvatar(
-        `http://localhost:1111/api/posts/uploads/avatars/${response.avatar}`
-      );
+    const data = await response.json();
+    setBiography(data.biography);
+    data.avatar
+      ? setAvatar(
+          `http://localhost:1111/api/posts/uploads/avatars/${data.avatar}`
+        )
+      : setAvatar('');
   };
 
   const logout = async () => {
-    const data = await fetch('http://localhost:1111/api/users/logout.php', {
+    const response = await fetch('http://localhost:1111/api/users/logout.php', {
       credentials: 'include'
     });
 

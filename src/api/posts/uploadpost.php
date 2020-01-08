@@ -25,6 +25,7 @@ if (isset($_SESSION['user'])) {
         $filename = "$uid.gif";
       } else {
         echo json_encode(array('message' => 'The file is not supported'));
+        http_response_code(400);
         exit;
       }
 

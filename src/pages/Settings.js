@@ -64,7 +64,6 @@ const UpdateUser = () => {
     );
 
     const data = await response.json();
-
     !response.ok && setErrors(data.message);
     setPassword('');
   };
