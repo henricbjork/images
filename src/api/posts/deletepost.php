@@ -35,6 +35,11 @@ if (isset($_SESSION['user'])) {
       $statement->bindParam(':id', $postId, PDO::PARAM_STR);
       $statement->execute();
 
+      $query = "DELETE FROM comments WHERE post_id = :id";
+      $statement = $pdo->prepare($query);
+      $statement->bindParam(':id', $postId, PDO::PARAM_STR);
+      $statement->execute();
+
       echo json_encode(array('message' => 'The post was deleted'));
     } else {
       echo json_encode(array('message' => 'No access to delete post'));

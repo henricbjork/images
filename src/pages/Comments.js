@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Nav from '../components/Nav';
 
 const Comments = ({match}) => {
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState(null);
   const [newComment, setNewComment] = useState('');
 
   useEffect(() => {
@@ -44,6 +44,10 @@ const Comments = ({match}) => {
     setNewComment('');
     getComments();
   };
+
+  if (comments === null) {
+    return null;
+  }
 
   return (
     <div>

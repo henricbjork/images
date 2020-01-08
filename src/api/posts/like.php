@@ -20,21 +20,7 @@ if (isset($_SESSION['user'])) {
     $statement->execute();
     $liked = $statement->fetch(PDO::FETCH_ASSOC);
 
-    $query = "SELECT id, likes FROM posts WHERE id = :pid";
-    $statement = $pdo->prepare($query);
-    $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
-    $statement->execute();
-    $likes = $statement->fetch(PDO::FETCH_ASSOC);
-
     if ($liked) {
-      $unlike = $likes['likes'] - 1;
-
-      $query = "UPDATE posts SET likes = :unlike WHERE id = :pid";
-      $statement = $pdo->prepare($query);
-      $statement->bindParam(':unlike', $unlike, PDO::PARAM_STR);
-      $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
-      $statement->execute();
-
       $query = "DELETE FROM likes WHERE user_id = :uid AND post_id = :pid";
       $statement = $pdo->prepare($query);
       $statement->bindParam(':uid', $userId, PDO::PARAM_STR);
@@ -43,13 +29,6 @@ if (isset($_SESSION['user'])) {
 
       echo json_encode(array('message' => 'Unliked'));
     } else {
-      $like = $likes['likes'] + 1;
-      $query = "UPDATE posts SET likes = :like WHERE id = :pid";
-      $statement = $pdo->prepare($query);
-      $statement->bindParam(':like', $like, PDO::PARAM_STR);
-      $statement->bindParam(':pid', $postId, PDO::PARAM_STR);
-      $statement->execute();
-
       $query = "INSERT INTO likes ('user_id','post_id') VALUES (:uid, :pid)";
       $statement = $pdo->prepare($query);
       $statement->bindParam(':uid', $userId, PDO::PARAM_STR);

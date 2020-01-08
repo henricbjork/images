@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import Nav from '../components/Nav';
 import Post from '../components/Post';
 
-const HomeTest = () => {
+const Home = () => {
   const [posts, setPosts] = useState(null);
 
   useEffect(() => {
@@ -56,4 +56,4 @@ const HomeTest = () => {
   );
 };
 
-export default HomeTest;
+export default Home;

@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import Nav from '../components/Nav';
 
 const UpdateUser = () => {
-  const [file, setFile] = useState('');
-  const [filename, setFilename] = useState('Choose a file');
-  const [biography, setBiography] = useState('');
-  const [email, setEmail] = useState('');
+  const [avatar, setAvatar] = useState('');
+  const [label, setLabel] = useState('Choose avatar');
+  const [biography, setBiography] = useState(null);
+  const [email, setEmail] = useState(null);
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState('');
 
@@ -26,10 +26,10 @@ const UpdateUser = () => {
     setEmail(response.email);
   };
 
-  const handleFile = event => {
+  const handleAvatar = event => {
     setErrors('');
-    setFilename('File selected');
-    setFile(event.target.files[0]);
+    setLabel('Avatar chosen');
+    setAvatar(event.target.files[0]);
   };
 
   const handlePassword = event => {
@@ -76,7 +76,7 @@ const UpdateUser = () => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('image', file);
+    formData.append('image', avatar);
     console.log(formData);
 
     const data = await fetch(
@@ -96,6 +96,10 @@ const UpdateUser = () => {
     getData();
   };
 
+  if (biography === null && email === null) {
+    return null;
+  }
+
   return (
     <div>
       <Nav />
@@ -103,11 +107,11 @@ const UpdateUser = () => {
         <div className="general-form">
           <form onSubmit={uploadAvatar}>
             <label>
-              {filename}
+              {label}
               <input
                 type="file"
                 className="fileinput"
-                onChange={handleFile}
+                onChange={handleAvatar}
                 required
               />
             </label>
