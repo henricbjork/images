@@ -7,8 +7,9 @@ import Login from '../pages/Login';
 import SignUp from '../pages/SignUp';
 import Home from '../pages/Home';
 import Comments from '../pages/Comments';
-import Users from '../pages/Users';
 import Share from '../pages/Share';
+import Search from '../pages/Search';
+import Users from '../pages/Users';
 import Profile from '../pages/Profile';
 import Settings from '../pages/Settings';
 import NotFound from '../pages/NotFound';
@@ -22,6 +23,7 @@ const App = () => {
             <AuthRoute exact path="/" component={Home} />
             <AuthRoute path="/post/:id" component={Comments} />
             <AuthRoute path="/share" component={Share} />
+            <AuthRoute path="/search" component={Search} />
             <AuthRoute path="/settings" component={Settings} />
             <AuthRoute path="/profile" component={Profile} />
             <AuthRoute path="/users" component={Users} />
