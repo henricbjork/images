@@ -16,7 +16,6 @@ const Home = () => {
     });
     const data = await response.json();
     console.log(data);
-
     setPosts(data);
   };
 

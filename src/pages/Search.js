@@ -1,5 +1,8 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import Nav from '../components/Nav';
+import SearchUser from '../components/SearchUser';
+import SearchPost from '../components/SearchPost';
 
 const Search = () => {
   const [users, setUsers] = useState(null);
@@ -28,18 +31,24 @@ const Search = () => {
     setPosts(data[0].posts);
   };
 
+  if (posts === null) {
+    return <Nav />;
+  }
+
   return (
     <div>
       <Nav />
-      {/* {posts.length > 0 ? (
-        posts.users.map(user => <p>{user.email}</p>)
+      {users.length > 0 ? (
+        users.map(user => <SearchUser key={user.id} user={user} />)
       ) : (
-        <p>No users</p>
-      )} */}
-      {/* {posts.users.map(user => (
-        <p>{user.email}</p>
-      ))} */}
-      {console.log(posts)}
+        <p>No users found</p>
+      )}
+      {posts.length > 0 ? (
+        posts.map(post => <SearchPost key={post.id} post={post} />)
+      ) : (
+        <p>No posts found</p>
+      )}
+      {console.log(posts.id)}
     </div>
   );
 };
