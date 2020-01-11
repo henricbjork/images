@@ -14,6 +14,7 @@ const User = props => {
     });
     onUpdate();
   };
+
   return (
     <p className="users-text">
       {props.user.followed === 0 ? (
@@ -28,4 +29,5 @@ const User = props => {
     </p>
   );
 };
+
 export default User;

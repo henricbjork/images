@@ -22,7 +22,6 @@ const App = () => {
             <AuthRoute exact path="/" component={Home} />
             <AuthRoute path="/post/:id" component={Comments} />
             <AuthRoute path="/share" component={Share} />
-            {/* <AuthRoute path="/search" component={Search} /> */}
             <AuthRoute path="/settings" component={Settings} />
             <AuthRoute path="/profile" component={Profile} />
             <AuthRoute path="/users" component={Users} />

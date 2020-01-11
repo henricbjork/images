@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . '/../autoload.php';
 
-header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
+header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
 header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json');
 
