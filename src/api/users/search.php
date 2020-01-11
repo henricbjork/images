@@ -47,10 +47,6 @@ if (isset($_SESSION['user'])) {
       }
     }
 
-    // $response[] = [
-    //   'users' => $users
-    // ];
-
     echo json_encode($response);
     http_response_code(200);
   }

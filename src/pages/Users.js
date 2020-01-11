@@ -19,7 +19,12 @@ const Users = () => {
 
     const data = await response.json();
     console.log(data);
-    data.length > 0 ? setUsers(data) : setErrors('No users found');
+    if (data.length > 0) {
+      setUsers(data);
+    } else {
+      setUsers([]);
+      setErrors('No users found');
+    }
   };
 
   const handleSearch = event => {
@@ -40,7 +45,7 @@ const Users = () => {
     <div>
       <Nav />
       <div className="content">
-        <div className="general-form">
+        <div className="users-form">
           <form onSubmit={uploadSearch}>
             <input
               type="text"

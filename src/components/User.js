@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 const User = props => {
   const {onUpdate} = props;
@@ -15,7 +15,7 @@ const User = props => {
     onUpdate();
   };
   return (
-    <div className="users-text">
+    <p className="users-text">
       {props.user.followed === 0 ? (
         <button
           onClick={() => follow(props.user.id)}
@@ -25,7 +25,7 @@ const User = props => {
           onClick={() => follow(props.user.id)}
         >{`Following ${props.user.email}`}</button>
       )}
-    </div>
+    </p>
   );
 };
 export default User;
