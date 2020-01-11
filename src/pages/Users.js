@@ -51,7 +51,7 @@ const Users = () => {
               type="text"
               onChange={handleSearch}
               value={search}
-              placeholder="Search users"
+              placeholder="Search"
               required
             />
             <button>Send</button>
