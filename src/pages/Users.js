@@ -1,58 +1,62 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import Nav from '../components/Nav';
+import User from '../components/User';
 
 const Users = () => {
-  const [users, setUsers] = useState(null);
-
-  useEffect(() => {
-    getUsers();
-  }, []);
+  const [search, setSearch] = useState('');
+  const [users, setUsers] = useState([]);
+  const [errors, setErrors] = useState(null);
 
   const getUsers = async () => {
-    const response = await fetch('http://localhost:1111/api/users/users.php', {
-      credentials: 'include'
-    });
-    const data = await response.json();
-    setUsers(data);
-  };
-
-  const follow = async user => {
     const formData = new FormData();
-    formData.append('id', user);
+    formData.append('search', search);
 
-    const response = await fetch('http://localhost:1111/api/users/follow.php', {
+    const response = await fetch('http://localhost:1111/api/users/search.php', {
       method: 'POST',
       body: formData,
       credentials: 'include'
     });
+
+    const data = await response.json();
+    console.log(data);
+    data.length > 0 ? setUsers(data) : setErrors('No users found');
+  };
+
+  const handleSearch = event => {
+    setErrors(null);
+    setSearch(event.target.value);
+  };
+
+  const uploadSearch = async event => {
+    event.preventDefault();
     getUsers();
   };
 
-  if (users === null) {
-    return <Nav />;
-  }
+  const handleUpdate = async () => {
+    getUsers();
+  };
 
   return (
     <div>
       <Nav />
       <div className="content">
-        {users.length > 0 ? (
-          users.map(user => (
-            <div className="users-text" key={user.id}>
-              {user.followed === 0 ? (
-                <button
-                  onClick={() => follow(user.id)}
-                >{`Follow ${user.email}`}</button>
-              ) : (
-                <button
-                  onClick={() => follow(user.id)}
-                >{`Following ${user.email}`}</button>
-              )}
-            </div>
-          ))
-        ) : (
-          <p>No users</p>
-        )}
+        <div className="general-form">
+          <form onSubmit={uploadSearch}>
+            <input
+              type="text"
+              onChange={handleSearch}
+              value={search}
+              placeholder="Search users"
+              required
+            />
+            <button>Send</button>
+          </form>
+          {users.length > 0 &&
+            users.map(user => (
+              <User key={user.id} onUpdate={() => handleUpdate()} user={user} />
+            ))}
+          {errors && <p className="users-text">{errors}</p>}
+        </div>
       </div>
     </div>
   );
