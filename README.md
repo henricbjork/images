@@ -16,7 +16,6 @@ $ npm start
 
 ## Testers
 * [TBD](https://github.com/)
-* [TBD](https://github.com/)
 
 ## Code Review
 TBD
