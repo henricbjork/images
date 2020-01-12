@@ -23,7 +23,6 @@ const UpdateUser = () => {
       }
     );
     const data = await response.json();
-    console.log(data);
     data.biography ? setBiography(data.biography) : setBiography('');
     data.email ? setEmail(data.email) : setEmail('');
   };
@@ -66,8 +65,6 @@ const UpdateUser = () => {
     );
 
     const data = await response.json();
-    console.log(response);
-    console.log(data);
     if (response.ok) {
       setRedirect(true);
     } else {

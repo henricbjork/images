@@ -21,7 +21,6 @@ const Profile = () => {
     );
 
     const data = await response.json();
-    console.log(data);
     data.biography ? setBiography(data.biography) : setBiography('');
     data.avatar
       ? setAvatar(`http://localhost:1111/api/uploads/avatars/${data.avatar}`)
