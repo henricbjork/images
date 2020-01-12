@@ -15,7 +15,6 @@ const Home = () => {
       credentials: 'include'
     });
     const data = await response.json();
-    console.log(data);
     setPosts(data);
   };
 

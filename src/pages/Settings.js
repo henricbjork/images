@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
+import {Redirect} from 'react-router-dom';
 import Nav from '../components/Nav';
 
 const UpdateUser = () => {
+  const [redirect, setRedirect] = useState(false);
   const [avatar, setAvatar] = useState('');
   const [label, setLabel] = useState('Choose avatar');
   const [biography, setBiography] = useState(null);
@@ -63,7 +65,11 @@ const UpdateUser = () => {
     );
 
     const data = await response.json();
-    !response.ok && setErrors(data.message);
+    if (response.ok) {
+      setRedirect(true);
+    } else {
+      setErrors(data.message);
+    }
     setPassword('');
   };
 
@@ -85,13 +91,17 @@ const UpdateUser = () => {
 
     const data = await response.json();
     if (response.ok) {
-      // setLabel('Saved');
+      setRedirect(true);
     } else {
       setLabel('Choose avatar');
       setErrors(data.message);
     }
     getSettings();
   };
+
+  if (redirect) {
+    return <Redirect to="/profile" />;
+  }
 
   if (biography === null && email === null) {
     return <Nav />;
