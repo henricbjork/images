@@ -10,12 +10,12 @@ const UpdateUser = () => {
   const [errors, setErrors] = useState(null);
 
   useEffect(() => {
-    getData();
+    getSettings();
   }, []);
 
-  const getData = async () => {
+  const getSettings = async () => {
     const response = await fetch(
-      'http://localhost:1111/api/users/usersettings.php',
+      'http://localhost:1111/api/users/settings.php',
       {
         credentials: 'include'
       }
@@ -46,16 +46,15 @@ const UpdateUser = () => {
     setBiography(event.target.value);
   };
 
-  const editUser = async event => {
+  const editAccount = async event => {
     event.preventDefault();
 
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
-    formData.append('biography', biography);
 
     const response = await fetch(
-      'http://localhost:1111/api/users/editusersettings.php',
+      'http://localhost:1111/api/users/editaccount.php',
       {
         method: 'POST',
         body: formData,
@@ -68,14 +67,15 @@ const UpdateUser = () => {
     setPassword('');
   };
 
-  const uploadAvatar = async event => {
+  const editSettings = async event => {
     event.preventDefault();
 
     const formData = new FormData();
     formData.append('image', avatar);
+    formData.append('biography', biography);
 
     const response = await fetch(
-      'http://localhost:1111/api/posts/uploadavatar.php',
+      'http://localhost:1111/api/users/editsettings.php',
       {
         method: 'POST',
         body: formData,
@@ -84,13 +84,13 @@ const UpdateUser = () => {
     );
 
     const data = await response.json();
-    if (response.ok) {
-      setLabel('Saved');
-    } else {
-      setLabel('Choose avatar');
-      setErrors(data.message);
-    }
-    getData();
+    // if (response.ok) {
+    //   // setLabel('Saved');
+    // } else {
+    //   setLabel('Choose avatar');
+    //   setErrors(data.message);
+    // }
+    // getSettings();
   };
 
   if (biography === null && email === null) {
@@ -102,25 +102,24 @@ const UpdateUser = () => {
       <Nav />
       <div className="content">
         <div className="general-form">
-          <form onSubmit={uploadAvatar}>
+          <form onSubmit={editSettings}>
             <label>
               {label}
               <input
                 type="file"
                 className="fileinput"
                 onChange={handleAvatar}
-                required
               />
             </label>
-            <button>Save</button>
-          </form>
-          <form onSubmit={editUser}>
             <input
               type="text"
               onChange={handleBiography}
               value={biography}
               placeholder="Biography"
             />
+            <button>Save</button>
+          </form>
+          <form onSubmit={editAccount}>
             <input
               type="email"
               onChange={handleEmail}

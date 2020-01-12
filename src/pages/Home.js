@@ -37,7 +37,7 @@ const Home = () => {
           ))
         ) : (
           <p>
-            To enjoy Instagram <Link to="/search">follow</Link> people or{' '}
+            To enjoy Instagram <Link to="/users">follow</Link> people or{' '}
             <Link to="/share">share</Link> photos.
           </p>
         )}

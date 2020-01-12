@@ -14,18 +14,18 @@ const Profile = () => {
 
   const getData = async () => {
     const response = await fetch(
-      'http://localhost:1111/api/users/usersettings.php',
+      'http://localhost:1111/api/users/settings.php',
       {
         credentials: 'include'
       }
     );
 
     const data = await response.json();
+    console.log(data);
+
     setBiography(data.biography);
     data.avatar
-      ? setAvatar(
-          `http://localhost:1111/api/posts/uploads/avatars/${data.avatar}`
-        )
+      ? setAvatar(`http://localhost:1111/api/uploads/avatars/${data.avatar}`)
       : setAvatar('');
   };
 
@@ -46,9 +46,9 @@ const Profile = () => {
     <div>
       <Nav />
       <div className="content">
-        {avatar ? <img src={avatar} alt="Avatar" /> : <p>No avatar</p>}
+        {avatar && <img className="profile-img" src={avatar} alt="Avatar" />}
         <div className="profile-text">
-          <p>{biography}</p>
+          {biography && <p>{biography}</p>}
           <Link to="/settings">
             <button>Edit Profile</button>
           </Link>

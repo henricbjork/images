@@ -64,10 +64,10 @@ const Post = props => {
   return (
     <div>
       <img
-        src={`http://localhost:1111/api/posts/uploads/images/${props.post.content}`}
+        src={`http://localhost:1111/api/uploads/images/${props.post.content}`}
         alt={`Post ${props.post.id}`}
       />
-      <div className="content-text">
+      <div className="home-text">
         <p>{props.post.description}</p>
         <span>
           {props.post.likes
@@ -89,7 +89,7 @@ const Post = props => {
         )}
       </div>
       {show && (
-        <div className="edit-form">
+        <div className="home-form">
           <form onSubmit={updatePost}>
             <input
               type="text"

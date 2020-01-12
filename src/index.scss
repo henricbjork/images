@@ -111,7 +111,7 @@ nav {
 .content {
   padding: 23px 0 0 0;
 
-  .content-text {
+  .home-text {
     padding: 5px 0 5px 0;
 
     p,
@@ -135,6 +135,18 @@ nav {
     }
   }
 
+  .home-form {
+    padding: 0 0 10px 0;
+  }
+
+  .comments {
+    padding: 0 0 10px 0;
+  }
+
+  .general-form {
+    padding: 1px 0 0 0;
+  }
+
   .users-text {
     padding: 5px 0 0 0;
 
@@ -156,24 +168,20 @@ nav {
     }
   }
 
-  .profile-text p {
-    padding: 5px 0 5px 0;
-  }
-
-  .general-form {
-    padding: 1px 0 0 0;
-  }
-
   .users-form {
     padding: 2px 0 0 0;
   }
 
-  .edit-form {
+  .profile-img {
     padding: 0 0 10px 0;
   }
 
-  .comments {
-    padding: 0 0 10px 0;
+  .profile-text {
+    margin: 2px 0 0 0;
+
+    p {
+      padding: 0 0 10px 0;
+    }
   }
 }
 

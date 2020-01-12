@@ -21,7 +21,7 @@ if (isset($_SESSION['user'])) {
     $post = $statement->fetch(PDO::FETCH_ASSOC);
 
     if ($post) {
-      $src = __DIR__ . '/uploads/images/' . $post['content'];
+      $src = __DIR__ . '/../uploads/images/' . $post['content'];
 
       unlink($src);
 

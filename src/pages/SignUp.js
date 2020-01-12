@@ -24,14 +24,11 @@ const SignUp = () => {
     formData.append('email', email);
     formData.append('password', password);
 
-    const response = await fetch(
-      'http://localhost:1111/api/users/createuser.php',
-      {
-        method: 'POST',
-        body: formData,
-        credentials: 'include'
-      }
-    );
+    const response = await fetch('http://localhost:1111/api/users/signup.php', {
+      method: 'POST',
+      body: formData,
+      credentials: 'include'
+    });
 
     const data = await response.json();
     if (response.ok) {

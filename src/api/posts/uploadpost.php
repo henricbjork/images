@@ -29,7 +29,7 @@ if (isset($_SESSION['user'])) {
         exit;
       }
 
-      $src = __DIR__ . '/uploads/images/' . $filename;
+      $src = __DIR__ . '/../uploads/images/' . $filename;
 
       move_uploaded_file($image['tmp_name'], $src);
 
