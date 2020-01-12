@@ -6,6 +6,7 @@ Built in React, PHP and SQLite
 ## Install
 ```
 $ git clone https://github.com/deinnielle/images.git
+$ cd images
 $ npm install
 $ cd src
 $ php -S localhost:1111
