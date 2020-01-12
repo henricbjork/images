@@ -14,121 +14,64 @@ if (isset($_SESSION['user'])) {
 
   if (isset($_FILES['image'], $_POST['biography'])) {
     $image = $_FILES['image'];
+    $uid = md5($image['name'] . uniqid());
 
-    if (!empty($image) && (!empty($biography))) {
-      if ($image['size'] <= 2097152) {
-        $query = "SELECT avatar FROM users WHERE id = :id";
-        $statement = $pdo->prepare($query);
-        $statement->bindParam(':id', $id, PDO::PARAM_STR);
-        $statement->execute();
-        $avatar = $statement->fetch(PDO::FETCH_ASSOC);
-
-        $uid = md5($image['name'] . uniqid());
-
-        if ($image['type'] === 'image/jpeg') {
-          $filename = "$uid.jpeg";
-        } else if ($image['type'] === 'image/png') {
-          $filename = "$uid.png";
-        } else if ($image['type'] === 'image/gif') {
-          $filename = "$uid.gif";
-        } else {
-          echo json_encode(array('message' => 'The file is not supported'));
-          http_response_code(400);
-          exit;
-        }
-
-        $src = __DIR__ . '/../uploads/avatars/' . $filename;
-        move_uploaded_file($image['tmp_name'], $src);
-
-        if ($avatar) {
-          $srcUnlink = __DIR__ . '/../uploads/avatars/' . $avatar['avatar'];
-          unlink($srcUnlink);
-
-          $query = "UPDATE users SET avatar = :avatar WHERE id = :id";
-          $statement = $pdo->prepare($query);
-          $statement->bindParam(':avatar', $filename, PDO::PARAM_STR);
-          $statement->bindParam(':id', $id, PDO::PARAM_STR);
-          $statement->execute();
-        } else {
-          $query = "UPDATE users SET avatar = :avatar WHERE id = :id";
-          $statement = $pdo->prepare($query);
-          $statement->bindParam(':avatar', $filename, PDO::PARAM_STR);
-          $statement->bindParam(':id', $id, PDO::PARAM_STR);
-          $statement->execute();
-        }
-
-        $query = "UPDATE users SET biography = :biography WHERE id = :id";
-        $statement = $pdo->prepare($query);
-        $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
-        $statement->bindParam(':id', $id, PDO::PARAM_STR);
-        $statement->execute();
-
-        echo json_encode(array('message' => 'Updated settings'));
-        http_response_code(201);
-      } else {
-        echo json_encode(array('message' => 'The file exceeds limit size'));
-        http_response_code(400);
-      }
-    } elseif (!empty($image) && (empty($biography))) {
-      if ($image['size'] <= 2097152) {
-        $query = "SELECT avatar FROM users WHERE id = :id";
-        $statement = $pdo->prepare($query);
-        $statement->bindParam(':id', $id, PDO::PARAM_STR);
-        $statement->execute();
-        $avatar = $statement->fetch(PDO::FETCH_ASSOC);
-
-        $uid = md5($image['name'] . uniqid());
-
-        if ($image['type'] === 'image/jpeg') {
-          $filename = "$uid.jpeg";
-        } else if ($image['type'] === 'image/png') {
-          $filename = "$uid.png";
-        } else if ($image['type'] === 'image/gif') {
-          $filename = "$uid.gif";
-        } else {
-          echo json_encode(array('message' => 'The file is not supported'));
-          http_response_code(400);
-          exit;
-        }
-
-        $src = __DIR__ . '/../uploads/avatars/' . $filename;
-        move_uploaded_file($image['tmp_name'], $src);
-
-        if ($avatar) {
-          $srcUnlink = __DIR__ . '/../uploads/avatars/' . $avatar['avatar'];
-          unlink($srcUnlink);
-
-          $query = "UPDATE users SET avatar = :avatar WHERE id = :id";
-          $statement = $pdo->prepare($query);
-          $statement->bindParam(':avatar', $filename, PDO::PARAM_STR);
-          $statement->bindParam(':id', $id, PDO::PARAM_STR);
-          $statement->execute();
-        } else {
-          $query = "UPDATE users SET avatar = :avatar WHERE id = :id";
-          $statement = $pdo->prepare($query);
-          $statement->bindParam(':avatar', $filename, PDO::PARAM_STR);
-          $statement->bindParam(':id', $id, PDO::PARAM_STR);
-          $statement->execute();
-        }
-
-        echo json_encode(array('message' => 'Updated avatar'));
-        http_response_code(201);
-      } else {
-        echo json_encode(array('message' => 'The file exceeds limit size'));
-        http_response_code(400);
-      }
+    if ($image['type'] === 'image/jpeg') {
+      $filename = "$uid.jpeg";
+    } else if ($image['type'] === 'image/png') {
+      $filename = "$uid.png";
+    } else if ($image['type'] === 'image/gif') {
+      $filename = "$uid.gif";
+    } elseif ($image['size'] >= 2097152) {
+      echo json_encode(array('message' => 'The file exceeds limit size'));
+      http_response_code(400);
+      exit;
+    } else {
+      echo json_encode(array('message' => 'The file is not supported'));
+      http_response_code(400);
+      exit;
     }
-  } elseif (isset($_POST['image'], $_POST['biography'])) {
-    $image = $_POST['image'];
 
-    if (empty($image) && (!empty($biography))) {
+    $src = __DIR__ . '/../uploads/avatars/' . $filename;
+    move_uploaded_file($image['tmp_name'], $src);
+
+    $query = "SELECT avatar FROM users WHERE id = :id";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':id', $id, PDO::PARAM_STR);
+    $statement->execute();
+    $avatar = $statement->fetch(PDO::FETCH_ASSOC);
+
+    if (!empty($avatar['avatar'])) {
+      $srcUnlink = __DIR__ . '/../uploads/avatars/' . $avatar['avatar'];
+      unlink($srcUnlink);
+    }
+
+    $query = "UPDATE users SET avatar = :avatar WHERE id = :id";
+    $statement = $pdo->prepare($query);
+    $statement->bindParam(':avatar', $filename, PDO::PARAM_STR);
+    $statement->bindParam(':id', $id, PDO::PARAM_STR);
+    $statement->execute();
+
+    if (!empty($biography)) {
       $query = "UPDATE users SET biography = :biography WHERE id = :id";
       $statement = $pdo->prepare($query);
       $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
       $statement->bindParam(':id', $id, PDO::PARAM_STR);
       $statement->execute();
+    }
 
-      echo json_encode(array('message' => 'Updated Biography'));
+    echo json_encode(array('message' => 'Updated settings'));
+    http_response_code(201);
+  } elseif (isset($_POST['image'], $_POST['biography'])) {
+    $image = $_POST['image'];
+
+    if (empty($image) && !empty($biography) || empty($image) && empty($biography)) {
+      $query = "UPDATE users SET biography = :biography WHERE id = :id";
+      $statement = $pdo->prepare($query);
+      $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
+      $statement->bindParam(':id', $id, PDO::PARAM_STR);
+      $statement->execute();
+      echo json_encode(array('message' => 'Updated biography'));
       http_response_code(201);
     }
   }

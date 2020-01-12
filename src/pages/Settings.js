@@ -6,8 +6,8 @@ const UpdateUser = () => {
   const [redirect, setRedirect] = useState(false);
   const [avatar, setAvatar] = useState('');
   const [label, setLabel] = useState('Choose avatar');
-  const [biography, setBiography] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [biography, setBiography] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState(null);
 
@@ -23,8 +23,9 @@ const UpdateUser = () => {
       }
     );
     const data = await response.json();
-    setBiography(data.biography);
-    setEmail(data.email);
+    console.log(data);
+    data.biography ? setBiography(data.biography) : setBiography('');
+    data.email ? setEmail(data.email) : setEmail('');
   };
 
   const handleAvatar = event => {
@@ -65,6 +66,8 @@ const UpdateUser = () => {
     );
 
     const data = await response.json();
+    console.log(response);
+    console.log(data);
     if (response.ok) {
       setRedirect(true);
     } else {
@@ -93,9 +96,9 @@ const UpdateUser = () => {
     if (response.ok) {
       setRedirect(true);
     } else {
+      setPassword('');
       setErrors(data.message);
     }
-    setPassword('');
   };
 
   if (redirect) {

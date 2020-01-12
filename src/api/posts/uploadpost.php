@@ -10,11 +10,10 @@ header('Content-Type: application/json');
 
 if (isset($_SESSION['user'])) {
   if (isset($_FILES['image'])) {
-
     $image = $_FILES['image'];
-    $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
 
-    if ($image['size'] <= 2097152 && $image['size'] > 1) {
+    if (!empty($image)) {
+      $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
       $uid = md5($image['name'] . uniqid());
 
       if ($image['type'] === 'image/jpeg') {
@@ -23,6 +22,10 @@ if (isset($_SESSION['user'])) {
         $filename = "$uid.png";
       } else if ($image['type'] === 'image/gif') {
         $filename = "$uid.gif";
+      } elseif ($image['size'] >= 2097152) {
+        echo json_encode(array('message' => 'The file exceeds limit size'));
+        http_response_code(400);
+        exit;
       } else {
         echo json_encode(array('message' => 'The file is not supported'));
         http_response_code(400);
@@ -51,13 +54,7 @@ if (isset($_SESSION['user'])) {
       }
       echo json_encode(array('message' => 'The post is uploaded'));
       http_response_code(201);
-    } else {
-      echo json_encode(array('message' => 'The file exceeds limit size'));
-      http_response_code(400);
     }
-  } else {
-    echo json_encode(array('message' => 'No file'));
-    http_response_code(400);
   }
 } else {
   echo json_encode(array('message' => 'Not logged in'));

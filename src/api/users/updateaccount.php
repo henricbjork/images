@@ -9,12 +9,10 @@ header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json');
 
 if (isset($_SESSION['user'])) {
-  $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_NUMBER_INT));
-
   if (isset($_POST['email'], $_POST['password'])) {
+    $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_NUMBER_INT));
     $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
     $password = $_POST['password'];
-
 
     if (!empty($email) && !empty($password)) {
       $query = "SELECT email FROM users WHERE email = :email AND NOT id = :id";

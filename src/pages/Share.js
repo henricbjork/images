@@ -4,15 +4,15 @@ import Nav from '../components/Nav';
 
 const Share = () => {
   const [redirect, setRedirect] = useState(false);
-  const [file, setFile] = useState('');
+  const [image, setImage] = useState('');
   const [label, setLabel] = useState('Choose a file');
   const [description, setDescription] = useState('');
   const [errors, setErrors] = useState(null);
 
-  const handleFile = event => {
+  const handeImage = event => {
     setErrors('');
     setLabel('File selected');
-    setFile(event.target.files[0]);
+    setImage(event.target.files[0]);
   };
 
   const handleDescription = event => {
@@ -24,7 +24,7 @@ const Share = () => {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append('image', file);
+    formData.append('image', image);
     formData.append('description', description);
 
     const response = await fetch(
@@ -60,7 +60,7 @@ const Share = () => {
               <input
                 type="file"
                 className="fileinput"
-                onChange={handleFile}
+                onChange={handeImage}
                 required
               />
             </label>

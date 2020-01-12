@@ -6,13 +6,13 @@ import Nav from '../components/Nav';
 const Profile = () => {
   const [auth, setAuth] = useContext(AppContext);
   const [avatar, setAvatar] = useState(null);
-  const [biography, setBiography] = useState('');
+  const [biography, setBiography] = useState(null);
 
   useEffect(() => {
-    getData();
+    getSettings();
   }, []);
 
-  const getData = async () => {
+  const getSettings = async () => {
     const response = await fetch(
       'http://localhost:1111/api/users/settings.php',
       {
@@ -21,7 +21,8 @@ const Profile = () => {
     );
 
     const data = await response.json();
-    setBiography(data.biography);
+    console.log(data);
+    data.biography ? setBiography(data.biography) : setBiography('');
     data.avatar
       ? setAvatar(`http://localhost:1111/api/uploads/avatars/${data.avatar}`)
       : setAvatar('');
@@ -36,7 +37,7 @@ const Profile = () => {
     setAuth(false);
   };
 
-  if (avatar === null) {
+  if (avatar === null && biography === null) {
     return <Nav />;
   }
 
