@@ -10,7 +10,7 @@ $ cd images
 $ npm install
 $ cd src
 $ php -S localhost:1111
-$ cd ..
+$ cd images
 $ npm start
 ```
 
