@@ -48,31 +48,6 @@ const UpdateUser = () => {
     setPassword(event.target.value);
   };
 
-  const updateAccount = async event => {
-    event.preventDefault();
-
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
-
-    const response = await fetch(
-      'http://localhost:1111/api/users/updateaccount.php',
-      {
-        method: 'POST',
-        body: formData,
-        credentials: 'include'
-      }
-    );
-
-    const data = await response.json();
-    if (response.ok) {
-      setRedirect(true);
-    } else {
-      setErrors(data.message);
-    }
-    setPassword('');
-  };
-
   const updateSettings = async event => {
     event.preventDefault();
 
@@ -96,7 +71,31 @@ const UpdateUser = () => {
       setLabel('Choose avatar');
       setErrors(data.message);
     }
-    getSettings();
+  };
+
+  const updateAccount = async event => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
+    const response = await fetch(
+      'http://localhost:1111/api/users/updateaccount.php',
+      {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'
+      }
+    );
+
+    const data = await response.json();
+    if (response.ok) {
+      setRedirect(true);
+    } else {
+      setErrors(data.message);
+    }
+    setPassword('');
   };
 
   if (redirect) {
@@ -135,7 +134,6 @@ const UpdateUser = () => {
               onChange={handleEmail}
               value={email}
               placeholder="Email"
-              required
             />
             <input
               type="password"
