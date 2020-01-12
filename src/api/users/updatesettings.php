@@ -32,9 +32,6 @@ if (isset($_SESSION['user'])) {
       exit;
     }
 
-    $src = __DIR__ . '/../uploads/avatars/' . $filename;
-    move_uploaded_file($image['tmp_name'], $src);
-
     $query = "SELECT avatar FROM users WHERE id = :id";
     $statement = $pdo->prepare($query);
     $statement->bindParam(':id', $id, PDO::PARAM_STR);
@@ -45,6 +42,9 @@ if (isset($_SESSION['user'])) {
       $srcUnlink = __DIR__ . '/../uploads/avatars/' . $avatar['avatar'];
       unlink($srcUnlink);
     }
+
+    $src = __DIR__ . '/../uploads/avatars/' . $filename;
+    move_uploaded_file($image['tmp_name'], $src);
 
     $query = "UPDATE users SET avatar = :avatar WHERE id = :id";
     $statement = $pdo->prepare($query);
