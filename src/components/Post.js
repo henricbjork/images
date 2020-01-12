@@ -35,7 +35,7 @@ const Post = props => {
     formData.append('id', props.post.id);
 
     const response = await fetch(
-      'http://localhost:1111/api/posts/editpost.php',
+      'http://localhost:1111/api/posts/updatepost.php',
       {
         method: 'POST',
         body: formData,

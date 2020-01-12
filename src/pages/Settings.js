@@ -31,9 +31,9 @@ const UpdateUser = () => {
     setAvatar(event.target.files[0]);
   };
 
-  const handlePassword = event => {
+  const handleBiography = event => {
     setErrors(null);
-    setPassword(event.target.value);
+    setBiography(event.target.value);
   };
 
   const handleEmail = event => {
@@ -41,12 +41,12 @@ const UpdateUser = () => {
     setEmail(event.target.value);
   };
 
-  const handleBiography = event => {
+  const handlePassword = event => {
     setErrors(null);
-    setBiography(event.target.value);
+    setPassword(event.target.value);
   };
 
-  const editAccount = async event => {
+  const updateAccount = async event => {
     event.preventDefault();
 
     const formData = new FormData();
@@ -54,7 +54,7 @@ const UpdateUser = () => {
     formData.append('password', password);
 
     const response = await fetch(
-      'http://localhost:1111/api/users/editaccount.php',
+      'http://localhost:1111/api/users/updateaccount.php',
       {
         method: 'POST',
         body: formData,
@@ -67,7 +67,7 @@ const UpdateUser = () => {
     setPassword('');
   };
 
-  const editSettings = async event => {
+  const updateSettings = async event => {
     event.preventDefault();
 
     const formData = new FormData();
@@ -75,7 +75,7 @@ const UpdateUser = () => {
     formData.append('biography', biography);
 
     const response = await fetch(
-      'http://localhost:1111/api/users/editsettings.php',
+      'http://localhost:1111/api/users/updatesettings.php',
       {
         method: 'POST',
         body: formData,
@@ -84,13 +84,13 @@ const UpdateUser = () => {
     );
 
     const data = await response.json();
-    // if (response.ok) {
-    //   // setLabel('Saved');
-    // } else {
-    //   setLabel('Choose avatar');
-    //   setErrors(data.message);
-    // }
-    // getSettings();
+    if (response.ok) {
+      // setLabel('Saved');
+    } else {
+      setLabel('Choose avatar');
+      setErrors(data.message);
+    }
+    getSettings();
   };
 
   if (biography === null && email === null) {
@@ -102,7 +102,7 @@ const UpdateUser = () => {
       <Nav />
       <div className="content">
         <div className="general-form">
-          <form onSubmit={editSettings}>
+          <form onSubmit={updateSettings}>
             <label>
               {label}
               <input
@@ -119,7 +119,7 @@ const UpdateUser = () => {
             />
             <button>Save</button>
           </form>
-          <form onSubmit={editAccount}>
+          <form onSubmit={updateAccount}>
             <input
               type="email"
               onChange={handleEmail}
@@ -131,7 +131,7 @@ const UpdateUser = () => {
               type="password"
               onChange={handlePassword}
               value={password}
-              placeholder="Password"
+              placeholder="New Password"
             />
             <button>Save</button>
           </form>

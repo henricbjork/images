@@ -9,14 +9,11 @@ header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json');
 
 if (isset($_SESSION['user'])) {
-  if (isset($_FILES['image'], $_POST['biography'])) {
-    $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
-    $image = $_FILES['image'];
-    $biography = trim(filter_var($_POST['biography'], FILTER_SANITIZE_STRING));
+  $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
+  $biography = trim(filter_var($_POST['biography'], FILTER_SANITIZE_STRING));
 
-    echo json_encode(array('message' => $image));
-    http_response_code(200);
-    exit;
+  if (isset($_FILES['image'], $_POST['biography'])) {
+    $image = $_FILES['image'];
 
     if (!empty($image) && (!empty($biography))) {
       if ($image['size'] <= 2097152) {
@@ -120,14 +117,18 @@ if (isset($_SESSION['user'])) {
         echo json_encode(array('message' => 'The file exceeds limit size'));
         http_response_code(400);
       }
-    } elseif (empty($image) && (!empty($biography))) {
+    }
+  } elseif (isset($_POST['image'], $_POST['biography'])) {
+    $image = $_POST['image'];
+
+    if (empty($image) && (!empty($biography))) {
       $query = "UPDATE users SET biography = :biography WHERE id = :id";
       $statement = $pdo->prepare($query);
       $statement->bindParam(':biography', $biography, PDO::PARAM_STR);
       $statement->bindParam(':id', $id, PDO::PARAM_STR);
       $statement->execute();
 
-      echo json_encode(array('message' => 'Updated biography'));
+      echo json_encode(array('message' => 'Updated Biography'));
       http_response_code(201);
     }
   }
