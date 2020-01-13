@@ -11,9 +11,10 @@ header('Content-Type: application/json');
 if (isset($_SESSION['user'])) {
   if (isset($_POST['email'], $_POST['password'])) {
     $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_NUMBER_INT));
+    $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
+    $password = $_POST['password'];
 
     if (!empty($email)) {
-      $email = trim(filter_var($_POST['email'], FILTER_SANITIZE_EMAIL));
       $query = "SELECT email FROM users WHERE email = :email AND NOT id = :id";
       $statement = $pdo->prepare($query);
       $statement->bindParam(':email', $email, PDO::PARAM_STR);
@@ -35,7 +36,6 @@ if (isset($_SESSION['user'])) {
     }
 
     if (!empty($password)) {
-      $password = $_POST['password'];
       $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
       $query = "UPDATE users SET password = :password WHERE id = :id";
       $statement = $pdo->prepare($query);
