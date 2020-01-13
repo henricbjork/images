@@ -116,7 +116,7 @@ const UpdateUser = () => {
               {label}
               <input
                 type="file"
-                className="fileinput"
+                className="file-input"
                 onChange={handleAvatar}
               />
             </label>

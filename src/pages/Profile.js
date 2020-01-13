@@ -45,8 +45,12 @@ const Profile = () => {
       <Nav />
       <div className="content">
         {avatar && <img className="profile-img" src={avatar} alt="Avatar" />}
-        <div className="profile-text">
-          {biography && <p>{biography}</p>}
+        {biography && (
+          <div className="profile-text">
+            <p>{biography}</p>
+          </div>
+        )}
+        <div className="profile-button">
           <Link to="/settings">
             <button>Edit Profile</button>
           </Link>

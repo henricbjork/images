@@ -53,11 +53,8 @@ label {
   cursor: pointer;
 }
 
-.fileinput {
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
+.file-input {
+  display: none;
 }
 
 input {
@@ -109,7 +106,7 @@ nav {
 }
 
 .content {
-  padding: 23px 0 0 0;
+  padding: 25px 0 0 0;
 
   .home-text {
     padding: 5px 0 5px 0;
@@ -144,7 +141,7 @@ nav {
   }
 
   .general-form {
-    padding: 1px 0 0 0;
+    padding: 3px 0 0 0;
   }
 
   .users-text {
@@ -169,7 +166,7 @@ nav {
   }
 
   .users-form {
-    padding: 2px 0 0 0;
+    padding: 4px 0 0 0;
   }
 
   .profile-img {
@@ -177,11 +174,11 @@ nav {
   }
 
   .profile-text {
-    margin: 2px 0 0 0;
+    margin: 0 0 10px 0;
+  }
 
-    p {
-      padding: 0 0 10px 0;
-    }
+  .profile-button {
+    margin: 4px 0 0 0;
   }
 }
 

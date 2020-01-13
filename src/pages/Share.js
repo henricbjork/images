@@ -59,7 +59,7 @@ const Share = () => {
               {label}
               <input
                 type="file"
-                className="fileinput"
+                className="file-input"
                 onChange={handeImage}
                 required
               />
