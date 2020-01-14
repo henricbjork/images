@@ -5,15 +5,22 @@ import {AppContext} from '../components/AppContext';
 const SignUp = () => {
   const [auth, setAuth] = useContext(AppContext);
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState(null);
+
+  const handleEmail = event => {
+    setEmail(event.target.value);
+    setErrors(null);
+  };
 
   const handlePassword = event => {
     setPassword(event.target.value);
     setErrors(null);
   };
-  const handleEmail = event => {
-    setEmail(event.target.value);
+
+  const handlePasswordConfirm = event => {
+    setPasswordConfirm(event.target.value);
     setErrors(null);
   };
 
@@ -23,6 +30,7 @@ const SignUp = () => {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
+    formData.append('passwordConfirm', passwordConfirm);
 
     const response = await fetch('http://localhost:1111/api/users/signup.php', {
       method: 'POST',
@@ -38,6 +46,7 @@ const SignUp = () => {
       setErrors(data.message);
     }
     setPassword('');
+    setPasswordConfirm('');
   };
 
   if (auth) {
@@ -47,7 +56,7 @@ const SignUp = () => {
   return (
     <div>
       <p className="login-text">
-        Sign up to see photos and videos from your friends.
+        Sign up to see photos and gifs from your friends.
       </p>
       <form onSubmit={login}>
         <input
@@ -62,6 +71,13 @@ const SignUp = () => {
           onChange={handlePassword}
           value={password}
           placeholder="Password"
+          required
+        />
+        <input
+          type="password"
+          onChange={handlePasswordConfirm}
+          value={passwordConfirm}
+          placeholder="Confirm Password"
           required
         />
         <button>Sign Up</button>

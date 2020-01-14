@@ -48,7 +48,7 @@ const Start = () => {
   return (
     <div>
       <p className="login-text">
-        Log in to see photos and videos from your friends.
+        Log in to see photos and gifs from your friends.
       </p>
       <form onSubmit={login}>
         <input
