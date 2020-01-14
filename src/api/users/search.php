@@ -11,7 +11,7 @@ header('Content-Type: application/json');
 if (isset($_SESSION['user'])) {
   if (isset($_POST['search'])) {
     $id = trim(filter_var($_SESSION['user'], FILTER_SANITIZE_STRING));
-    $search = $_POST['search'];
+    $search = trim(filter_var($_POST['search'], FILTER_SANITIZE_STRING));
 
     if (!empty($search)) {
       $searchQuery = '%' . $_POST['search'] . '%';

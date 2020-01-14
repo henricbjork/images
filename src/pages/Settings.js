@@ -4,11 +4,12 @@ import Nav from '../components/Nav';
 
 const UpdateUser = () => {
   const [redirect, setRedirect] = useState(false);
-  const [avatar, setAvatar] = useState('');
   const [label, setLabel] = useState('Choose avatar');
+  const [avatar, setAvatar] = useState('');
   const [biography, setBiography] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [errors, setErrors] = useState(null);
 
   useEffect(() => {
@@ -48,6 +49,11 @@ const UpdateUser = () => {
     setPassword(event.target.value);
   };
 
+  const handlePasswordConfirm = event => {
+    setErrors(null);
+    setPasswordConfirm(event.target.value);
+  };
+
   const updateSettings = async event => {
     event.preventDefault();
 
@@ -79,6 +85,7 @@ const UpdateUser = () => {
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
+    formData.append('passwordConfirm', passwordConfirm);
 
     const response = await fetch(
       'http://localhost:1111/api/users/updateaccount.php',
@@ -140,6 +147,12 @@ const UpdateUser = () => {
               onChange={handlePassword}
               value={password}
               placeholder="New Password"
+            />
+            <input
+              type="password"
+              onChange={handlePasswordConfirm}
+              value={passwordConfirm}
+              placeholder="Confirm Password"
             />
             <button>Save</button>
           </form>
