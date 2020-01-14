@@ -15,7 +15,8 @@ $ npm start
 ```
 
 ## Testers
-* [TBD](https://github.com/)
+* [Bernhard Stedt](https://github.com/Vehx)
+* [Marcus Augustsson](https://github.com/MarcusIsCode)
 
 ## Code Review
 TBD
