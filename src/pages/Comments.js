@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Nav from '../components/Nav';
+import Comment from '../components/Comment';
 
 const Comments = ({match}) => {
   const [comments, setComments] = useState(null);
@@ -47,6 +48,10 @@ const Comments = ({match}) => {
     getComments();
   };
 
+  const handleUpdate = () => {
+    getComments();
+  };
+
   if (comments === null) {
     return <Nav />;
   }
@@ -58,11 +63,19 @@ const Comments = ({match}) => {
         <div className="comments">
           {comments ? (
             comments.map(comment => (
-              <p key={comment.id}>{`${comment.email} ${comment.comment}`}</p>
+              <Comment comment={comment} onUpdate={() => handleUpdate()} />
             ))
           ) : (
             <p>No comments</p>
           )}
+          {/* <div className="comments">
+          {comments ? (
+            comments.map(comment => (
+              <p key={comment.id}>{`${comment.email} ${comment.comment}`}</p>
+            ))
+          ) : (
+            <p>No comments</p>
+          )} */}
         </div>
         <form onSubmit={addComment}>
           <input
