@@ -12,6 +12,7 @@ import Users from '../pages/Users';
 import Profile from '../pages/Profile';
 import Settings from '../pages/Settings';
 import NotFound from '../pages/NotFound';
+import PostSearch from '../pages/PostSearch';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <AuthRoute path="/settings" component={Settings} />
             <AuthRoute path="/profile" component={Profile} />
             <AuthRoute path="/users" component={Users} />
+            <AuthRoute path="/searchpost" component={PostSearch} />
             <HideRoute path="/login" component={Login} />
             <HideRoute path="/signup" component={SignUp} />
             <Route path="*" component={NotFound} />
