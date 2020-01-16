@@ -1,22 +1,26 @@
 import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom';
 import Nav from '../components/Nav';
 
-const NotFound = () => {
-  const [posts, setPosts] = useState(null);
+const PostSearch = () => {
   const [search, setSearch] = useState('');
+  const [posts, setPosts] = useState([]);
 
   const uploadSearch = async event => {
     event.preventDefault();
+    const formData = new FormData();
+    formData.append('search', search);
+
     const response = await fetch(
       'http://localhost:1111/api/posts/searchpost.php',
       {
+        method: 'POST',
+        body: formData,
         credentials: 'include'
       }
     );
     const data = await response.json();
-    // setPosts(data);
-    // console.log(posts);
+    setPosts(data);
+    console.log(data);
   };
 
   const handleSearch = event => {
@@ -37,10 +41,21 @@ const NotFound = () => {
           />
           <button>Send</button>
         </form>
-        <h1>Hello world</h1>
+        {posts ? (
+          posts.map(post => (
+            <div>
+              <img
+                src={`http://localhost:1111/api/uploads/images/${post.content}`}
+               alt="postimage"/>
+              <p>{post.description}</p>
+            </div>
+          ))
+        ) : (
+          <p>No photos</p>
+        )}
       </div>
     </div>
   );
 };
 
-export default NotFound;
+export default PostSearch;
