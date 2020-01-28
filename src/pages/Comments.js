@@ -22,6 +22,7 @@ const Comments = ({match}) => {
       }
     );
     const data = await response.json();
+
     data.length ? setComments(data) : setComments(false);
   };
 

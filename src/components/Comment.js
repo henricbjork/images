@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 const Comment = props => {
   const [editComment, setEditComment] = useState('');
+    const [show, setShow] = useState(false);
 
   const {onUpdate} = props;
 
