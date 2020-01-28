@@ -33,8 +33,7 @@ const Comment = props => {
   const deleteComment = async id => {
     const formData = new FormData();
     formData.append('id', id);
-
-
+   
     const response = await fetch(
       'http://localhost:1111/api/posts/deletecomment.php',
       {
@@ -43,6 +42,7 @@ const Comment = props => {
         credentials: 'include'
       }
     );
+
     onUpdate();
   };
 
