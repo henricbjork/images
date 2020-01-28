@@ -1,5 +1,7 @@
 $backgroundColor: #ffffff;
 $fontColor: #000000;
+$confirmationGreen: #18c900;
+$deleteRed: #e62e2e;
 $fontSize: 20px;
 
 * {
@@ -86,6 +88,14 @@ button:hover {
   color: $backgroundColor;
   background: $fontColor;
   text-decoration: none;
+}
+
+.comment-button-edit:hover {
+  background: $confirmationGreen;
+}
+
+.comment-button-delete:hover {
+    background: $deleteRed;
 }
 
 .wrapper {

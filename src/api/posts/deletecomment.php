@@ -9,7 +9,7 @@ header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json');
 
 if (isset($_SESSION['user'])) {
-    if (isset($_POST['id'])) {
+    if (isset($_POST['id']) && $_POST['user_id'] === $_SESSION['user_id']) {
         $commentId = trim(filter_var($_POST['id'], FILTER_SANITIZE_STRING));
 
         $query = "DELETE FROM comments WHERE id = :cid";

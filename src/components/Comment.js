@@ -56,9 +56,11 @@ const Comment = props => {
           placeholder="Edit Comment"
           required
         />
-        <button>Send</button>
+        <button class="comment-button-edit">Save</button>
       </form>
-      <button onClick={() => deleteComment(props.comment.id)}>Delete</button>
+      <button class="comment-button-delete" onClick={() => deleteComment(props.comment.id)}>
+        Delete
+      </button>
     </div>
   );
 };

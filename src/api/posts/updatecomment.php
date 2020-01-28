@@ -9,7 +9,7 @@ header('Access-Control-Allow-Credentials: true');
 header('Content-Type: application/json');
 
 if (isset($_SESSION['user'])) {
-    if (isset($_POST['comment'], $_POST['id'])) {
+    if (isset($_POST['comment'], $_POST['id']) && $_POST['user_id'] === $_SESSION['user']   ) {
         $comment = trim(filter_var($_POST['comment'], FILTER_SANITIZE_STRING));
         $commentId = trim(filter_var($_POST['id'], FILTER_SANITIZE_STRING));
 
